@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Http\Livewire\Application\Payment\Form;
+
+use App\Http\Livewire\Helpers\Cost\CostGeneralHelper;
+use App\Http\Livewire\Helpers\DateFormatHelper;
+use App\Http\Livewire\Helpers\SchoolHelper;
+use App\Models\Paiment;
+use Livewire\Component;
+
+class EditPaymentInfos extends Component
+{
+    protected $listeners = ['paymentToEdit' => 'getPayment','scolaryYearFresh' => 'getScolaryYear',];
+    public $payment=null;
+    public $cost_other_id=0,$created_at,$defaultScolaryYerId;
+    public $months=[],$month,$listOtherCost=[];
+    public function getPayment(Paiment $payment)
+    {
+        $this->payment = $payment;
+    }
+    public function getScolaryYear($id)
+    {
+        $this->defaultScolaryYerId = $id;
+    }
+    public function mount(){
+        $this->months=(new DateFormatHelper())->getMonthsForYear();
+        $defaultScolaryYer = (new SchoolHelper())->getCurrectScolaryYear();
+        $this->defaultScolaryYerId=$defaultScolaryYer->id;
+    }
+    public function update(){
+        $this->validateForm();
+        $this->payment->cost_general_id=$this->cost_other_id;
+        $this->payment->mounth_name=$this->month;
+        $this->payment->created_at=$this->created_at;
+        $this->payment->update();
+        $this->emit('paymentListRefresh');
+        $this->dispatchBrowserEvent('updated',['message'=>'Infos bien mise à jour']);
+    }
+    public function validateForm(){
+        $this->validate([
+            'month' => ['required', 'string'],
+            'cost_other_id' => ['required', 'numeric'],
+            'created_at' => ['required', 'date'],
+        ]);
+    }
+    public function render()
+    {
+        $this->cost_other_id=$this->payment?->cost_general_id;
+        $this->month=$this->payment?->mounth_name;
+        $this->created_at=$this->payment?->created_at->format('Y-m-d');
+
+        $this->listOtherCost=(new CostGeneralHelper())
+                ->getListCostGeneralHelper($this->payment?->cost->typeOtherCost->id,$this->defaultScolaryYerId);
+        return view('livewire.application.payment.form.edit-payment-infos');
+    }
+}
