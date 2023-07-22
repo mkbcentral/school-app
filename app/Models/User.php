@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable,HasRoles;
 
@@ -47,16 +47,6 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The roles that belong to the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    /*
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
-    }
 
     /**
      * Get the school that owns the User
@@ -82,8 +72,4 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(SubAppLink::class, 'sub_app_link_user', 'user_id', 'sub_app_link_id');
     }
 
-    public function canAccessFilament(): bool
-    {
-        return $this->hasRole(['Admin','Finance']);
-    }
 }
