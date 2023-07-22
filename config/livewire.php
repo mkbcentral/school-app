@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => config('app.env')=='local'?null:'https://school-app-test.mkbcentral.com/public/',
+    'asset_url' => config('app.env')=='local'?null:'https://school-app-test.mkbcentral.com/public',
 
     /*
     |--------------------------------------------------------------------------
