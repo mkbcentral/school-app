@@ -78,8 +78,7 @@ class ListInscription extends Component
     }
     public function loadData(){
 
-        $this->inscriptionList= (new GetInscriptionHelper())
-        ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,$this->defaultCureencyName,false);
+        $this->inscriptionList= Inscription::orderBy('created_at','desc')->get();
     }
     public function edit(Student $student)
     {
