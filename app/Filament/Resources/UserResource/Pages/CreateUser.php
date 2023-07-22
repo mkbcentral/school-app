@@ -14,7 +14,6 @@ class CreateUser extends CreateRecord
     {
         $data['password'] = bcrypt('password');
         $data['school_id'] = auth()->user()->school->id;
-
         return $data;
     }
 }

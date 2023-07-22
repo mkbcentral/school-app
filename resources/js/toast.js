@@ -1,14 +1,17 @@
 import toastr from 'toastr';
 window.$(document).ready(function () {
     toastr.options = {
-    "positionClass": "toast-bottom-right",
-    "progressBar": true
+        "positionClass": "toast-top-right",
+        "progressBar": true
     };
     window.addEventListener('added', function (event) {
         toastr.success(event.detail.message, 'Validation');
         $('#formInscriptionModal').modal('hide');
         $('#newReinscription').modal('hide');
         $('#newPayment').modal('hide');
+    });
+    window.addEventListener('added-inscription', function (event) {
+        toastr.success(event.detail.message, 'Validation');
     });
     window.addEventListener('updated', function (event) {
         toastr.info(event.detail.message, 'Validation');
@@ -24,7 +27,6 @@ window.$(document).ready(function () {
 
 
 });
-
 $("input[data-bootstrap-switch]").each(function(){
     $(this).bootstrapSwitch('state', $(this).prop('checked'));
   });

@@ -1,8 +1,6 @@
 <nav class="main-header navbar navbar-expand {{theme_setting('is_dark_mode')?'navbar-dark':'navbar-white'}} navbar-light">
     <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
+        @livewire('application.school.change-collapse-state-widget')
     </ul>
 
     <ul class="navbar-nav ml-auto">

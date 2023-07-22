@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Application\Inscription;
 
+use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\ClasseOption;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class NewInscription extends Component
 {
+    use AuthorizesRequests;
     public $selectedIndex = 0;
     public $costs = [];
     public  $optionList;
@@ -19,7 +22,7 @@ class NewInscription extends Component
     {
         $defualtOption = ClasseOption::first();
         $this->selectedIndex = $defualtOption->id;
-        $this->optionList = ClasseOption::orderBy('name', 'ASC')->get();
+        $this->optionList = (new SchoolHelper())->getListClasseOption();
     }
     public function changeIndex(ClasseOption $option)
     {

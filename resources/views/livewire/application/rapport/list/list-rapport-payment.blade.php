@@ -16,7 +16,7 @@
                                     <option value="">Choisir...</option>
                                     @foreach ($months as $m)
                                         <option value="{{$m}}">
-                                            {{ $m }}</option>
+                                            {{ app_get_month_name($m) }}</option>
                                     @endforeach
                                 </x-select>
                             </div>
@@ -43,7 +43,7 @@
                                     <option value="">Choisir...</option>
                                     @foreach ($classeList as $classe)
                                         <option value="{{ $classe->id }}">
-                                            {{ $classe->name . '/' . $classe->option->name }}</option>
+                                            {{ $classe->name . '/' . $classe->classeOption->name }}</option>
                                     @endforeach
                                 </x-select>
                             </div>
@@ -76,7 +76,7 @@
                                        <td>{{$payment->created_at->format('d/m/y')}}</td>
                                        <td>{{$payment->student->name}}</td>
                                        <td class="text-right">{{$payment->cost->name}}</td>
-                                       <td class="text-right">{{$payment->amount}} {{$defaultCureencyName}}</td>
+                                       <td class="text-right">{{app_format_number($payment->amount)}} {{$defaultCureencyName}}</td>
                                        <td>
 
                                        </td>

@@ -105,7 +105,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <x-button type="submit" class="btn btn-primary">Sauvegarder</x-button>

@@ -43,7 +43,7 @@
                                <td class="text-center">{{ $payment->cost->name }}
                                </td>
                                <td class="text-center">
-                                   {{$payment->amount}} {{$defaultCureencyName}}
+                                   {{app_format_number($payment->amount)}} {{$defaultCureencyName}}
                                </td>
                                <td class="text-center">
                                    <x-button wire:click.prevent='edit({{ $payment }})'

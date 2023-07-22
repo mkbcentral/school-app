@@ -20,7 +20,6 @@ class ValideInscriptionPayment extends Component
     {
         $this->defaultScolaryYerId = $id;
     }
-
     public function loadData():Collection
     {
       return  $this->inscriptionList = (new GetInscriptionHelper())

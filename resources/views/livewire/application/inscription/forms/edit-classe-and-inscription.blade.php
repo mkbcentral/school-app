@@ -29,7 +29,7 @@
                                                     <option value="">Choisir...</option>
                                                     @foreach ($classeList as $classe)
                                                         <option value="{{ $classe->id }}">
-                                                            {{ $classe->name . '/' . $classe->option->name }}</option>
+                                                            {{ $classe->name . '/' . $classe->classeOption->name }}</option>
                                                     @endforeach
                                                 </x-select>
                                             </div>

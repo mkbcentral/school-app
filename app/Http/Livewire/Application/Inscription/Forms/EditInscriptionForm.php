@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Application\Inscription\Forms;
 
+use App\Http\Livewire\Helpers\Responsable\CreateNewResponsableHelper;
 use App\Http\Requests\EditStudentRequest;
 use App\Models\Classe;
 use App\Models\CostInscription;
@@ -30,18 +31,19 @@ class EditInscriptionForm extends Component
         $data = $this->validate($request->rules());
         $this->student->update($data);
         if ($this->student->responsable != null) {
-            $this->student->responsable->name = $data['name_responsable'];
+            $this->student->responsable->name_responsable = $data['name_responsable'];
             $this->student->responsable->phone = $data['phone'];
             $this->student->responsable->other_phone = $data['other_phone'];
             $this->student->responsable->email = $data['email'];
             $this->student->responsable->update();
         } else {
-            $responsable = StudentResponsable::create([
-                'name' => $data['name_responsable'],
+            $data =[
+                'name_responsable' => $data['name_responsable'],
                 'phone' => $data['phone'],
                 'other_phone' => $data['other_phone'],
                 'email' => $data['email'],
-            ]);
+            ];
+            $responsable=CreateNewResponsableHelper::create($data);
             $this->student->student_responsable_id = $responsable->id;
             $this->student->update();
         }
@@ -71,7 +73,7 @@ class EditInscriptionForm extends Component
         $this->gender = $this->student?->gender;
         $this->age=$this->student?->getAge($this->student?->date_of_birth);
         if ($this->student?->responsable != null) {
-            $this->name_responsable = $this->student?->responsable?->name;
+            $this->name_responsable = $this->student?->responsable?->name_responsable;
             $this->phone = $this->student?->responsable?->phone;
             $this->other_phone = $this->student?->responsable?->other_phone;
             $this->email = $this->student?->responsable?->email;

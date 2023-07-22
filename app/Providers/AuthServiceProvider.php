@@ -9,6 +9,7 @@ use App\Models\CostGeneral;
 use App\Models\CostInscription;
 use App\Models\Currency;
 use App\Models\Gender;
+use App\Models\Inscription;
 use App\Models\Rate;
 use App\Models\Role;
 use App\Models\School;
@@ -29,6 +30,7 @@ use App\Policies\SectionPolicy;
 use App\Policies\TypeOtherCostPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -62,8 +64,23 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Gate::define('valid-payment', function () {
+            $user=auth()->user();
+            return $user->hasRole(['Finance']);
+        });
+        Gate::define('edit-student-infos', function () {
+            $user=auth()->user();
+            return $user->hasRole(['Secretaire']);
+        });
+        Gate::define('edit-classe-inscription', function () {
+            $user=auth()->user();
+            return $user->hasRole(['Secretaire','Finance']);
+        });
+        Gate::define('view-total-amount', function () {
+            $user=auth()->user();
+            return $user->hasRole(['Finance']);
+        });
         $this->registerPolicies();
 
-        //
     }
 }

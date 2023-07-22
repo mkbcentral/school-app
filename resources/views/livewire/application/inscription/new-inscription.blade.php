@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-danger"> &#x1F5C3; GESTIONNAIRE DES INSCRIPTIONS</h1>
+                    <h1 class="m-0"> &#x1F5C3; GESTIONNAIRE DES INSCRIPTIONS</h1>
                 </div>
             </div>
         </div>
@@ -28,7 +28,6 @@
                                         </a>
                                     </li>
                                 @endforeach
-
                             </ul>
                         </div>
                         <div class="d-flex justify-content-end align-items-center p-2">

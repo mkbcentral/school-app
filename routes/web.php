@@ -10,6 +10,7 @@ use App\Http\Livewire\Application\Settings\AppLinkSettings;
 use App\Http\Livewire\Application\Settings\AppSettings;
 use App\Http\Livewire\Application\Rapport\PaymentRapport;
 use App\Http\Controllers\Application\Printings\RapportPaymentPrintingController;
+use App\Http\Livewire\Application\Rapport\Inscription\RapportInscriptionByClasse;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     //Rapport payment
     Route::prefix('rapport')->group(function () {
         Route::get('payments',PaymentRapport::class)->name('rapport.payments');
+        Route::get('inscription-by-classe',RapportInscriptionByClasse::class)->name('rapport.inscription.by.classe');
     });
 
 

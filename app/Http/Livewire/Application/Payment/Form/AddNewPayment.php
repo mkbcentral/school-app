@@ -8,6 +8,7 @@ use App\Http\Livewire\Helpers\DateFormatHelper;
 use App\Http\Livewire\Helpers\Notifications\SmsNotificationHelper;
 use App\Http\Livewire\Helpers\Payment\CreatePaymentCheckerHelper;
 use App\Http\Livewire\Helpers\Payment\PaymentCreationHelper;
+use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\CostGeneral;
 use App\Models\Paiment;
@@ -18,7 +19,11 @@ use function Symfony\Component\Translation\t;
 
 class AddNewPayment extends Component
 {
-    protected $listeners = ['studentPayment' => 'getStudent', 'scolaryYearFresh' => 'getScolaryYear',];
+    protected $listeners =
+        [
+            'studentPayment' => 'getStudent',
+            'scolaryYearFresh' => 'getScolaryYear',
+        ];
     public  $student = null;
     public $listTypeCost=[],$listOtherCost;
     public $type_other_cost_id,$cost_other_id;
@@ -54,11 +59,16 @@ class AddNewPayment extends Component
                 $this->defaultScolaryYerId,
                 $this->cost_other_id,
                 $this->student->id,
-                $this->student->inscription->classe->id
+                $this->student->inscription->classe->id,
+                $this->student->inscription->classe->classeOption->id
             );
             $cost=CostGeneral::find($this->cost_other_id);
+            (new PosPrintingHelper())->printPayment($payment,'USD');
+            /*
             SmsNotificationHelper::sendSMS( '+243898337969','+243971330007',auth()->user()->school->name."\nBonjour Votre enfant "
                 .$this->student->name."\n vient de payer le ".$cost->name."\nCout:".$cost->amount." USD"."\nA:".$payment->created_at->format('d/m/Y H:i'));
+
+            */
             $this->emit('paymentListRefresh');
             $this->dispatchBrowserEvent('added',['message'=>'Paiement bien effectué']);
         }

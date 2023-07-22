@@ -13,17 +13,6 @@ class Classe extends Model
     protected $fillable=['name','classe_option_id'];
 
     /**
-     * Get the OptionClasse that owns the Classe
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-
-    public function option(): BelongsTo
-    {
-        return $this->belongsTo(ClasseOption::class, 'classe_option_id');
-    }
-
-    /**
      * Get all of the comments for the Classe
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

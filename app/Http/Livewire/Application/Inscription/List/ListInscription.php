@@ -3,13 +3,17 @@
 namespace App\Http\Livewire\Application\Inscription\List;
 
 use App\Http\Livewire\Helpers\Inscription\GetInscriptionHelper;
+use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Inscription;
 use App\Models\Student;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ListInscription extends Component
 {
+    use AuthorizesRequests;
     protected $listeners = [
         'scolaryYearFresh' => 'getScolaryYear',
         'CurrancyFresh' => 'getCurrency',
@@ -25,12 +29,14 @@ class ListInscription extends Component
     public function updatedClasseOptionId($val){
         $this->classe_option_id=$val;
     }
-
+    public function updatedDateToSearch($val){
+        $this->emit('changeDateSumInscription',$val);
+        $this->emit('changeDateInscription',$val);
+    }
     public function getScolaryYear($id)
     {
         $this->defaultScolaryYerId = $id;
     }
-
     public  function  getCurrency($currency){
     $this->defaultCureencyName=$currency;
     }
@@ -39,15 +45,21 @@ class ListInscription extends Component
     {
         $this->selectedIndex = $index;
     }
+    public function refreshList(){
+        $this->emit('refreshInscriptionByDay');
+    }
 
     //Valided payment inscription
     public  function valideInscriptionPayement(Inscription $inscription){
-        if ($inscription->is_paied==false){
+        if (!$inscription->is_paied){
             $inscription->is_paied=true;
+            $inscription->update();
+            (new PosPrintingHelper())->printInscription($inscription,$this->defaultCureencyName);
         }else{
             $inscription->is_paied=false;
+            $inscription->update();
         }
-        $inscription->update();
+        $this->emit('refreshSumByDayInscription');
         $this->dispatchBrowserEvent('added', ['message' => "Paiement inscription validée !"]);
     }
 
@@ -65,8 +77,9 @@ class ListInscription extends Component
         $this->defaultCureencyName=$defaultCurrency->currency;
     }
     public function loadData(){
+
         $this->inscriptionList= (new GetInscriptionHelper())
-        ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,$this->defaultCureencyName);
+        ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,$this->defaultCureencyName,false);
     }
     public function edit(Student $student)
     {
@@ -76,6 +89,7 @@ class ListInscription extends Component
     {
         $this->emit('inscriptionToEdit', $inscription,$this->selectedIndex==0?$this->classe_option_id:$this->selectedIndex);
     }
+
     public function render()
     {
         if ($this->classe_option_id == 0) {

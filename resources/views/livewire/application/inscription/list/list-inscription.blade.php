@@ -5,11 +5,24 @@
         <div class="card-body">
             <div class="tab-content">
                 <div class="active tab-pane" id="inscription">
-                    <div class="d-flex justify-content-end">
-                        <x-button type="button" wire:click.prevent='loadData' class="btn btn-sm btn-primary">
-                            <i class="fas fa-sync" aria-hidden="true"></i>
-                        </x-button>
-                    </div>
+                    @can('view-total-amount')
+                        <div class="d-flex justify-content-end">
+                            <x-button wire:click.prevent="refreshList" type="button"  class="btn btn-warning"
+                                      data-toggle="modal"
+                                      data-target="#showListInscriptionPaymentByDateModal">
+                                @livewire('application.payment.widget.sum-inscription-by-day-widget',
+                                            [
+                                                'date' => $date_to_search,
+                                                'defaultScolaryYerId'=> $defaultScolaryYerId,
+                                                'classeId' => $classe_id,
+                                                'currency' => $defaultCureencyName
+                                            ])
+                            </x-button>
+                            <x-button type="button" wire:click.prevent='loadData' class="btn btn-info ml-2">
+                                <i class="fas fa-sync" aria-hidden="true"></i> Actualiser
+                            </x-button>
+                        </div>
+                    @endcan
                     <div class="d-flex justify-content-between align-items-center">
                         @if ($selectedIndex ==0)
                         <div class="form-group ">
@@ -29,14 +42,14 @@
                                 <option value="">Choisir...</option>
                                 @foreach ($classeList as $classe)
                                     <option value="{{ $classe->id }}">
-                                        {{ $classe->name . '/' . $classe->option->name }}</option>
+                                        {{ $classe->name . '/' . $classe->classeOption->name }}</option>
                                 @endforeach
                             </x-select>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <x-label value="{{ __('Filtrer par date') }}" />
-                                <x-input class="" type='date' placeholder="Lieu de naissance"
+                                <x-input class="" type='date'
                                     wire:model='date_to_search' />
                             </div>
                         </div>
@@ -50,13 +63,14 @@
                             </span>
                         @else
                             <div>
-                                <div>
-                                    <h4 class="text-uppercase text-bold text-danger">Inscriptions journalières</h4>
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="text-uppercase text-bold">Inscriptions journalières</h4>
                                 </div>
                             </div>
-                            <table class="table table-stripped table-sm mt-4">
+                            <table class="table table-stripped table-sm">
                                 <thead class="thead-light">
                                     <tr class="text-uppercase">
+                                        <th class="text-center">#</th>
                                         <th>Noms élève</th>
                                         <th class="text-center">Genre</th>
                                         <th class="text-center">Age</th>
@@ -65,8 +79,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($inscriptions as $inscription)
+                                    @foreach ($inscriptions as  $index=> $inscription)
                                         <tr>
+                                            <td class="text-center">{{$index+1}}</td>
                                             <td>{{ $inscription->student->name . '/' . $inscription->classe->name . ' ' . $inscription->classe->classeOption->name }}
                                             </td>
 
@@ -79,20 +94,27 @@
                                                 <span class="badge badge-{{$inscription->getPaiementStatusColor($inscription)}}">{{$inscription->getPaiementStatus($inscription)}}</span>
                                             </td>
                                             <td class="text-center">
-                                                <x-button wire:click.prevent='edit({{ $inscription->student }})'
-                                                    class="btn-sm" type="button" data-toggle="modal"
-                                                    data-target="#formEditInscriptionModal">
-                                                    <i class="fas fa-edit text-primary"></i>
-                                                </x-button>
-                                                <x-button wire:click.prevent='editInscription({{ $inscription }})'
-                                                    class="btn-sm text-secondary" type="button" data-toggle="modal"
-                                                    data-target="#editClasseAnInscription">
-                                                    <i class="fa fa-cog" aria-hidden="true"></i>
-                                                </x-button>
-                                                <x-button wire:click.prevent='valideInscriptionPayement({{ $inscription }})'
-                                                          class="btn-sm text-secondary" type="button">
-                                                    <i class="fas fa-check-double" aria-hidden="true"></i>
-                                                </x-button>
+                                              @can('edit-student-infos')
+                                                    <x-button wire:click.prevent='edit({{ $inscription->student }})'
+                                                              class="btn-sm" type="button" data-toggle="modal"
+                                                              data-target="#formEditInscriptionModal">
+                                                        <i class="fas fa-edit text-primary"></i>
+                                                    </x-button>
+                                              @endcan
+
+                                                @can('edit-classe-inscription')
+                                                      <x-button wire:click.prevent='editInscription({{ $inscription }})'
+                                                                class="btn-sm text-secondary" type="button" data-toggle="modal"
+                                                                data-target="#editClasseAnInscription">
+                                                          <i class="fa fa-cog" aria-hidden="true"></i>
+                                                      </x-button>
+                                                @endcan
+                                                @can('valid-payment')
+                                                    <x-button wire:click.prevent='valideInscriptionPayement({{ $inscription }})'
+                                                              class="btn-sm text-secondary" type="button">
+                                                        <i class="fas {{$inscription->is_paied?' fa-times-circle text-danger':'fa-check-double'}} " aria-hidden="true"></i>
+                                                    </x-button>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

@@ -13,8 +13,7 @@ class SwitchThemeWidget extends Component
         $setting= AppSetting::first();
         $setting->is_dark_mode=$val;
         $setting->update();
-        Cache::forget('setting');
-        $this->dispatchBrowserEvent('updated',['message'=>'Paramètres bien défini']);
+        Cache::forget('theme_setting');
     }
     public function render()
     {

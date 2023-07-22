@@ -75,8 +75,7 @@ class Paiment extends Model
     }
 
     public function getStudentClasseName(Paiment $paiment):string{
-        $name= $paiment?->classe->name.'/'.$paiment?->classe?->classeOption->name;
-        return $name;
+        return ' '.$paiment?->classe->name.'/'.$paiment?->classe?->classeOption->name;
     }
 
     public function getArchiveAmount($id){

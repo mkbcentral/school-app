@@ -11,7 +11,7 @@ class Inscription extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cost_inscription_id', 'user_id', 'classe_id', 'scolary_year_id', 'number_paiment', 'student_id','rate_id'];
+    protected $fillable = ['cost_inscription_id', 'user_id', 'classe_id', 'scolary_year_id', 'school_id','number_paiment', 'student_id','rate_id'];
 
     /**
      * Get the Student that owns the Inscription
@@ -59,9 +59,9 @@ class Inscription extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function depense(): HasOne
+    public function rate(): BelongsTo
     {
-        return $this->hasOne(DepenseInInscription::class);
+        return $this->belongsTo(Rate::class,'rate_id');
     }
 
     /**
@@ -74,11 +74,13 @@ class Inscription extends Model
         return $this->hasOne(InscRegularisation::class);
     }
 
+
+
     //Get status inscription with payment
     public  function getPaiementStatus(Inscription $inscription):string{
         $status='';
-        if ($inscription->is_paied==false){
-            $status='INVALIDE';
+        if (!$inscription->is_paied){
+            $status='En cours';
         }else{
             $status='VALIDE';
         }
@@ -87,7 +89,7 @@ class Inscription extends Model
     //Get status inscription color with payment
     public  function getPaiementStatusColor(Inscription $inscription):string{
         $status='';
-        if ($inscription->is_paied==false){
+        if (!$inscription->is_paied){
             $status='danger';
         }else{
             $status='success';
@@ -96,8 +98,7 @@ class Inscription extends Model
     }
 
     public function getStudentClasseName(Inscription $inscription):string{
-        $name= $inscription?->classe->name.'/'.$inscription?->classe?->classeOption->name;
-        return $name;
+        return ' '.$inscription?->classe->name.'/'.$inscription?->classe?->classeOption->name;
     }
 
 }

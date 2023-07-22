@@ -5,7 +5,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="showListInscriptionPaymentByDateModalLabel">LISTE PAIEMENT INSCRIPTIONS JOURNALIERES</h5>
+                    <h5 class="modal-title" id="showListInscriptionPaymentByDateModalLabel"><i class="fas fa-list"></i> LISTE PAIEMENT INSCRIPTIONS JOURNALIERES</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -37,6 +37,7 @@
                             <table class="table table-stripped table-sm">
                                 <thead class="thead-light">
                                 <tr class="text-uppercase">
+                                    <th class="text-center">#</th>
                                     <th>Noms élève</th>
                                     <th class="text-center">Genre</th>
                                     <th class="text-center">Montant</th>
@@ -45,15 +46,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($inscriptions as $inscription)
+                                @foreach ($inscriptions as $index => $inscription)
                                     <tr>
+                                        <td class="text-center">{{$index+1}}</td>
                                         <td>{{ $inscription->student->name . '/' . $inscription->classe->name . ' ' . $inscription->classe->classeOption->name }}
                                         </td>
 
                                         <td class="text-center">{{ $inscription->student->gender }}
                                         </td>
                                         <td class="text-center">
-                                            {{ $inscription->amount }} {{$defaultCureencyName}}
+                                            {{ app_format_number($inscription->amount) }} {{$defaultCureencyName}}
                                         </td>
                                         <td class="text-center">
                                             <span class="badge badge-{{$inscription->getPaiementStatusColor($inscription)}}">{{$inscription->getPaiementStatus($inscription)}}</span>
@@ -75,7 +77,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <h3 class="text-uppercase text-primary">Total: {{$total}} {{$defaultCureencyName}}</h3>
+                    <h3 class="text-uppercase text-primary">Total: {{app_format_number($total)}} {{$defaultCureencyName}}</h3>
                 </div>
             </div>
         </div>
