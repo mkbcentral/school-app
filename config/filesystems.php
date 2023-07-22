@@ -39,7 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => config('app.env') == 'local' ? config('app.url'). '/storage' : "'url' => 'https://school-app-test.mkbcentral.com/public/storage',",
             'visibility' => 'public',
             'throw' => false,
         ],
