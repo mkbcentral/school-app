@@ -6,6 +6,9 @@
     <title>{{auth()->user()?auth()->user()->school->name:app_setting('app_name') }}</title>
     <link rel="icon" type="image/png" sizes="96x96" href="{{ auth()->user()? asset('storage/'.auth()->user()?->school->logo):asset('storage/'.app_setting('app_logo')) }}">
     <link rel="stylesheet" href="{{ asset('chargement.css') }}">
+    @if(config('app.env' !='local'))
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    @endif
     <script src="{{ asset('moment/moment.min.js') }}"></script>
     @stack('css')
     @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/table.css'])
