@@ -21,10 +21,11 @@ class DatabaseSeeder extends Seeder
         $admin=User::factory()->create([
              'name' => 'SuperAdmin',
              'email' => 'superadmin@example.com',
+            'school_id' => 1
          ]);
         $user=User::factory()->create([
             'name' => 'Test user',
-            'email' => 'testuser@example.com',
+            'email' => 'testuser@example.com','school_id' => 1
         ]);
         $role=Role::create(['name'=>'Admin']);
         $admin->assignRole($role);
