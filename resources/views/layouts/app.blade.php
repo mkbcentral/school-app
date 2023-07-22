@@ -13,7 +13,7 @@
     @endif
     <script src="{{ asset('moment/moment.min.js') }}"></script>
     @stack('css')
-    @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/table.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini {{theme_setting('is_dark_mode')?'dark-mode':''}}  {{theme_setting('is_sidebar_collapse')?'sidebar-collapse':''}}">
