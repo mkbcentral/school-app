@@ -146,7 +146,7 @@
                     </div>
                     <div class="modal-footer">
                         <x-button type="submit" class="btn btn-primary">
-                            <span wire:loading wire:target="addResponsable" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span wire:loading wire:target="store" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             <i class="fas fa-save"></i> Sauvegarder
                         </x-button>
                         <x-button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</x-button>
