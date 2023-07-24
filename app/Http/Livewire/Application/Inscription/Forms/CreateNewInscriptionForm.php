@@ -39,6 +39,7 @@ class CreateNewInscriptionForm extends Component
             $this->dispatchBrowserEvent('deleted', ['message' => "Désolé cet élève existe déjà !"]);
         } else {
             $data['scolary_year_id']=$this->defaultScolaryYear->id;
+            $data['school_id']=auth()->user()->school->id;
             $student= StundentHelper::create($data);
             (new CreateInscriptionHelper())
                 ->create(
@@ -61,7 +62,7 @@ class CreateNewInscriptionForm extends Component
     {
         $this->costInscriptionList = (new CostInscriptionHelper())->getListCostInscription();;
         $this->genderList = (new SchoolHelper())->getListOfGender();
-        $this->defaultScolaryYear=ScolaryYear::where('active',true)->first();
+        $this->defaultScolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
     }
     public function render()
     {

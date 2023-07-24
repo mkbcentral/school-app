@@ -13,7 +13,7 @@ class RatePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin','Finance']);
+        return $user->hasRole(['Super-Admin','Finance']);
     }
 
     /**
@@ -21,7 +21,7 @@ class RatePolicy
      */
     public function view(User $user, Rate $rate): bool
     {
-        return $user->hasRole(['Finance']);
+        return $user->hasRole(['Finance','Super-Admin']);
     }
 
     /**
@@ -29,7 +29,7 @@ class RatePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Finance']);
+        return $user->hasRole(['Finance','Super-Admin']);
     }
 
     /**

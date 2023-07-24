@@ -8,7 +8,7 @@ use App\Models\Inscription;
 
 class CreateInscriptionHelper
 {
-    public  function create($scolaryYear_id,$cost_inscription_id,$student_id,$classe_id):Inscription{
+    public  function create($scolaryYear_id,$cost_inscription_id,$student_id,$classe_id,$classe_option_id):Inscription{
         $rate=(new SchoolHelper())->getCurrentRate();
         $inscription= Inscription::create([
             'number_paiment'=>(new FormatInvoiceNumberHelper())->formatInscriptionInvoiceNumber($classe_option_id),

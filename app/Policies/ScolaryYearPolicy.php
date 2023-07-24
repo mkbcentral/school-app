@@ -13,7 +13,7 @@ class ScolaryYearPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -21,7 +21,7 @@ class ScolaryYearPolicy
      */
     public function view(User $user, ScolaryYear $scolaryYear): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -29,7 +29,7 @@ class ScolaryYearPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -37,7 +37,7 @@ class ScolaryYearPolicy
      */
     public function update(User $user, ScolaryYear $scolaryYear): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -45,7 +45,7 @@ class ScolaryYearPolicy
      */
     public function delete(User $user, ScolaryYear $scolaryYear): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -53,7 +53,7 @@ class ScolaryYearPolicy
      */
     public function restore(User $user, ScolaryYear $scolaryYear): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -61,6 +61,6 @@ class ScolaryYearPolicy
      */
     public function forceDelete(User $user, ScolaryYear $scolaryYear): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 }

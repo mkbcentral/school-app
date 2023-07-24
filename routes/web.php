@@ -11,6 +11,7 @@ use App\Http\Livewire\Application\Settings\AppSettings;
 use App\Http\Livewire\Application\Rapport\PaymentRapport;
 use App\Http\Controllers\Application\Printings\RapportPaymentPrintingController;
 use App\Http\Livewire\Application\Rapport\Inscription\RapportInscriptionByClasse;
+use App\Http\Controllers\Application\Pages\CreateSchoolController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,8 @@ use App\Http\Livewire\Application\Rapport\Inscription\RapportInscriptionByClasse
 | contains the "web" middleware group. Now create something great!
 */
 Route::middleware('auth')->group(function () {
-    Route::get('/', ApplicationLinkController::class)->name('main');
+    Route::get('/', ApplicationLinkController::class)->name('main')->middleware('school-checker');
+    Route::get('/app-create-school', CreateSchoolController::class)->name('school.create');
     //DASHBOARD REFACTORING
     Route::prefix('dashboard')->group(function () {
         Route::get('main',MainDashboard::class)->name('dashboard.main');

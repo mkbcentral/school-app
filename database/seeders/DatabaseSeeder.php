@@ -15,19 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call(SubAppLinkSeeder::class);
-        // \App\Models\User::factory(10)->create();
-
         $admin=User::factory()->create([
-             'name' => 'SuperAdmin',
-             'email' => 'superadmin@example.com',
-            'school_id' => 1
+             'name' => 'Super Admin',
+             'email' => 'superadmin@school-app.app',
+            'school_id' => null
          ]);
-        $user=User::factory()->create([
-            'name' => 'Test user',
-            'email' => 'testuser@example.com','school_id' => 1
-        ]);
-        $role=Role::create(['name'=>'Admin']);
+        $role=Role::create(['name'=>'Super-Admin']);
         $admin->assignRole($role);
     }
 }

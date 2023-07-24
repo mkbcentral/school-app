@@ -20,7 +20,7 @@ class AppLinkResource extends Resource
     protected static ?string $model = AppLink::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-link';
-
+    protected static ?string $navigationLabel='Menu principal';
     protected static ?string $navigationGroup = 'Navigations';
 
 

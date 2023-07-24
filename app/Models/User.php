@@ -25,7 +25,8 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-        'school_id'
+        'school_id',
+        'avatar'
     ];
 
     /**
@@ -84,6 +85,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {
-        return $this->hasRole(['Admin','Finance']);
+        return $this->hasRole(['Super-Admin','Finance']);
     }
 }
