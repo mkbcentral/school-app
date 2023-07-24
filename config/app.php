@@ -56,7 +56,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'asset_url' =>env('ASSET_URL'),
+    'asset_url' =>config('app.env'=='local')? env('ASSET_URL',null):env('ASSET_URL','https://school-app-test.mkbcentral.com/public'),
 
     /*
     |--------------------------------------------------------------------------
