@@ -9,7 +9,7 @@
         @vite(['resources/css/app.css','resources/js/app.js'])
         @livewireStyles
     </head>
-    <body class="hold-transition login-page " style="background: #0c84ff">
+    <body class="hold-transition login-page "  style="background: url('http://127.0.0.1:8000/my-bg.svg');background-size:cover;background-repeat: no-repeat">
         {{ $slot }}
     </body>
 </html>

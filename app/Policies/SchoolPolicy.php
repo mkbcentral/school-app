@@ -13,7 +13,7 @@ class SchoolPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -21,7 +21,7 @@ class SchoolPolicy
      */
     public function view(User $user, School $school): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -29,7 +29,8 @@ class SchoolPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        $schools=School::all();
+        return $user->hasRole(['Super-Admin'] , $schools->count()<=1);
     }
 
     /**
@@ -37,7 +38,7 @@ class SchoolPolicy
      */
     public function update(User $user, School $school): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -45,7 +46,7 @@ class SchoolPolicy
      */
     public function delete(User $user, School $school): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -53,7 +54,7 @@ class SchoolPolicy
      */
     public function restore(User $user, School $school): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -61,6 +62,6 @@ class SchoolPolicy
      */
     public function forceDelete(User $user, School $school): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 }

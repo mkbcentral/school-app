@@ -68,6 +68,10 @@ class AuthServiceProvider extends ServiceProvider
             $user=auth()->user();
             return $user->hasRole(['Finance']);
         });
+        Gate::define('view-administration-panel', function () {
+            $user=auth()->user();
+            return $user->hasRole(['Super-Admin']);
+        });
         Gate::define('edit-student-infos', function () {
             $user=auth()->user();
             return $user->hasRole(['Secretaire']);

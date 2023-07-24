@@ -22,8 +22,16 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
+
+    public function redirectTo() {
+        if (auth()->user()->school){
+            return redirect()->route('main');
+        }else{
+            return redirect()->route('school.create');
+        }
+    }
     public function boot()
     {
         $this->configureRateLimiting();
