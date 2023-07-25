@@ -50,6 +50,7 @@ class AddNewReinscription extends Component
                     $this->cost_inscription_id,
                     $this->student->id,
                     $this->classe_id,
+                    $this->classe_option_id
                 );
             $this->emit('refreshListInscription');
             $this->dispatchBrowserEvent('added', ['message' => "Reinscription bien sauvegargée !"]);

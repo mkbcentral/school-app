@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Application\School;
 
+use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Currency;
 use Livewire\Component;
 
@@ -15,9 +16,7 @@ class CurrencyWidget extends Component
     }
 
     public function mount(){
-        $this->defaulCurrency=Currency::where('school_id',auth()->user()->school->id)
-            ->where('id',1)
-            ->first();
+        $this->defaulCurrency=(new SchoolHelper())->getCurrentCurrency();
     }
 
     public function render()

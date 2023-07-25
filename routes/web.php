@@ -21,8 +21,8 @@ use App\Http\Controllers\Application\Pages\CreateSchoolController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 */
-Route::middleware('auth')->group(function () {
-    Route::get('/', ApplicationLinkController::class)->name('main')->middleware('school-checker');
+Route::middleware(['auth','route-access-checker'])->group(function () {
+    Route::get('/', ApplicationLinkController::class)->name('main');
     Route::get('/app-create-school', CreateSchoolController::class)->name('school.create');
     //DASHBOARD REFACTORING
     Route::prefix('dashboard')->group(function () {

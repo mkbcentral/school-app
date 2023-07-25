@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckerRedirectUser;
 use App\Http\Middleware\CheckIfUserHasSchool;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -64,6 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'school-checker' => CheckIfUserHasSchool::class
+        'school-checker' => CheckIfUserHasSchool::class,
+        'route-access-checker'=>CheckerRedirectUser::class
     ];
 }

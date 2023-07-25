@@ -7,17 +7,19 @@
                 <div class="active tab-pane" id="inscription">
                     @can('view-total-amount')
                         <div class="d-flex justify-content-end">
-                            <x-button wire:click.prevent="refreshList" type="button"  class="btn btn-warning"
-                                      data-toggle="modal"
-                                      data-target="#showListInscriptionPaymentByDateModal">
-                                @livewire('application.payment.widget.sum-inscription-by-day-widget',
-                                            [
-                                                'date' => $date_to_search,
-                                                'defaultScolaryYerId'=> $defaultScolaryYerId,
-                                                'classeId' => $classe_id,
-                                                'currency' => $defaultCureencyName
-                                            ])
-                            </x-button>
+                            @can('view-total-amount')
+                                <x-button wire:click.prevent="refreshList" type="button"  class="btn btn-warning"
+                                          data-toggle="modal"
+                                          data-target="#showListInscriptionPaymentByDateModal">
+                                    @livewire('application.payment.widget.sum-inscription-by-day-widget',
+                                                [
+                                                    'date' => $date_to_search,
+                                                    'defaultScolaryYerId'=> $defaultScolaryYerId,
+                                                    'classeId' => $classe_id,
+                                                    'currency' => $defaultCureencyName
+                                                ])
+                                </x-button>
+                            @endcan
                             <x-button type="button" wire:click.prevent='loadData' class="btn btn-info ml-2">
                                 <i class="fas fa-sync" aria-hidden="true"></i> Actualiser
                             </x-button>

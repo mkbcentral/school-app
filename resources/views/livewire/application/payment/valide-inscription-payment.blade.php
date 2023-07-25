@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h3 class="m-0"><i class="fas fa-money-check-alt"></i>PAIEMENT DES INSCRIPTIONS</h3>
+                    <h3 class="m-0"><i class="fas fa-money-check-alt"></i> PAIEMENT DES INSCRIPTIONS</h3>
                 </div>
             </div>
         </div>
