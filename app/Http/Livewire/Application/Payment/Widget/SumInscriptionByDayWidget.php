@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Application\Payment\Widget;
 
-use App\Http\Livewire\Helpers\Inscription\GetInscriptionHelper;
+use App\Http\Livewire\Helpers\Inscription\GetInscriptionByDateWithPaymentStatusHelper;
 use Livewire\Component;
 
 class SumInscriptionByDayWidget extends Component
@@ -16,27 +16,57 @@ class SumInscriptionByDayWidget extends Component
     public $total=0,$date_to_search;
     public  $defaultScolaryYerId,$defaultCureencyName,$classe_id = 0;
 
-    public function getScolaryYear($id)
+    /**
+     * Get scolaryYearId with emit in scolaryYearWidget listener
+     * @param $id
+     * @return void
+     */
+    public function getScolaryYear($id): void
     {
         $this->defaultScolaryYerId = $id;
     }
-    public function changeDate($date){
+
+    /**
+     * Get date to send in child component
+     * @param $date
+     * @return void
+     */
+    public function changeDate($date): void
+    {
         $this->date_to_search=$date;
     }
+    /**
+     * Get currency name with emit in currencyWidget listener
+     * @param $currency
+     * @return void
+     */
     public  function  getCurrency($currency){
         $this->defaultCureencyName=$currency;
     }
 
-    public function mount($date,$defaultScolaryYerId,$classeId,$currency){
+    /**
+     *mount component
+     * @param $date
+     * @param $defaultScolaryYerId
+     * @param $classeId
+     * @param $currency
+     * @return void
+     */
+    public function mount($date,$defaultScolaryYerId,$classeId,$currency): void
+    {
         $this->date_to_search=$date;
         $this->defaultScolaryYerId=$defaultScolaryYerId;
         $this->classe_id=$classeId;
         $this->defaultCureencyName=$currency;
     }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function render()
     {
-        $this->total= (new GetInscriptionHelper())
-            ->getDateSumTotalInscription($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,$this->defaultCureencyName,true);
+        $this->total= (new GetInscriptionByDateWithPaymentStatusHelper())
+            ->getSumTotalAmountInscriptionByDate($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,$this->defaultCureencyName,true);
         return view('livewire.application.payment.widget.sum-inscription-by-day-widget',['total'=>$this->total]);
     }
 }

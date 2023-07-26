@@ -34,6 +34,10 @@ class Paiment extends Model
         return $this->belongsTo(Student::class, 'student_id');
     }
 
+    public function rate():BelongsTo{
+        return $this->belongsTo(Rate::class,'rate_id');
+    }
+
     /**
      * Get the Student that owns the Paiement
      *

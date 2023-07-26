@@ -2,7 +2,8 @@
 
 namespace App\Http\Livewire\Application\Inscription\List;
 
-use App\Http\Livewire\Helpers\Inscription\GetInscriptionHelper;
+use App\Http\Livewire\Helpers\Inscription\GetInscriptionByDateWithPaymentStatusHelper;
+use App\Http\Livewire\Helpers\Inscription\GetInscriptionByyDateHelper;
 use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Inscription;
@@ -79,8 +80,8 @@ class ListInscription extends Component
     }
     public function loadData(){
 
-        $this->inscriptionList= (new GetInscriptionHelper())
-        ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,$this->defaultCureencyName,false);
+        $this->inscriptionList= (new GetInscriptionByyDateHelper())
+        ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,$this->defaultCureencyName);
         //dd( $this->inscriptionList);
     }
     public function edit(Student $student)

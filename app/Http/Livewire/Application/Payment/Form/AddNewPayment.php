@@ -3,19 +3,15 @@
 namespace App\Http\Livewire\Application\Payment\Form;
 
 use App\Http\Livewire\Helpers\Cost\CostGeneralHelper;
-use App\Http\Livewire\Helpers\Cost\CostInscriptionHelper;
+use App\Http\Livewire\Helpers\Cost\TypeCostHelper;
 use App\Http\Livewire\Helpers\DateFormatHelper;
-use App\Http\Livewire\Helpers\Notifications\SmsNotificationHelper;
 use App\Http\Livewire\Helpers\Payment\CreatePaymentCheckerHelper;
 use App\Http\Livewire\Helpers\Payment\PaymentCreationHelper;
 use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\CostGeneral;
-use App\Models\Paiment;
 use App\Models\Student;
-use App\Models\TypeOtherCost;
 use Livewire\Component;
-use function Symfony\Component\Translation\t;
 
 class AddNewPayment extends Component
 {
@@ -84,11 +80,10 @@ class AddNewPayment extends Component
 
     public function mount()
     {
+        $this->month=date('m');
         $defaultScolaryYer = (new SchoolHelper())->getCurrectScolaryYear();
         $this->defaultScolaryYerId=$defaultScolaryYer->id;
-        $this->listTypeCost=TypeOtherCost::where('school_id',auth()->user()->school->id)
-            ->where('scolary_year_id',$this->defaultScolaryYerId)
-            ->get();
+        $this->listTypeCost=(new TypeCostHelper())->getListTypeCost($this->defaultScolaryYerId);
         $this->months=(new DateFormatHelper())->getMonthsForYear();
     }
     public function render()

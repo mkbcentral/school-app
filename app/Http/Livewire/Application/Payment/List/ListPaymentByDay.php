@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\Application\Payment\List;
 
 use App\Http\Livewire\Helpers\Payment\PaymentByDateHelper;
+use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Currency;
 use App\Models\Paiment;
+use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
 
 class ListPaymentByDay extends Component
@@ -17,20 +19,23 @@ class ListPaymentByDay extends Component
     ];
     public $keyToSearch='',$date_to_search,$defaultCureencyName;
     public $defaultScolaryYerId;
-    public function getScolaryYear($id)
+    public function getScolaryYear($id):void
     {
         $this->defaultScolaryYerId = $id;
     }
 
-    public  function  getCurrency($currency){
+    public  function  getCurrency($currency):void{
         $this->defaultCureencyName=$currency;
     }
 
-    public function edit(Paiment $payment){
+    public function edit(Paiment $payment): void
+    {
         $this->emit('paymentToEdit',$payment);
     }
-
-    public function mount()
+    public function printBill(Paiment $payment):void{;
+        (new PosPrintingHelper())->printPayment($payment,$this->defaultCureencyName);
+    }
+    public function mount(): void
     {
         $defaultScolaryYer = (new SchoolHelper())->getCurrectScolaryYear();
         $this->defaultScolaryYerId=$defaultScolaryYer->id;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Application\Rapport\Inscription;
 
+use App\Http\Livewire\Helpers\Inscription\GetInscriptionWithGrouping;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\ClasseOption;
 use App\Models\Inscription;
@@ -41,21 +42,9 @@ class RapportInscriptionByClasse extends Component
     }
     public function render()
     {
-        $inscriptions=Inscription::where('inscriptions.scolary_year_id',$this->defaultScolaryYerId)
-            ->where('inscriptions.school_id',auth()->user()->school->id)
-            ->join('classes','classes.id','=','inscriptions.classe_id')
-            ->join('cost_inscriptions','cost_inscriptions.id','=','inscriptions.cost_inscription_id')
-            ->join('rates','rates.id','=','inscriptions.rate_id')
-            ->groupBy('classes.name')
-            ->where('inscriptions.is_paied',true)
-            ->where('classes.classe_option_id',$this->selectedIndex)
-            ->select(
-                'classes.name',
-                DB::raw('count(inscriptions.id) as number'),
-                DB::raw($this->defaultCureencyName=='USD'?
-                    'sum(cost_inscriptions.amount) as amount':
-                    'sum(cost_inscriptions.amount*rates.rate)as amount'))
-            ->get();
-        return view('livewire.application.rapport.inscription.rapport-inscription-by-classe',['inscriptions'=>$inscriptions]);
+        $inscriptions=(new GetInscriptionWithGrouping())
+            ->getAmountInscriptionGroupingByCalsseWithSelectedOption($this->selectedIndex,$this->defaultScolaryYerId,$this->defaultCureencyName);
+        return view('livewire.application.rapport.inscription.rapport-inscription-by-classe',
+            ['inscriptions'=>$inscriptions]);
     }
 }

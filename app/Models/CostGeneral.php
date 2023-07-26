@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Helpers\SchoolHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -39,8 +40,9 @@ class CostGeneral extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function typeOtherCost(): BelongsTo
-    {
-        return $this->belongsTo(TypeOtherCost::class, 'type_other_cost_id');
+    {   $scolaryYer=(new SchoolHelper())->getCurrectScolaryYear();;
+        return $this->belongsTo(TypeOtherCost::class, 'type_other_cost_id')
+               ->where('active',true);
     }
 
 

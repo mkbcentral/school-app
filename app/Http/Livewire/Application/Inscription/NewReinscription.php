@@ -39,9 +39,9 @@ class NewReinscription extends Component
     {
         $studentList = Student::join('scolary_years', 'scolary_years.id', '=', 'students.scolary_year_id')
             ->where('scolary_years.active', false)
-            ->select('students.*')
             ->where('students.school_id',auth()->user()->school->id)
             ->where('students.name', 'Like', '%' . $this->keyToSearch . '%')
+            ->select('students.*')
             ->orderBy('students.name','ASC')
             ->paginate(10);
         return view('livewire.application.inscription.new-reinscription', ['studentList'=> $studentList]);

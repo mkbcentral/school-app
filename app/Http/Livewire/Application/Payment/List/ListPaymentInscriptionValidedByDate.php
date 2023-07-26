@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Application\Payment\List;
 
-use App\Http\Livewire\Helpers\Inscription\GetInscriptionHelper;
+use App\Http\Livewire\Helpers\Inscription\GetInscriptionByDateWithPaymentStatusHelper;
 use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Currency;
@@ -50,7 +50,7 @@ class ListPaymentInscriptionValidedByDate extends Component
     public function render()
     {
 
-        $this->inscriptionList= (new GetInscriptionHelper())
+        $this->inscriptionList= (new GetInscriptionByDateWithPaymentStatusHelper())
             ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, 0, 0,$this->defaultCureencyName);
         return view('livewire.application.payment.list.list-payment-inscription-valided-by-date', ['inscriptions' => $this->inscriptionList]);
     }

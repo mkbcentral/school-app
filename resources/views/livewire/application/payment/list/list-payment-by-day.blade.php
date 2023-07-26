@@ -51,7 +51,10 @@
                                              data-target="#editPayment">
                                        <i class="fa fa-cog" aria-hidden="true"></i>
                                    </x-button>
-
+                                   <x-button wire:click.prevent='printBill({{ $payment }})'
+                                             class="btn-sm text-secondary" type="button" >
+                                       <i class="fa fa-print" aria-hidden="true"></i>
+                                   </x-button>
                                </td>
                            </tr>
                            @php

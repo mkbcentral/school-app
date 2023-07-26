@@ -17,7 +17,7 @@
                         @if ($student)
                             <div class="card p-2">
                                 <h6><span class="text-bold text-info">Nom:</span>{{ $student->name }}</h6>
-                                <h6><span class="text-bold text-info">Classe: {{$student->inscription->classe->name}}</span></h6>
+                                <h6><span class="text-bold text-info">Classe: {{$student->inscription->getStudentClasseName($student->inscription)}}</span></h6>
                             </div>
                             <div class="card">
                                 <div class="card-body">
@@ -57,7 +57,7 @@
                                                 <x-select wire:model.defer='month'>
                                                     <option value="">Choisir...</option>
                                                     @foreach ($months as $month)
-                                                        <option value="{{ $month }}">{{ $month }}</option>
+                                                        <option value="{{ $month }}">{{ app_get_month_name($month) }}</option>
                                                     @endforeach
                                                 </x-select>
                                             </div>

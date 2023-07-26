@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Helpers\Payment\GetPaymentByTypeCostToCheck;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class TypeOtherCost extends Model
 {
     use HasFactory;
-    protected $fillable=['name','school_id','active'];
+    protected $fillable=['name','school_id','active','scolary_year_id'];
     /**
      * Get all of the comments for the TypeOtherCost
      *
@@ -39,30 +40,30 @@ class TypeOtherCost extends Model
         return $this->belongsTo(ScolaryYear::class, 'scolary_year_id');
     }
 
-    public  function getPayment($idType,$studentId,$month):string{
-        $scolaryYear=ScolaryYear::where('name','2022-2023')->first();
+    public  function getPaymentCheckerStatus($idType,$studentId,$month):string{
+        $payment=GetPaymentByTypeCostToCheck::getPaymentChecker($idType,$studentId,$month);
         $status='';
-        $payment=Paiment::join('cost_generals','cost_generals.id','=','paiments.cost_general_id')
-            ->join('type_other_costs','type_other_costs.id','=','cost_generals.type_other_cost_id')
-            ->where('paiments.student_id',$studentId)
-            ->where('paiments.school_id',auth()->user()->school->id)
-            ->where('paiments.scolary_year_id',$scolaryYear->id)
-            ->where('cost_generals.type_other_cost_id',$idType)
-            ->where('paiments.mounth_name',$month)
-            ->select('paiments.*')
-            ->first();
         if($payment){
-            $status='OK';
+            return   $status='OK';
         }else{
-            $status='-';
+            return  $status='-';
         }
-        return  $status;
     }
 
-    public function getBgColor($month):string{
+    public  function getPaymentCheckerBgtatus($idType,$studentId,$month):string{
+        $payment=GetPaymentByTypeCostToCheck::getPaymentChecker($idType,$studentId,$month);
+        $status='';
+        if($payment){
+            return $status;
+        }else{
+            return $status='bg-danger';
+        }
+    }
+
+    public function getBgColorWithMonthNotPayment($month):string{
         $bg='';
         if ($month=='06' || $month=='07' || $month=='08'){
-            $bg='bg-danger';
+            $bg='bg-success';
         }
         return $bg;
     }

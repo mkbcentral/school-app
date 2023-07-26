@@ -29,6 +29,11 @@
 
                             </ul>
                         </div>
+                        <div class="d-flex  justify-content-center">
+                            <div wire:loading wire:target="changeIndex" class="spinner-grow text-primary text-center" role="status">
+                                <span hidden>Loading...</span>
+                            </div>
+                        </div>
                         @livewire('application.rapport.list.list-rapport-payment',['index' => $selectedIndex])
                     </div>
                     <!-- /.card -->

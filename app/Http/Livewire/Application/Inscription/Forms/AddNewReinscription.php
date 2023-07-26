@@ -5,12 +5,8 @@ namespace App\Http\Livewire\Application\Inscription\Forms;
 use App\Http\Livewire\Helpers\Cost\CostInscriptionHelper;
 use App\Http\Livewire\Helpers\DateFormatHelper;
 use App\Http\Livewire\Helpers\Inscription\CreateInscriptionHelper;
+use App\Http\Livewire\Helpers\Inscription\ExistingInscriptionCheckerHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
-use App\Models\Classe;
-use App\Models\ClasseOption;
-use App\Models\CostInscription;
-use App\Models\Inscription;
-use App\Models\ScolaryYear;
 use App\Models\Student;
 use App\Models\TypeOtherCost;
 use Livewire\Component;
@@ -37,10 +33,7 @@ class AddNewReinscription extends Component
     public function store()
     {
         $this->validateForm();
-        $inscription = Inscription::where('student_id', $this->student->id)
-            ->where('classe_id', $this->classe_id)
-            ->where('scolary_year_id', $this->defaultScolaryYear->id)
-            ->first();
+        $inscription =ExistingInscriptionCheckerHelper::checkIfInscriptionExist($this->student->id,$this->classe_id,$this->defaultScolaryYear->id);
         if ($inscription) {
             $this->dispatchBrowserEvent('error', ['message' => "Cet élève est déjà inscrit !"]);
         } else {
@@ -50,7 +43,8 @@ class AddNewReinscription extends Component
                     $this->cost_inscription_id,
                     $this->student->id,
                     $this->classe_id,
-                    $this->classe_option_id
+                    $this->classe_option_id,
+                    true
                 );
             $this->emit('refreshListInscription');
             $this->dispatchBrowserEvent('added', ['message' => "Reinscription bien sauvegargée !"]);
@@ -70,7 +64,7 @@ class AddNewReinscription extends Component
         $this->costInscriptionList =(new CostInscriptionHelper())->getListCostInscription();
         $this->listClasseOption = (new SchoolHelper())->getListClasseOption();
         $this->defaultScolaryYear = (new SchoolHelper())->getCurrectScolaryYear();
-
+        //Get lis type cost with id in di[1,2]
         $this->listTypeCost=TypeOtherCost::where('active',true)
             ->whereIn('id',[1,2])
             ->get();

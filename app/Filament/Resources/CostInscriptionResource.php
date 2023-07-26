@@ -20,8 +20,8 @@ class CostInscriptionResource extends Resource
     protected static ?string $model = CostInscription::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
-
-    protected static ?string $navigationGroup = 'Cost manager';
+    protected static ?string $navigationLabel="Type frais inscription";
+    protected static ?string $navigationGroup = 'Gestion de frais';
 
     public static function getEloquentQuery(): Builder
     {

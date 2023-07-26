@@ -38,7 +38,7 @@
                                         <tbody class=">
                                             @foreach ($studentList as $student)
                                                 <tr ">
-                                                    <td>{{ $student->name }}/{{ $student->id }}
+                                                    <td>{{ $student->name }}
                                                     </td>
 
                                                     <td class="text-center">{{ $student->gender }}

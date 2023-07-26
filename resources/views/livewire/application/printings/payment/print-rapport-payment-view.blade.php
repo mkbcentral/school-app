@@ -1,8 +1,4 @@
 <x-pinting-layout>
-    <div style="border: 1px solid black;padding: 6px">
-
-    </div>
-    </div>
     @php
         $total=0;;
     @endphp

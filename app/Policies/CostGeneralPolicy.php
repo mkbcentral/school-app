@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\CostGeneral;
+use App\Models\CostInscription;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -13,15 +13,15 @@ class CostGeneralPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, CostGeneral $costGeneral): bool
+    public function view(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -29,38 +29,38 @@ class CostGeneralPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, CostGeneral $costGeneral): bool
+    public function update(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, CostGeneral $costGeneral): bool
+    public function delete(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, CostGeneral $costGeneral): bool
+    public function restore(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, CostGeneral $costGeneral): bool
+    public function forceDelete(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 }

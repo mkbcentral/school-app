@@ -21,7 +21,8 @@ class CostGeneralResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cash';
 
-    protected static ?string $navigationGroup = 'Cost manager';
+    protected static ?string $navigationLabel="Frais scolaire";
+    protected static ?string $navigationGroup = 'Gestion de frais';
 
     public static function getEloquentQuery(): Builder
     {
@@ -45,6 +46,9 @@ class CostGeneralResource extends Resource
                     ->required(),
                 Forms\Components\Toggle::make('active')
                     ->required(),
+                Forms\Components\Select::make('type_other_cost_id')
+                    ->relationship('typeOtherCost','name')
+                    ->preload(),
             ]);
     }
 

@@ -4,7 +4,7 @@
         aria-labelledby="newReinscriptionLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-primary">
+                <div class="modal-header">
                     <h5 class="modal-title" id="newReinscriptionLabel">
                         PASSE UNE NOUVELLE REINSCRIPTION
                     </h5>
@@ -17,7 +17,7 @@
                         @if ($student)
                             <div class="card p-2">
                                 <h6><span class="text-bold text-info">Nom:</span>{{ $student->name }}</h6>
-                                <h6><span class="text-bold text-info">Classe:</span></h6>
+                                <h6><span class="text-bold text-info">Classe passée:{{$student->inscription->getStudentClasseName($student->inscription)}}</span></h6>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -87,7 +87,7 @@
                                                 <tr>
                                                     <td>{{$type->name}}</td>
                                                     @foreach($months as $m)
-                                                        <td class="{{$type->getBgColor($m)}}">{{$type->getPayment($type->id,$student->id,$m)}}</td>
+                                                        <td class="{{$type->getBgColorWithMonthNotPayment($m)}}">{{$type->getPaymentCheckerStatus($type->id,$student->id,$m)}}</td>
                                                     @endforeach
                                                 </tr>
                                             @endforeach

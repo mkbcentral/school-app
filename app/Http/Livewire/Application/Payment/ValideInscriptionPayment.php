@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Application\Payment;
 
-use App\Http\Livewire\Helpers\Inscription\GetInscriptionHelper;
+use App\Http\Livewire\Helpers\Inscription\GetInscriptionByDateWithPaymentStatusHelper;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -22,7 +22,7 @@ class ValideInscriptionPayment extends Component
     }
     public function loadData():Collection
     {
-      return  $this->inscriptionList = (new GetInscriptionHelper())
+      return  $this->inscriptionList = (new GetInscriptionByDateWithPaymentStatusHelper())
             ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0);
     }
     public function render()

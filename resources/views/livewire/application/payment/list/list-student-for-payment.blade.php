@@ -20,10 +20,10 @@
             </div>
             @if ($listInscription->isEmpty())
                 <span class="text-success text-center p-4">
-                                    <h4><i class="fa fa-database" aria-hidden="true"></i>
-                                        Aucune donnée trouvée !
-                                    </h4>
-                                </span>
+                    <h4><i class="fa fa-database" aria-hidden="true"></i>
+                        Aucune donnée trouvée !
+                    </h4>
+                </span>
             @else
                 <div class="p-2">
                     <table class="table table-stripped table-sm">
@@ -34,21 +34,20 @@
                             <th class="text-center">Actions</th>
                         </tr>
                         </thead>
-                        <tbody class=">
+                        <tbody>
                        @foreach ($listInscription as $inscription)
-                                                <tr ">
-                        <td>{{ $inscription?->student->name }}{{$inscription->getStudentClasseName($inscription)}}
-                        </td>
-
-                        <td class="text-center">{{ $inscription->student->gender }}
-                        </td>
-                        <td class="text-center">
-                            <x-button wire:click.prevent='show({{ $inscription->student }})'
-                                      class="btn-sm btn-info" type="button" data-toggle="modal"
-                                      data-target="#newPayment">
-                                Payer
-                            </x-button>
-                        </td>
+                        <tr>
+                            <td>{{ $inscription?->student->name }}{{$inscription->getStudentClasseName($inscription)}}
+                            </td>
+                            <td class="text-center">{{ $inscription->student->gender }}
+                            </td>
+                            <td class="text-center">
+                                <x-button wire:click.prevent='show({{ $inscription->student }})'
+                                          class="btn-sm btn-info" type="button" data-toggle="modal"
+                                          data-target="#newPayment">
+                                    Payer
+                                </x-button>
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>

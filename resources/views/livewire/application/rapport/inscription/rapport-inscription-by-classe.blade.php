@@ -30,28 +30,32 @@
                         <span hidden>Loading...</span>
                     </div>
                 </div>
-
-                <table class="table table-bordered border-primary mt-2">
-                    <thead>
-                    <tr>
-                        <th scope="col" class="text-center">#</th>
-                        <th scope="col">CLASSE</th>
-                        <th class="text-center" scope="col">NRE ELEVE</th>
-                        <th class="text-right" scope="col">MONTANT</th>
-                    </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                    @foreach($inscriptions as $index=>$inscription)
+                @if($inscriptions->isEmpty())
+                    <x-data-empty/>
+                @else
+                    <table class="table table-bordered border-primary mt-2">
+                        <thead>
                         <tr>
-                            <th scope="row" class="text-center">{{$index+1}}</th>
-                            <td>{{$inscription->name}}/{{$selectedClasseOption->name}}</td>
-                            <td class="text-center">{{$inscription->number}}</td>
-                            <td class="text-right">{{app_format_number($inscription->amount)}} {{$defaultCureencyName}}</td>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col">CLASSE</th>
+                            <th class="text-center" scope="col">NRE ELEVE</th>
+                            <th class="text-right" scope="col">MONTANT</th>
                         </tr>
-                        @php $total+= $inscription->amount @endphp
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="table-group-divider">
+                        @foreach($inscriptions as $index=>$inscription)
+                            <tr>
+                                <th scope="row" class="text-center">{{$index+1}}</th>
+                                <td>{{$inscription->name}}/{{$selectedClasseOption->name}}</td>
+                                <td class="text-center">{{$inscription->number}}</td>
+                                <td class="text-right">{{app_format_number($inscription->amount)}} {{$defaultCureencyName}}</td>
+                            </tr>
+                            @php $total+= $inscription->amount @endphp
+                        @endforeach
+                        </tbody>
+                    </table>
+                @endif
+
             </div>
             <div class="card-footer d-flex justify-content-end">
                 <h3><span class="text-bold">Total</span>: {{app_format_number($total)}} {{$defaultCureencyName}}</h3>

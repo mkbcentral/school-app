@@ -20,8 +20,8 @@ class TypeOtherCostResource extends Resource
     protected static ?string $model = TypeOtherCost::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
-
-    protected static ?string $navigationGroup = 'Cost manager';
+    protected static ?string $navigationLabel="Type frais scolaire";
+    protected static ?string $navigationGroup = 'Gestion de frais';
 
     public static function getEloquentQuery(): Builder
     {
@@ -32,6 +32,7 @@ class TypeOtherCostResource extends Resource
     }
 
 
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,6 +40,9 @@ class TypeOtherCostResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('scolary_year_id')
+                    ->relationship('scolaryYear','name')
+                    ->preload(),
                 Forms\Components\Toggle::make('active')
                     ->required(),
             ]);

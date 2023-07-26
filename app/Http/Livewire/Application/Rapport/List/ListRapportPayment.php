@@ -26,29 +26,72 @@ class ListRapportPayment extends Component
     public $months=[],$month;
     public $listPayments;
 
-    public function updatedMonth(){
+    /**
+     * Reset date to search on null after month property is updated
+     * @return void
+     */
+    public function updatedMonth(): void
+    {
         $this->date_to_search=null;
     }
-    public function updatedCostId($val){
+
+    /**
+     * updated cost id property
+     * @param $val
+     * @return void
+     */
+    public function updatedCostId($val): void
+    {
         $this->cost_id=$val;
     }
-    public function updatedClasseId($val){
+
+    /**
+     * Updated classe id property
+     * @param $val
+     * @return void
+     */
+    public function updatedClasseId($val): void
+    {
         $this->classe_id=$val;
     }
-    public function getScolaryYear($id)
+
+    /**
+     * Get selected scolaryYear id with emit ScolaryYearWidget listener
+     * @param $id
+     * @return void
+     */
+    public function getScolaryYear($id): void
     {
         $this->defaultScolaryYerId = $id;
     }
 
-    public  function  getCurrency($currency){
+    /**
+     * Get selected currency with emit CurrencyWidget listener
+     * @param $currency
+     * @return void
+     */
+    public  function  getCurrency($currency): void
+    {
         $this->defaultCureencyName=$currency;
     }
 
-    public function getTypeCost($id){
+    /**
+     * Update index property for type cost id selected
+     * @param $id
+     * @return void
+     */
+    public function getTypeCost($id): void
+    {
         $this->index=$id;
     }
 
-    public function mount($index){
+    /**
+     * Mounted component
+     * @param $index
+     * @return void
+     */
+    public function mount($index): void
+    {
         $this->index=$index;
         $this->classeList=(new SchoolHelper())->getListClasse();
         $this->months=(new DateFormatHelper())->getMonthsForYear();
@@ -57,12 +100,17 @@ class ListRapportPayment extends Component
         $defaultScolaryYer = (new SchoolHelper())->getCurrectScolaryYear();
         $this->defaultScolaryYerId=$defaultScolaryYer->id;
 
-        $defaultCurrency = Currency::where('id', 1)
-            ->where('school_id',auth()->user()->school->id)
-            ->first();
+        $defaultCurrency = (new SchoolHelper())->getCurrentCurrency();
         $this->defaultCureencyName=$defaultCurrency->currency;
+
     }
-    public function loadData(){
+
+    /**
+     * Loading initial data
+     * @return void
+     */
+    public function loadData(): void
+    {
         if($this->date_to_search==null){
             $this->listPayments=PaymentByMonthHelper::getMonthPayments(
                 $this->month,
@@ -85,9 +133,10 @@ class ListRapportPayment extends Component
             );
         }
     }
+
     public function render()
     {
-        $listCost=(new CostGeneralHelper())->getListCostGeneralHelper($this->index,2);
+        $listCost=(new CostGeneralHelper())->getListCostGeneralHelper($this->index,$this->defaultScolaryYerId);
         $this->loadData();
         return view('livewire.application.rapport.list.list-rapport-payment',
             ['listCost' => $listCost,'listPayments'=>$this->listPayments]);

@@ -17,7 +17,7 @@ class ManageTypeOtherCosts extends ManageRecords
             Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
                 $scolaryYear=ScolaryYear::where('active',true)->first();
                 $data['school_id'] = auth()->user()->school->id;
-                $data['school_scolary_year_id'] = $scolaryYear->id;
+                $data['scolary_year_id'] = $scolaryYear->id;
                 return $data;
             }),
         ];

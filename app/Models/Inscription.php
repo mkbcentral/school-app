@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Inscription extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['cost_inscription_id', 'user_id', 'classe_id', 'scolary_year_id', 'school_id','number_paiment', 'student_id','rate_id'];
+    protected $fillable = ['cost_inscription_id', 'user_id', 'classe_id', 'scolary_year_id', 'school_id','number_paiment', 'student_id','rate_id','is_old_student'];
 
     /**
      * Get the Student that owns the Inscription
@@ -53,6 +52,9 @@ class Inscription extends Model
         return $this->belongsTo(School::class, 'school_id');
     }
 
+    public function scolaryyear():BelongsTo{
+        return $this->belongsTo(ScolaryYear::class,'scolary_year_id');
+    }
 
     /**
      * Get the user associated with the Inscription
@@ -73,8 +75,6 @@ class Inscription extends Model
     {
         return $this->hasOne(InscRegularisation::class);
     }
-
-
 
     //Get status inscription with payment
     public  function getPaiementStatus(Inscription $inscription):string{
