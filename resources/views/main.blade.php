@@ -11,7 +11,7 @@
     @livewireStyles
 </head>
 
-<body class="hold-transition py-4" style="background: url('http://127.0.0.1:8000/my-bg.svg');background-size:cover;background-repeat: no-repeat">
+<body class="hold-transition py-4" style="background: url({{asset('my-bg.svg')}});background-size:cover;background-repeat: no-repeat">
     <div class="d-flex justify-content-center align-items-center">
         @livewire('application.navigation.application-link-menu')
     </div>
