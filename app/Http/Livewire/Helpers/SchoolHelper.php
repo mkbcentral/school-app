@@ -25,9 +25,11 @@ class SchoolHelper
             ->first();
     }
 
-    public function getLastScolaryTear():ScolaryYear{
+    public function getOldScolaryYear():ScolaryYear{
         return  ScolaryYear::where('is_last_year',true)->first();
     }
+
+
     //Get Current Currency
     public function getCurrentCurrency():Currency{
         return Currency::where('id', 1)

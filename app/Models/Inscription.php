@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Helpers\Payment\GetPaymentByTypeCostToCheck;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -99,6 +100,26 @@ class Inscription extends Model
 
     public function getStudentClasseName(Inscription $inscription):string{
         return ' '.$inscription?->classe->name.'/'.$inscription?->classe?->classeOption->name;
+    }
+
+    public  function getByCurrentYearPaymentCheckerStatus($idType,$studentId,$month):string{
+        $payment=GetPaymentByTypeCostToCheck::getCurrentYearPaymentChecker($idType,$studentId,$month);
+        $status='';
+        if($payment){
+            return   $status='OK';
+        }else{
+            return  $status='-';
+        }
+    }
+
+    public  function getByCurrentYearBycostPaymentCheckerStatus($idType,$studentId,$month,$costId):string{
+        $payment=GetPaymentByTypeCostToCheck::getCurrentYearCostPaymentChecker($idType,$studentId,$month,$costId);
+        $status='';
+        if($payment){
+            return   $status='OK';
+        }else{
+            return  $status='-';
+        }
     }
 
 }

@@ -54,6 +54,7 @@ class TypeOtherCostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\ToggleColumn::make('active'),
+                Tables\Columns\ToggleColumn::make('is_by_tranch')->label('Par tranche'),
             ])
             ->filters([
                 SelectFilter::make('Sections')->relationship('scolaryYear','name'),

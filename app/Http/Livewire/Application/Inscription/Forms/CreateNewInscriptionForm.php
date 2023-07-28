@@ -3,22 +3,13 @@
 namespace App\Http\Livewire\Application\Inscription\Forms;
 
 use App\Http\Livewire\Helpers\Cost\CostInscriptionHelper;
-use App\Http\Livewire\Helpers\DateFormatHelper;
 use App\Http\Livewire\Helpers\Inscription\CreateInscriptionHelper;
-use App\Http\Livewire\Helpers\Invoice\FormatInvoiceNumberHelper;
 use App\Http\Livewire\Helpers\Responsable\CreateNewResponsableHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Http\Livewire\Helpers\Student\StundentHelper;
 use App\Http\Requests\NewStudentRequest;
-use App\Http\Requests\NewStudentResponsableRequest;
-use App\Models\Classe;
-use App\Models\CostInscription;
-use App\Models\Gender;
-use App\Models\Inscription;
-use App\Models\ScolaryYear;
 use App\Models\Student;
 use Livewire\Component;
-
 class CreateNewInscriptionForm extends Component
 {
     protected $listeners = ['selectedClasseOption' => 'getOptionSelected'];
@@ -26,9 +17,9 @@ class CreateNewInscriptionForm extends Component
     public $selectedOption = 0,$defaultScolaryYear,$student;
     public $name, $date_of_birth, $gender, $classe_id, $cost_inscription_id,$place_of_birth;
     public $name_responsable,$phone,$other_phone,$email;
-    public function getOptionSelected($index)
+    public function updated($name): void
     {
-        $this->selectedOption = $index;
+        $this->validateOnly($name);
     }
     public function store()
     {

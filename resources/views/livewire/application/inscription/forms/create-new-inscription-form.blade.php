@@ -23,7 +23,7 @@
                                                <div class="form-group">
                                                    <x-label value="{{ __('Nom complet élève') }}" />
                                                    <x-input class="" type='text' placeholder="Nom de la section"
-                                                            wire:model.defer='name' />
+                                                            wire:model='name' />
                                                    @error('name')
                                                    <span class="error text-danger">{{ $message }}</span>
                                                    @enderror

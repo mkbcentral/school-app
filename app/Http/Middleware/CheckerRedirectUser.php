@@ -47,7 +47,8 @@ class CheckerRedirectUser
                 'payment.other.cost',
                 'rapport.payments',
                 'rapport.inscription.by.classe',
-                'print.rapport.payments'
+                'print.rapport.payments',
+                'payment.control'
             ],
             'Secretaire'=>[
                 'main',

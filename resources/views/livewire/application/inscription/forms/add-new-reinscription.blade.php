@@ -42,7 +42,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <x-label value="{{ __('Type inscription') }}" />
-                                                        <x-select wire:model.defer='cost_inscription_id'>
+                                                        <x-select wire:model='cost_inscription_id'>
                                                             <option value="">Choisir...</option>
                                                             @foreach ($costInscriptionList as $cost)
                                                                 <option value="{{ $cost->id }}">{{ $cost->name }}</option>
@@ -56,7 +56,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <x-label value="{{ __('Classe') }}" />
-                                                        <x-select wire:model.defer='classe_id'>
+                                                        <x-select wire:model='classe_id'>
                                                             <option value="">Choisir...</option>
                                                             @foreach ($classeList as $classe)
                                                                 <option value="{{ $classe->id }}">
@@ -73,6 +73,24 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
+                                    <div class="row">
+                                        @foreach($listOldCostType as $cost)
+                                            <div class="col-sm-4">
+                                                <!-- checkbox -->
+                                                <div class="form-group clearfix">
+                                                    <div  class="icheck-primary d-inline">
+                                                        <input type="checkbox" id="{{$cost->id}}"
+                                                               wire:model="typeCostSelected" value="{{$cost->id}}">
+                                                        <label for="{{$cost->id}}"
+                                                               class="">
+                                                            {{$cost->name}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                    </div>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -87,7 +105,9 @@
                                                 <tr>
                                                     <td>{{$type->name}}</td>
                                                     @foreach($months as $m)
-                                                        <td class="{{$type->getBgColorWithMonthNotPayment($m)}}">{{$type->getPaymentCheckerStatus($type->id,$student->id,$m)}}</td>
+                                                        <td class="{{$type->getPaymentCheckerBgtatus($type->id,$student->id,$m)}}">
+                                                            {{$type->getPaymentCheckerStatus($type->id,$student->id,$m)}}
+                                                        </td>
                                                     @endforeach
                                                 </tr>
                                             @endforeach

@@ -12,6 +12,7 @@ use App\Http\Livewire\Application\Rapport\PaymentRapport;
 use App\Http\Controllers\Application\Printings\RapportPaymentPrintingController;
 use App\Http\Livewire\Application\Rapport\Inscription\RapportInscriptionByClasse;
 use App\Http\Controllers\Application\Pages\CreateSchoolController;
+use App\Http\Livewire\Application\Payment\MainControlPayment;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,7 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
     //Payment routes
     Route::prefix('payment')->group(function () {
         Route::get('other-cost-payment',OtherCostPayment::class)->name('payment.other.cost');
+        Route::get('control-payment',MainControlPayment::class)->name('payment.control');
     });
     //Settings links route
     Route::prefix('settings')->group(function () {

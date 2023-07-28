@@ -17,6 +17,7 @@ class NewInscriptionByDateCounterWidget extends Component
     public int $counter=0;
     public string $day='';
     public int $defaultScolaryYerId;
+    public $isLoanding=false;
     /**
      * Mounted component
      * @return void
@@ -29,7 +30,10 @@ class NewInscriptionByDateCounterWidget extends Component
 
     public function changeDate($date)
     {
+        $this->isLoanding=true;
         $this->day=$date;
+        $this->isLoanding=false;
+        //$this->refr
     }
     public function mount(): void
     {

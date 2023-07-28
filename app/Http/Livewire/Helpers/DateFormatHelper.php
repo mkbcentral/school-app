@@ -5,7 +5,7 @@ use Carbon\Carbon;
 
 class DateFormatHelper{
     //Formatter la date dd/mm/yyyy à Y-d-m
-    public function formatDate($date){
+    public function formatDate($date):string{
         return Carbon::createFromFormat('d/m/Y',$date)->format('Y-m-d');
     }
     // Get Age of users
@@ -67,6 +67,12 @@ class DateFormatHelper{
             $months[]=date('m',mktime(0,0,0,$month,1));
         }
         return $months;
+    }
+    //Get months of year
+    public function getMonthsForScolaryYear():array{
+        return [
+            '09','10','11','12','01','02','03','04','05'
+        ];
     }
     //Get years aléatoires
     public function getYearsAleatoire():array{

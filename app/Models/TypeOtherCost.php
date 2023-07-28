@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Helpers\DateFormatHelper;
 use App\Http\Livewire\Helpers\Payment\GetPaymentByTypeCostToCheck;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,6 +41,13 @@ class TypeOtherCost extends Model
         return $this->belongsTo(ScolaryYear::class, 'scolary_year_id');
     }
 
+    /**
+     * Retuner ok si le mois est payé e - si le mois de n'est pas payé
+     * @param $idType
+     * @param $studentId
+     * @param $month
+     * @return string
+     */
     public  function getPaymentCheckerStatus($idType,$studentId,$month):string{
         $payment=GetPaymentByTypeCostToCheck::getPaymentChecker($idType,$studentId,$month);
         $status='';
@@ -50,6 +58,13 @@ class TypeOtherCost extends Model
         }
     }
 
+    /**
+     * Returner une une couleur de fond pour le mois qui n'on pas de payment ['06,07,08']
+     * @param $idType
+     * @param $studentId
+     * @param $month
+     * @return string
+     */
     public  function getPaymentCheckerBgtatus($idType,$studentId,$month):string{
         $payment=GetPaymentByTypeCostToCheck::getPaymentChecker($idType,$studentId,$month);
         $status='';
@@ -60,6 +75,11 @@ class TypeOtherCost extends Model
         }
     }
 
+    /**
+     * Returner une couleur pour les moins qui sont pas encore payé
+     * @param $month
+     * @return string
+     */
     public function getBgColorWithMonthNotPayment($month):string{
         $bg='';
         if ($month=='06' || $month=='07' || $month=='08'){
