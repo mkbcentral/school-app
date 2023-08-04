@@ -85,6 +85,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {
-        return $this->hasRole(['Super-Admin','Finance']);
+        return $this->hasRole(['Super-Admin','Finance','App-Admin']);
     }
 }

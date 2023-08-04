@@ -41,4 +41,20 @@ class GetCounterInscriptionHelper
             ->with('classe')
             ->count();
     }
+
+    public function getCountInscriptionsSection($sectionId,$scolaryYearId): int
+    {
+        return Inscription::join('classes','classes.id','=','inscriptions.classe_id')
+            ->join('classe_options','classe_options.id','=','classes.classe_option_id')
+            ->join('sections','sections.id','=','classe_options.section_id')
+            ->where('inscriptions.scolary_year_id',$scolaryYearId)
+            ->where('inscriptions.school_id',auth()->user()->school->id)
+            ->where('inscriptions.is_paied',true)
+            ->where('classe_options.section_id',$sectionId)
+            ->with('Cost')
+            ->with('student')
+            ->with('school')
+            ->with('classe')
+            ->count();
+    }
 }

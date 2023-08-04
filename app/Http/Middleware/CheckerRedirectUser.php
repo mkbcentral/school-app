@@ -16,16 +16,21 @@ class CheckerRedirectUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $ucrrentRouteName=Route::currentRouteName();
-        if (in_array($ucrrentRouteName,$this->userAccessRole()[ auth()->user()->getRoleNames()[0]])) {
+        $cucrrentRouteName=Route::currentRouteName();
+        if (in_array($cucrrentRouteName,$this->userAccessRole()[ auth()->user()->getRoleNames()[0]])) {
             return $next($request);
         } else {
             abort(403);
         }
     }
 
+
     Public function userAccessRole(){
         return [
+            'App-Admin'=>[
+                'filament.pages.dashboard',
+                'main',
+            ],
             'Super-Admin'=>[
                 'main',
                 'filament.pages.dashboard',
@@ -34,13 +39,13 @@ class CheckerRedirectUser
                 'settings.app.links',
                 'settings.app',
             ],
-            'Cordonateur'=>[
+            'Coordinator'=>[
                 'main',
                 'dashboard.main',
                 'rapport.payments',
                 'rapport.inscription.by.classe'
             ],
-            'Financier'=>[
+            'Finance'=>[
                 'main',
                 'dashboard.main',
                 'inscription.payment.valide',
@@ -48,22 +53,15 @@ class CheckerRedirectUser
                 'rapport.payments',
                 'rapport.inscription.by.classe',
                 'print.rapport.payments',
-                'payment.control'
+                'payment.control',
+                'rapport.receipt.all.by.section'
             ],
-            'Secretaire'=>[
+            'Secretary'=>[
                 'main',
                 'dashboard.main',
                 'inscription.new',
                 'reinscription.new'
             ],
-            'Prefet'=>[
-                'main',
-                'dashboard.main',
-            ],
-            'Directeur'=>[
-                'main',
-                'dashboard.main',
-            ]
         ];
     }
 }

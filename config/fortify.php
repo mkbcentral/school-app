@@ -10,7 +10,7 @@ return [
     | Fortify Guard
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which authentication guard Fortify will use while
+    | Here you may specify which auth guard Fortify will use while
     | authenticating users. This value should correspond with one of your
     | guards that is already present in your "auth" configuration file.
     |
@@ -56,7 +56,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may configure the path where users will get redirected during
-    | authentication or password reset when the operations are successful
+    | auth or password reset when the operations are successful
     | and the user is authenticated. You are free to change this value.
     |
     */

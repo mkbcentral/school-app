@@ -9,19 +9,26 @@ use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Http\Livewire\Helpers\Student\StundentHelper;
 use App\Http\Requests\NewStudentRequest;
 use App\Models\Student;
+use App\Models\StudentResponsable;
 use Livewire\Component;
 class CreateNewInscriptionForm extends Component
 {
-    protected $listeners = ['selectedClasseOption' => 'getOptionSelected'];
+    protected $listeners = [
+        'selectedClasseOption' => 'getOptionSelected',
+        'selectRresposableId'=>'getIdResponsable'
+    ];
     public $costInscriptionList = [], $genderList = [];
-    public $selectedOption = 0,$defaultScolaryYear,$student;
+    public $selectedOption = 0,$defaultScolaryYear;
     public $name, $date_of_birth, $gender, $classe_id, $cost_inscription_id,$place_of_birth;
-    public $name_responsable,$phone,$other_phone,$email;
-    public function updated($name): void
+    public ?StudentResponsable $responsable;
+    public  function getOptionSelected($index): void
     {
-        $this->validateOnly($name);
+        $this->selectedOption=$index;
     }
-    public function store()
+    public function getIdResponsable(StudentResponsable $responsable):void{
+        $this->responsable=$responsable;
+    }
+    public function store(): void
     {
         $request = new NewStudentRequest();
         $data = $this->validate($request->rules());
@@ -31,6 +38,7 @@ class CreateNewInscriptionForm extends Component
         } else {
             $data['scolary_year_id']=$this->defaultScolaryYear->id;
             $data['school_id']=auth()->user()->school->id;
+            $data['student_responsable_id']=$this->responsable->id;
             $student= StundentHelper::create($data);
             (new CreateInscriptionHelper())
                 ->create(
@@ -40,17 +48,14 @@ class CreateNewInscriptionForm extends Component
                     $data['classe_id'],
                     $this->selectedOption
                 );
-            if ($data['name_responsable']!=null){
-                $responsable=CreateNewResponsableHelper::create($data);
-                $student->student_responsable_id=$responsable->id;
-                $student->update();
-            }
             $this->dispatchBrowserEvent('added', ['message' => "Action bien réalisée !"]);
-            $this->emit('refreshListInscription');
+            //$this->emit('refreshListInscription');
+            $this->emit('refreshListResponsible');
         }
     }
-    public function mount()
+    public function mount(int $index): void
     {
+        $this->selectedOption=$index;
         $this->costInscriptionList = (new CostInscriptionHelper())->getListCostInscription();;
         $this->genderList = (new SchoolHelper())->getListOfGender();
         $this->defaultScolaryYear=(new SchoolHelper())->getCurrectScolaryYear();

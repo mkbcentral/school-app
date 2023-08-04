@@ -30,10 +30,8 @@ class NewInscriptionByDateCounterWidget extends Component
 
     public function changeDate($date)
     {
-        $this->isLoanding=true;
+
         $this->day=$date;
-        $this->isLoanding=false;
-        //$this->refr
     }
     public function mount(): void
     {

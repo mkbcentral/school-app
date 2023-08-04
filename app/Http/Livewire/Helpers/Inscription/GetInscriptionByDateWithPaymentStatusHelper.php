@@ -97,7 +97,7 @@ class GetInscriptionByDateWithPaymentStatusHelper{
      * @param $ispaied
      * @return int|mixed
      */
-    public function getSumTotalAmountInscriptionByDate($date,$scolaryYearId,$classeId,$costId,$currency,$ispaied=true){
+    public function getSumTotalAmountInscriptionByDate($date,$scolaryYearId,$classeId,$costId,$currency,$ispaied=true):float{
         if ($classeId==0) {
             if ($costId==0) {
                $total=Inscription::join('students','inscriptions.student_id','=','students.id')
@@ -177,7 +177,7 @@ class GetInscriptionByDateWithPaymentStatusHelper{
      * @param $ispaied
      * @return int|mixed
      */
-    public function getSumTotalAmountInscriptionByMonth($month,$scolaryYearId,$classeId,$costId,$currency,$ispaied=true){
+    public function getSumTotalAmountInscriptionByMonth($month, $scolaryYearId, $classeId, $costId, $currency, $ispaied=true):float{
         if ($classeId==0) {
             if ($costId==0) {
                 $total=Inscription::join('students','inscriptions.student_id','=','students.id')

@@ -19,6 +19,12 @@ class RoleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-finger-print';
     protected static ?string $navigationGroup = 'Administration';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->whereNotIn('name',['App-Admin','Super-Admin']);
+    }
     public static function form(Form $form): Form
     {
         return $form

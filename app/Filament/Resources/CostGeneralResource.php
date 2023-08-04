@@ -49,6 +49,9 @@ class CostGeneralResource extends Resource
                 Forms\Components\Select::make('type_other_cost_id')
                     ->relationship('typeOtherCost','name')
                     ->preload(),
+                Forms\Components\Select::make('classe_option_id')
+                    ->relationship('classeOption','name')
+                    ->preload(),
             ]);
     }
 
@@ -57,6 +60,7 @@ class CostGeneralResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('classeOption.name')->sortable(),
                 Tables\Columns\TextColumn::make('amount')->sortable(),
                 Tables\Columns\IconColumn::make('active')->sortable()
                     ->boolean(),

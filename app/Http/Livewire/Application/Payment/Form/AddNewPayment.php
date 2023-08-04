@@ -26,19 +26,21 @@ class AddNewPayment extends Component
     public $months=[],$month;
     public $defaultScolaryYerId;
 
-    public function updatedTypeOtherCostId($val){
+    public function updatedTypeOtherCostId($val): void
+    {
         $this->type_other_cost_id=$val;
     }
-    public function getStudent(Student $student)
+    public function getStudent(Student $student): void
     {
         $this->student = null;
         $this->student = $student;
     }
-    public function getScolaryYear($id)
+    public function getScolaryYear($id): void
     {
         $this->defaultScolaryYerId = $id;
     }
-    public function store(){
+    public function store(): void
+    {
         $this->validateForm();
         $paymentChecker=CreatePaymentCheckerHelper::checkIfPaymentExistBeforCreate(
             $this->student->id,
@@ -52,14 +54,12 @@ class AddNewPayment extends Component
             $cost=CostGeneral::find($this->cost_other_id);
             $payment= PaymentCreationHelper::create(
                 $this->month,
-                $this->defaultScolaryYerId,
                 $this->cost_other_id,
-                $this->student->id,
-                $this->student->inscription->classe->id,
-                $this->student->inscription->classe->classeOption->id
+                $this->student->inscription->classe->classeOption->id,
+                $this->student->inscription->id,
             );
             $cost=CostGeneral::find($this->cost_other_id);
-            (new PosPrintingHelper())->printPayment($payment,'USD');
+            //(new PosPrintingHelper())->printPayment($payment,'USD');
             /*
             SmsNotificationHelper::sendSMS( '+243898337969','+243971330007',auth()->user()->school->name."\nBonjour Votre enfant "
                 .$this->student->name."\n vient de payer le ".$cost->name."\nCout:".$cost->amount." USD"."\nA:".$payment->created_at->format('d/m/Y H:i'));
@@ -70,7 +70,8 @@ class AddNewPayment extends Component
         }
     }
 
-    public function validateForm(){
+    public function validateForm(): void
+    {
         $this->validate([
             'month' => ['required', 'string'],
             'cost_other_id' => ['required', 'numeric'],
@@ -78,7 +79,7 @@ class AddNewPayment extends Component
         ]);
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->month=date('m');
         $defaultScolaryYer = (new SchoolHelper())->getCurrectScolaryYear();
@@ -88,7 +89,7 @@ class AddNewPayment extends Component
     }
     public function render()
     {
-        $this->listOtherCost=(new CostGeneralHelper())->getListCostGeneralHelper($this->type_other_cost_id,$this->defaultScolaryYerId);
+        $this->listOtherCost=(new CostGeneralHelper())->getListCostGeneral($this->type_other_cost_id,$this->defaultScolaryYerId);
         return view('livewire.application.payment.form.add-new-payment', ['classeList' =>   $this->listOtherCost]);
     }
 }

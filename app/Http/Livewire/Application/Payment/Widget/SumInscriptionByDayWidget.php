@@ -59,10 +59,6 @@ class SumInscriptionByDayWidget extends Component
         $this->classe_id=$classeId;
         $this->defaultCureencyName=$currency;
     }
-
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
     public function render()
     {
         $this->total= (new GetInscriptionByDateWithPaymentStatusHelper())

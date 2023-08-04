@@ -16,13 +16,13 @@ class ScolaryYearWidget extends Component
 
     public function mount(){
         $this->defaulScolaryYear=ScolaryYear::where('school_id',auth()->user()->school->id)
-                                            ->where('active',true)->first();
+                                            ?->where('active',true)?->first();
     }
 
     public function render()
     {
         $listScolaryYear=ScolaryYear::where('school_id',auth()->user()->school->id)
-                        ->orderBy('active','ASC')->get();
+                        ?->orderBy('active','ASC')?->get();
         return view('livewire.application.school.scolary-year-widget',['listScolaryYear'=>$listScolaryYear]);
     }
 }

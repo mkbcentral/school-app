@@ -7,7 +7,7 @@
         <div class="card-body">
             <div x-data="{ recovery: false }">
                 <div class="mb-3" x-show="! recovery">
-                    {{ __('Please confirm access to your account by entering the authentication code provided by your authenticator application.') }}
+                    {{ __('Please confirm access to your account by entering the auth code provided by your authenticator application.') }}
                 </div>
 
                 <div class="mb-3" x-show="recovery">
@@ -49,7 +49,7 @@
                                             recovery = false;
                                             $nextTick(() => { $refs.code.focus() })
                                         ">
-                            {{ __('Use an authentication code') }}
+                            {{ __('Use an auth code') }}
                         </button>
 
                         <x-jet-button>

@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\CostInscription;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class CostInscriptionPolicy
 {
@@ -13,7 +12,7 @@ class CostInscriptionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -21,7 +20,7 @@ class CostInscriptionPolicy
      */
     public function view(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -29,7 +28,7 @@ class CostInscriptionPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -37,7 +36,7 @@ class CostInscriptionPolicy
      */
     public function update(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -45,7 +44,7 @@ class CostInscriptionPolicy
      */
     public function delete(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -53,7 +52,7 @@ class CostInscriptionPolicy
      */
     public function restore(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -61,6 +60,6 @@ class CostInscriptionPolicy
      */
     public function forceDelete(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 }

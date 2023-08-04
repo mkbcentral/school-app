@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CostGeneral extends Model
 {
     use HasFactory;
-    protected $fillable=['name','amount','type_other_cost_id'];
+    protected $fillable=['name','amount','type_other_cost_id','classe_option_id'];
 
     /**
      * Get the Paiement associated with the CostGeneral
@@ -22,18 +22,6 @@ class CostGeneral extends Model
     {
         return $this->hasMany(Paiment::class);
     }
-
-    /**
-     * Get the typ that owns the CostGeneral
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    /*
-    public function typeCost(): BelongsTo
-    {
-        return $this->belongsTo(TypeOtherCost::class, 'type_other_cost_id');
-    }
-
     /**
      * Get the typ that owns the CostGeneral
      *
@@ -43,6 +31,9 @@ class CostGeneral extends Model
     {   $scolaryYer=(new SchoolHelper())->getCurrectScolaryYear();;
         return $this->belongsTo(TypeOtherCost::class, 'type_other_cost_id')
                ->where('active',true);
+    }
+    public function classeOption():BelongsTo{
+        return $this->belongsTo(ClasseOption::class,'classe_option_id');
     }
 
 

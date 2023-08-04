@@ -13,7 +13,7 @@ class ClasseOptionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -21,7 +21,7 @@ class ClasseOptionPolicy
      */
     public function view(User $user, ClasseOption $classeOption): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -29,7 +29,7 @@ class ClasseOptionPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -37,7 +37,7 @@ class ClasseOptionPolicy
      */
     public function update(User $user, ClasseOption $classeOption): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -45,7 +45,7 @@ class ClasseOptionPolicy
      */
     public function delete(User $user, ClasseOption $classeOption): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -53,7 +53,7 @@ class ClasseOptionPolicy
      */
     public function restore(User $user, ClasseOption $classeOption): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 
     /**
@@ -61,6 +61,6 @@ class ClasseOptionPolicy
      */
     public function forceDelete(User $user, ClasseOption $classeOption): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasRole(['Super-Admin']);
     }
 }

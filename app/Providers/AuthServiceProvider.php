@@ -20,6 +20,7 @@ use App\Models\User;
 use App\Policies\ClasseOptionPolicy;
 use App\Policies\ClassePolicy;
 use App\Policies\CostGeneralPolicy;
+use App\Policies\CostInscriptionPolicy;
 use App\Policies\CurrencyPolicy;
 use App\Policies\GenderPolicy;
 use App\Policies\RatePolicy;
@@ -47,7 +48,7 @@ class AuthServiceProvider extends ServiceProvider
         Currency::class=>CurrencyPolicy::class,
         TypeOtherCost::class=>TypeOtherCostPolicy::class,
         CostGeneral::class=>CostGeneralPolicy::class,
-        CostInscription::class=>CostGeneralPolicy::class,
+        CostInscription::class=>CostInscriptionPolicy::class,
         Classe::class=>ClassePolicy::class,
         School::class=>SchoolPolicy::class,
         ScolaryYear::class=>ScolaryYearPolicy::class,
@@ -58,7 +59,7 @@ class AuthServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register any authentication / authorization services.
+     * Register any auth / authorization services.
      *
      * @return void
      */
@@ -66,15 +67,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         Gate::define('valid-payment', function () {
             $user=auth()->user();
-            return $user->hasRole(['Financier']);
+            return $user->hasRole(['Finance']);
         });
         Gate::define('view-administration-panel', function () {
             $user=auth()->user();
             return $user->hasRole(['Super-Admin']);
         });
+        Gate::define('view-links-settings', function () {
+            $user=auth()->user();
+            return $user->hasRole(['App-Admin']);
+        });
         Gate::define('edit-student-infos', function () {
             $user=auth()->user();
-            return $user->hasRole(['Secretaire']);
+            return $user->hasRole(['Secretary']);
         });
         Gate::define('edit-classe-inscription', function () {
             $user=auth()->user();
@@ -82,7 +87,7 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('view-total-amount', function () {
             $user=auth()->user();
-            return $user->hasRole(['Financier']);
+            return $user->hasRole(['Finance']);
         });
         $this->registerPolicies();
 

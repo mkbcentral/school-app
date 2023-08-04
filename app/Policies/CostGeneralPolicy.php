@@ -3,9 +3,7 @@
 namespace App\Policies;
 
 use App\Models\CostGeneral;
-use App\Models\CostInscription;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class CostGeneralPolicy
 {

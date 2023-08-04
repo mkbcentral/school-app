@@ -74,7 +74,7 @@
                                @foreach($listPayments as $payment)
                                    <tr>
                                        <td>{{$payment->created_at->format('d/m/y')}}</td>
-                                       <td>{{$payment->student->name.'/'.$payment->getStudentClasseName($payment)}}</td>
+                                       <td>{{$payment->inscription->student->name.'/'.$payment->getStudentClasseName($payment)}}</td>
                                        <td class="text-right">{{$payment->cost->name}}</td>
                                        <td class="text-right">{{app_format_number($payment->amount)}} {{$defaultCureencyName}}</td>
                                        <td>

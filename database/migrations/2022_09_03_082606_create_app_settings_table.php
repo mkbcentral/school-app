@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('app_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('printer_name');
+            $table->string('app_name')->nullable();
+            $table->boolean('is_sidebar_collapse')->default(false);
+            $table->boolean('is_dark_mode')->default(false);
             $table->timestamps();
         });
     }

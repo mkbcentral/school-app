@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ClasseOption;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('classe_option_id')->index('classes_classe_option_id_foreign');
+            $table->foreignIdFor(ClasseOption::class);
             $table->timestamps();
         });
     }

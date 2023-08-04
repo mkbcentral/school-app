@@ -13,7 +13,7 @@ class SubAppLinkPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -21,7 +21,7 @@ class SubAppLinkPolicy
      */
     public function view(User $user, SubAppLink $subAppLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -29,7 +29,7 @@ class SubAppLinkPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -37,7 +37,7 @@ class SubAppLinkPolicy
      */
     public function update(User $user, SubAppLink $subAppLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -45,7 +45,7 @@ class SubAppLinkPolicy
      */
     public function delete(User $user, SubAppLink $subAppLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -53,7 +53,7 @@ class SubAppLinkPolicy
      */
     public function restore(User $user, SubAppLink $subAppLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -61,6 +61,6 @@ class SubAppLinkPolicy
      */
     public function forceDelete(User $user, SubAppLink $subAppLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 }

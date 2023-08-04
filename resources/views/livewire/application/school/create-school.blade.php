@@ -2,11 +2,17 @@
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-               <h5 class="text-dark"> <i class="fas fa-school"></i> CREATION ECOLE</h5>
+                <img  class="" src="{{asset('logo.svg')}}" alt="Logo">
             </div>
             <div class="card-body">
                 <form wire:submit.prevent="store">
-                    <div class="input-group  @error('name') is-invalid border border-danger rounded @enderror">
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="">
+                            <img src="{{ asset('defautl-user.jpg') }}" class="user-image img-circle elevation-2"
+                                 alt="User Image" width="100px"/>
+                        </a>
+                    </div>
+                    <div class="input-group mt-2  @error('name') is-invalid border border-danger rounded @enderror">
                         <x-input type="text" class="" placeholder="Nom de votre école" wire:model.defer="name" />
                     </div>
                     @error('name')
@@ -26,7 +32,7 @@
                     @enderror
                     <div class="row mt-4">
                         <div class="col-12">
-                            <x-button type="submit" class=" btn-primary btn-block">
+                            <x-button type="submit" class=" btn-info btn-block">
                                 <span wire:loading wire:target="store"
                                       class="spinner-border spinner-border-sm"
                                       role="status" aria-hidden="true">

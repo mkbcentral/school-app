@@ -12,7 +12,6 @@ class AppLink extends Model
     use HasFactory;
 
     protected $fillable=['name','icon','link','color'];
-
     /**
      * The users that belong to the AppLink
      *

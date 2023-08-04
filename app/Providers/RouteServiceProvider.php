@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * The path to the "home" route for your application.
      *
-     * Typically, users are redirected here after authentication.
+     * Typically, users are redirected here after auth.
      *
      * @var string
      */
@@ -25,13 +26,6 @@ class RouteServiceProvider extends ServiceProvider
      * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function redirectTo() {
-        if (auth()->user()->school){
-            return redirect()->route('main');
-        }else{
-            return redirect()->route('school.create');
-        }
-    }
     public function boot()
     {
         $this->configureRateLimiting();

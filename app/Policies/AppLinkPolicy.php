@@ -13,7 +13,7 @@ class AppLinkPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -21,7 +21,7 @@ class AppLinkPolicy
      */
     public function view(User $user, AppLink $appLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -29,7 +29,7 @@ class AppLinkPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -37,7 +37,7 @@ class AppLinkPolicy
      */
     public function update(User $user, AppLink $appLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -45,7 +45,7 @@ class AppLinkPolicy
      */
     public function delete(User $user, AppLink $appLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -53,7 +53,7 @@ class AppLinkPolicy
      */
     public function restore(User $user, AppLink $appLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 
     /**
@@ -61,6 +61,6 @@ class AppLinkPolicy
      */
     public function forceDelete(User $user, AppLink $appLink): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['App-Admin']);
     }
 }

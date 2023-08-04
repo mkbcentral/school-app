@@ -13,6 +13,7 @@ use App\Http\Controllers\Application\Printings\RapportPaymentPrintingController;
 use App\Http\Livewire\Application\Rapport\Inscription\RapportInscriptionByClasse;
 use App\Http\Controllers\Application\Pages\CreateSchoolController;
 use App\Http\Livewire\Application\Payment\MainControlPayment;
+use App\Http\Livewire\Application\Rapport\Payment\RapportAllReceiptBySection;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,6 +49,7 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
     //Rapport payment
     Route::prefix('rapport')->group(function () {
         Route::get('payments',PaymentRapport::class)->name('rapport.payments');
+        Route::get('payment-all-receipt-by-section',RapportAllReceiptBySection::class)->name('rapport.receipt.all.by.section');
         Route::get('inscription-by-classe',RapportInscriptionByClasse::class)->name('rapport.inscription.by.classe');
     });
 

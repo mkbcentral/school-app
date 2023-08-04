@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\School;
+use App\Models\ScolaryYear;
+use App\Models\StudentResponsable;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,8 +23,9 @@ class CreateStudentsTable extends Migration
             $table->enum('gender', ['M', 'F']);
             $table->string('place_of_birth')->nullable();
             $table->string('date_of_birth')->nullable();
-            $table->unsignedBigInteger('classe_id')->index('students_classe_id_foreign');
-            $table->unsignedBigInteger('student_responsable_id')->nullable()->index('students_student_responsable_id_foreign');
+            $table->foreignIdFor(StudentResponsable::class);
+            $table->foreignIdFor(School::class);
+            $table->foreignIdFor(ScolaryYear::class);
             $table->timestamps();
         });
     }

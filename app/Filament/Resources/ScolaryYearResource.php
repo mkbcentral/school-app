@@ -20,6 +20,9 @@ class ScolaryYearResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
     protected static ?string $navigationGroup = 'School manager';
+    protected static ?string $navigationLabel="Année scolaire";
+
+    protected static ?string $label="Année scolaire";
 
     public static function getEloquentQuery(): Builder
     {
@@ -45,10 +48,11 @@ class ScolaryYearResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('school.name'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\IconColumn::make('active')
-                    ->boolean(),
+                Tables\Columns\TextColumn::make('school.name')->label('Ecole'),
+                Tables\Columns\TextColumn::make('name')->label('Année scolaire'),
+                Tables\Columns\ToggleColumn::make('active')->label('Status'),
+                Tables\Columns\ToggleColumn::make('is_last_year')->label('Année ppasse'),
+                Tables\Columns\ToggleColumn::make('is_old_year')->label('Ancienne année'),
             ])
             ->filters([
                 //

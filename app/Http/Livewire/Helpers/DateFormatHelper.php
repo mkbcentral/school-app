@@ -71,7 +71,7 @@ class DateFormatHelper{
     //Get months of year
     public function getMonthsForScolaryYear():array{
         return [
-            '09','10','11','12','01','02','03','04','05'
+            '08','09','10','11','12','01','02','03','04','05'
         ];
     }
     //Get years aléatoires

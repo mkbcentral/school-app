@@ -22,7 +22,6 @@ class ClasseOption extends Model
     {
         return $this->belongsTo(Section::class, 'section_id');
     }
-
     /**
      * Get all of the Classe for the ClasseOption
      *

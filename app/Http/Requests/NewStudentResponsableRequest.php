@@ -22,8 +22,8 @@ class NewStudentResponsableRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_responsable' => ['nullable','string'],
-            'phone' =>['nullable','string'],
+            'name_responsable' => ['required','string'],
+            'phone' =>['required','string'],
             'other_phone' => ['nullable','string'],
             'email' => ['nullable','string'],
         ];

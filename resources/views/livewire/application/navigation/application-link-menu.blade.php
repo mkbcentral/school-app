@@ -55,5 +55,23 @@
                     </a>
                 </div>
         @endcan
+        @can('view-links-settings')
+                <div class="col-12 col-sm-6 col-md-3">
+                    <a href="/app-configration" target="_blank" >
+                        <div class="info-box">
+                        <span class="info-box-icon bg-dark elevation-1">
+                            <i class="fas fas fa-user-cog"></i>
+                        </span>
+                            <div class="info-box-content">
+                            <span class="info-box-number">
+                               Adminstration
+                            </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </a>
+                </div>
+        @endcan
     </div>
 </div>

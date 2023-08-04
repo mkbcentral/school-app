@@ -136,7 +136,7 @@ class ListRapportPayment extends Component
 
     public function render()
     {
-        $listCost=(new CostGeneralHelper())->getListCostGeneralHelper($this->index,$this->defaultScolaryYerId);
+        $listCost=(new CostGeneralHelper())->getListCostGeneral($this->index,$this->defaultScolaryYerId);
         $this->loadData();
         return view('livewire.application.rapport.list.list-rapport-payment',
             ['listCost' => $listCost,'listPayments'=>$this->listPayments]);

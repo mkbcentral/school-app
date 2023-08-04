@@ -7,20 +7,24 @@
         <li class="nav-item mr-4">
             <div class="d-flex  align-items-center ">
                <span class="mr-2 text-bold text-danger">Devise</span>
-                @livewire('application.school.currency-widget')
+               @if(Auth::user()->school)
+                    @livewire('application.school.currency-widget')
+               @endif
                 <span class="mr-2 text-bold pl-4 text-bold text-primary">Année scolaire</span>
-            @livewire('application.school.scolary-year-widget')
+                @if(Auth::user()->school)
+                    @livewire('application.school.scolary-year-widget')
+                @endif
             </div>
         </li>
         <li class="nav-item dropdown user-menu text-white">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ asset('defautl-user.jpg') }}" class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline text-white">User name<span>
+                <img src="{{ asset(auth()->user()->avatar ?'/storage/'.auth()->user()->avatar :'defautl-user.jpg') }}" class="user-image img-circle elevation-2" alt="User Image" />
+                <span class="d-none d-md-inline text-white">User name</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="{{ asset('defautl-user.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{asset(auth()->user()->avatar ?'/storage/'.auth()->user()->avatar :'defautl-user.jpg')}}" class="img-circle elevation-2" alt="User Image">
                     <p>
                         <small>{{Auth::user()->email}}</small>
                     </p>

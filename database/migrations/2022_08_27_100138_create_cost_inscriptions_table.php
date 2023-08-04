@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\School;
+use App\Models\ScolaryYear;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +20,8 @@ class CreateCostInscriptionsTable extends Migration
             $table->string('name');
             $table->double('amount')->default(0);
             $table->boolean('active')->default(true);
+            $table->foreignIdFor(School::class);
+            $table->foreignIdFor(ScolaryYear::class);
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@ return [
     'path' => env('FILAMENT_PATH', 'app-configration'),
 
     /*
-    |--------------------------------------------------------------------------
+    |--------------------------ù------------------------------------------------
     | Filament Core Path
     |--------------------------------------------------------------------------
     |
@@ -79,7 +79,7 @@ return [
     | Auth
     |--------------------------------------------------------------------------
     |
-    | This is the configuration that Filament will use to handle authentication
+    | This is the configuration that Filament will use to handle auth
     | into the admin panel.
     |
     */
@@ -234,7 +234,7 @@ return [
                 'alignment' => 'left',
                 'are_sticky' => false,
             ],
-            'have_inline_labels' => false,
+            'have_inline_labels' => true,
         ],
         'footer' => [
             'should_show_logo' => true,

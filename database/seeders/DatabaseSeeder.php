@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\AppSetting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -15,12 +16,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $admin=User::factory()->create([
-             'name' => 'Super Admin',
-             'email' => 'superadmin@school-app.app',
-            'school_id' => null
+        $appAdmin=User::factory()->create([
+            'name' => config('app.name'),
+             'email' => 'app-admin@school-app.app',
+             'school_id' => null
          ]);
-        $role=Role::create(['name'=>'Super-Admin']);
-        $admin->assignRole($role);
+        $admin=User::factory()->create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@school-app.app',
+            'school_id' => null
+        ]);
+        $role1=Role::create(['name'=>'App-Admin']);
+        $role2=Role::create(['name'=>'Super-Admin']);
+        $appAdmin->assignRole($role1);
+        $admin->assignRole($role2);
+        AppSetting::create(['app_name'=>config('app.name')]);
     }
 }

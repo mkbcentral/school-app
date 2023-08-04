@@ -2,9 +2,9 @@
     <div class="card mt-2">
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
+                <div class="row">
                     <div class="col-sm-6">
-                        <h1 class="m-0"><i class="fas fa-chart-pie"></i> Situation des inscriptions journalières</h1>
+                        <h1 class="m-0"><i class="fas fa-chart-pie"></i> Dashboard</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -16,44 +16,60 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="d-flex justify-content">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <x-label value="{{ __('Filtrer par date') }}" />
-                        <x-input class="" type='date' placeholder="Lieu de naissance"
-                                 wire:model='day' />
-                    </div>
-                </div>
-            </div>
             <div class="row">
-                <div class="col-md-3">
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>@livewire('application.inscription.widget.new-inscription-by-date-counter-widget')</h3>
-                            <p>Nouvelle inscription</p>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label><i class="fas fa-calendar-day"></i> Stiuation journalière</label>
+                                <x-input  class="form-control w-25" type='date' placeholder="Lieu de naissance"
+                                         wire:model='day' />
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="fas fa-user-plus"></i>
+                        <div class="card-body">
+                            @can('view-total-amount')
+                                @livewire('application.receipts.cost-other-payment-receipts-by-date')
+                            @endcan
+                           @can('edit-student-infos')
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="small-box bg-info">
+                                                <div class="inner">
+                                                    <h3>@livewire('application.inscription.widget.new-inscription-by-date-counter-widget')</h3>
+                                                    <p>Nouvelle inscription</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fas fa-user-plus"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="small-box bg-primary">
+                                                <div class="inner">
+                                                    <h3>@livewire('application.inscription.widget.old-student-inscription-counter-widget')</h3>
+                                                    <p>Réinscription</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            @livewire('application.inscription.widget.list-counter-inscription-by-classe-option-widget')
+                                        </div>
+                                    </div>
+                           @endcan
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="small-box bg-primary">
-                        <div class="inner">
-                            <h3>@livewire('application.inscription.widget.old-student-inscription-counter-widget')</h3>
-                            <p>Réinscription</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    @livewire('application.inscription.widget.list-counter-inscription-by-classe-option-widget')
+                <div class="col-md-6">
+                    @can('view-total-amount')
+                        @livewire('application.receipts.cost-other-payment-receipts-by-month')
+                    @endcan
                 </div>
             </div>
         </div>

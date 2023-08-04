@@ -9,7 +9,6 @@
             </div>
         </div>
     </div>
-    @livewire('application.inscription.forms.create-new-inscription-form')
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -30,14 +29,14 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <div class="d-flex justify-content-end align-items-center p-2">
-                            <x-button class="btn-primary mt-4" wire:click.prevent='shwoFormCreate' type="button"
-                                data-toggle="modal" data-target="#formInscriptionModal">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                Nouvelle inscription
-                            </x-button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                @livewire('application.inscription.forms.add-new-familly')
+                            </div>
+                            <div class="col-md-8">
+                                @livewire('application.inscription.list.list-student-responsable',['index' => $selectedIndex])
+                            </div>
                         </div>
-                        @livewire('application.inscription.list.list-inscription', ['index' => $selectedIndex])
                     </div>
                     <!-- /.card -->
                 </div>

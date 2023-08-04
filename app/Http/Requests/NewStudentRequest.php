@@ -28,10 +28,6 @@ class NewStudentRequest extends FormRequest
             'gender' => 'required',
             'classe_id' => 'required',
             'cost_inscription_id' => ['required','numeric'],
-            'name_responsable' => ['nullable','string'],
-            'phone' =>['nullable','string'],
-            'other_phone' => ['nullable','string'],
-            'email' => ['nullable','string'],
         ];
     }
 }

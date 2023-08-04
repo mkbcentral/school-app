@@ -19,7 +19,7 @@ class SchoolHelper
             ->first();
     }
     //Get current scolary year
-    public  function  getCurrectScolaryYear():ScolaryYear{
+    public  function  getCurrectScolaryYear():?ScolaryYear{
         return ScolaryYear::where('active', true)
             ->where('school_id',auth()->user()->school->id)
             ->first();
@@ -31,7 +31,7 @@ class SchoolHelper
 
 
     //Get Current Currency
-    public function getCurrentCurrency():Currency{
+    public function getCurrentCurrency():?Currency{
         return Currency::where('id', 1)
             ->where('school_id',auth()->user()->school->id)
             ->first();

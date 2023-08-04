@@ -7,6 +7,7 @@ use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Currency;
 use App\Models\Paiment;
+use App\Models\Payment;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
 
@@ -32,7 +33,7 @@ class ListPaymentByDay extends Component
     {
         $this->emit('paymentToEdit',$payment);
     }
-    public function printBill(Paiment $payment):void{;
+    public function printBill(Payment $payment):void{;
         (new PosPrintingHelper())->printPayment($payment,$this->defaultCureencyName);
     }
     public function mount(): void
@@ -49,15 +50,14 @@ class ListPaymentByDay extends Component
 
     public function render()
     {
-        $listPayments=(new PaymentByDateHelper())->getDatePaiments(
+        $listPayments=PaymentByDateHelper::getDatePayments(
             $this->date_to_search,
             $this->defaultScolaryYerId,
             0,
             0,
             0,
             $this->keyToSearch,
-            $this->defaultCureencyName
-        );
+            $this->defaultCureencyName);
         return view('livewire.application.payment.list.list-payment-by-day',['listPayments'=>$listPayments]);
     }
 }

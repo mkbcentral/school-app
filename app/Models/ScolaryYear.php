@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ScolaryYear extends Model
 {
     use HasFactory;
-    protected $fillable=['name','school_id','active'];
+    protected $fillable=['name','school_id','active','school_id'];
 
     /**
      * Get the school that owns the ScolaryYear

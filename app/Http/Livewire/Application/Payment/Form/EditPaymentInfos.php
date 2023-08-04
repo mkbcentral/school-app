@@ -50,7 +50,7 @@ class EditPaymentInfos extends Component
         $this->created_at=$this->payment?->created_at->format('Y-m-d');
 
         $this->listOtherCost=(new CostGeneralHelper())
-                ->getListCostGeneralHelper($this->payment?->cost->typeOtherCost->id,$this->defaultScolaryYerId);
+                ->getListCostGeneral($this->payment?->cost->typeOtherCost->id,$this->defaultScolaryYerId);
         return view('livewire.application.payment.form.edit-payment-infos');
     }
 }

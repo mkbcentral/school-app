@@ -7,7 +7,6 @@ use App\Models\StudentResponsable;
 class CreateNewResponsableHelper
 {
     public static function create(array $data): StudentResponsable{
-       $responsable= StudentResponsable::create($data);
-       return $responsable;
+        return StudentResponsable::create($data);
     }
 }

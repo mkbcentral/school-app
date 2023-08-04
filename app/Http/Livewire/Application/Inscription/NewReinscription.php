@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Application\Inscription;
 
 use App\Http\Livewire\Helpers\DateFormatHelper;
 use App\Models\Paiment;
+use App\Models\Payment;
 use App\Models\ScolaryYear;
 use App\Models\Student;
 use Livewire\Component;
@@ -27,13 +28,12 @@ class NewReinscription extends Component
         foreach ((new DateFormatHelper())->getMonthsForYear() as $month){
             $mothData[]=$month;
         }
-        //dd($mothData);
-        $payments=Paiment::whereNotIn('scolary_year_id',$years)
+        $payments=Payment::whereNotIn('inscriptions.scolary_year_id',$years)
+            ->join('inscriptions','inscriptions.id','payments.inscription_id')
             ->where('student_id',25)
             ->where('school_id',1)
-            ->whereIn('mounth_name',$mothData)
+            ->whereIn('month_name',$mothData)
             ->get();
-        //dd($payments);
     }
     public function render()
     {

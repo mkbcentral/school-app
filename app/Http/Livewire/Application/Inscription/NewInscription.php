@@ -14,10 +14,6 @@ class NewInscription extends Component
     public $costs = [];
     public  $optionList;
 
-    public function shwoFormCreate()
-    {
-        $this->emit('selectedClasseOption', $this->selectedIndex);
-    }
     public function mount()
     {
         $defualtOption = ClasseOption::first();

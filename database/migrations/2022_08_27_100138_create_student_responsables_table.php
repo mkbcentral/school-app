@@ -15,7 +15,7 @@ class CreateStudentResponsablesTable extends Migration
     {
         Schema::create('student_responsables', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name_responsable');
             $table->string('phone')->nullable();
             $table->string('other_phone')->nullable();
             $table->string('email')->nullable();
