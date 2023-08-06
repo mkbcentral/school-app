@@ -84,13 +84,8 @@ class AddNewReinscription extends Component
                     $this->classe_option_id,
                     true
                 );
-
             $this->emit('refreshListInscription');
             $this->dispatchBrowserEvent('added', ['message' => "Reinscription bien sauvegargée !"]);
-            /*
-            dd((new TypeCostHelper())
-                ->getListOfCostNotPaymentRapport($this->student->id,$this->typeCostSelected));
-            */
         }
     }
     /**

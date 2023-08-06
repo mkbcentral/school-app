@@ -17,7 +17,8 @@
                         @if ($student)
                             <div class="card p-2">
                                 <h6><span class="text-bold text-info">Nom:</span>{{ $student->name }}</h6>
-                                <h6><span class="text-bold text-info">Classe passée:{{$student->inscription->getStudentClasseName($student->inscription)}}</span></h6>
+                                <h6><span class="text-bold text-info">
+                                        Classe passée:{{$student->inscription->classe->name}} {{$student->inscription->getStudentClasseName($student->inscription)}}</span></h6>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -30,7 +31,8 @@
                                                         <x-select wire:model='classe_option_id'>
                                                             <option value="">Choisir...</option>
                                                             @foreach ($listClasseOption as $classOption)
-                                                                <option value="{{ $classOption->id }}">{{ $classOption->name }}
+                                                                <option value="{{ $classOption->id }}">
+                                                                    {{$classOption->name}}
                                                                 </option>
                                                             @endforeach
                                                         </x-select>
@@ -60,7 +62,7 @@
                                                             <option value="">Choisir...</option>
                                                             @foreach ($classeList as $classe)
                                                                 <option value="{{ $classe->id }}">
-                                                                    {{ $classe->name . '/' . $classe->classeOption->name }}</option>
+                                                                    {{ $classe->name  }}</option>
                                                             @endforeach
                                                         </x-select>
                                                     </div>
@@ -105,8 +107,8 @@
                                                 <tr>
                                                     <td>{{$type->name}}</td>
                                                     @foreach($months as $m)
-                                                        <td class="{{$type->getPaymentCheckerBgtatus($type->id,$student->id,$m)}}">
-                                                            {{$type->getPaymentCheckerStatus($type->id,$student->id,$m)}}
+                                                        <td class="{{$type->getPaymentCheckerBgtatus($type->id,$student->inscription->id,$m)}}">
+                                                            {{$type->getPaymentCheckerStatus($type->id,$student->inscription->id,$m)}}
                                                         </td>
                                                     @endforeach
                                                 </tr>

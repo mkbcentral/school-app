@@ -15,6 +15,8 @@ class NewReinscription extends Component
     use WithPagination;
     public string $keyToSearch = '';
 
+
+
     public function show(Student $student){
         $this->emit('studentReinscription', $student);
     }
@@ -43,7 +45,7 @@ class NewReinscription extends Component
             ->where('students.name', 'Like', '%' . $this->keyToSearch . '%')
             ->select('students.*')
             ->orderBy('students.name','ASC')
-            ->paginate(10);
+            ->paginate(100);
         return view('livewire.application.inscription.new-reinscription', ['studentList'=> $studentList]);
     }
 }

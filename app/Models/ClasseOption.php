@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ClasseOption extends Model
 {
     use HasFactory;
-    protected $fillable=['name','section_id'];
+    protected $fillable=['id','name','section_id'];
 
     /**
      * Get the Section that owns the ClasseOption
