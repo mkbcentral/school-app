@@ -3,32 +3,50 @@
         $total=0;;
     @endphp
     <div>
-        <table sty>
-            <thead style="background: rgb(67, 67, 67);color: rgb(222, 221, 221)">
-            <tr>
-                <th >N°</th>
-                <th >DATE</th>
-                <th >NOMS ELEVE</th>
-                <th>MONTANT</th>
-            </tr>
-            </thead>
-            <tbody>
-                @foreach($listPayments as $index => $payment)
-                   <tr >
-                       <td class="bg-danger">{{$index+1}}</td>
-                       <td>{{$payment->created_at->format('d/m/Y')}}</td>
-                       <td>{{$payment->student->name}}</td>
-                       <td>{{$payment->amount}} {{$currency}}</td>
-                   </tr>
+        @if ($inscriptions->isEmpty())
+
+        @else
+            <table>
+                <thead>
+                <tr *>
+                    <th>#</th>
+                    <th>Noms élève</th>
+                    <th>Genre</th>
+                    <th>Montant</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($inscriptions as $index => $inscription)
+                    <tr>
+                        <td>{{$index+1}}</td>
+                        <td>{{ $inscription->student->name . '/' . $inscription->classe->name . ' ' . $inscription->classe->classeOption->name }}
+                        </td>
+
+                        <td>{{ $inscription->student->gender }}
+                        </td>
+                        <td>
+                            {{ app_format_number($inscription->amount) }} {{$defaultCureencyName}}
+                        </td>
+                        <td>
+                            <span class="badge badge-{{$inscription->getPaiementStatusColor($inscription)}}">{{$inscription->getPaiementStatus($inscription)}}</span>
+                        </td>
+                        <td>
+                            <x-button wire:click.prevent='printBill({{ $inscription }})'
+                                      class="btn-sm text-info" type="button">
+                                <i class="fas fa-print" aria-hidden="true"></i>
+                            </x-button>
+
+                        </td>
+                    </tr>
+                    @php
+                        $total+=$inscription->amount;
+                    @endphp
                 @endforeach
-            </tbody>
-        </table>
-        <div style="text-align: right;font-size: 18px;margin-top: 10px;">
-            <span style="font-weight: bold">Total: </span><span>{{ number_format($total,1,',',' ') }} Fc</span>
-            <div style="margin-top: 8px">
-                <span style="">Fiat à Lubumbashi,Le {{date('d/m/Y')}}</span>
-            </div>
-        </div>
+                </tbody>
+            </table>
+        @endif
     </div>
 
 </x-pinting-layout>

@@ -45,7 +45,7 @@ class NewReinscription extends Component
             ->where('students.name', 'Like', '%' . $this->keyToSearch . '%')
             ->select('students.*')
             ->orderBy('students.name','ASC')
-            ->paginate(100);
+            ->paginate(20);
         return view('livewire.application.inscription.new-reinscription', ['studentList'=> $studentList]);
     }
 }

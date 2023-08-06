@@ -65,6 +65,7 @@
                                                       class="btn-sm text-info" type="button">
                                                 <i class="fas fa-print" aria-hidden="true"></i>
                                             </x-button>
+
                                         </td>
                                     </tr>
                                     @php
@@ -76,7 +77,8 @@
                         @endif
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d-flex justify-content-between align-items-center">
+                    <a href="{{route('print.rapport.inscription.payment.by.day',[$date_to_search,$defaultScolaryYerId,$defaultCureencyName])}}" target="_blank"><i class="fas fa-print"></i> Imprimer</a>
                     <h3 class="text-uppercase text-primary">Total: {{app_format_number($total)}} {{$defaultCureencyName}}</h3>
                 </div>
             </div>

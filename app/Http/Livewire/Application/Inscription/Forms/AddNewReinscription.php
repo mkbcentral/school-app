@@ -9,6 +9,7 @@ use App\Http\Livewire\Helpers\Inscription\CreateInscriptionHelper;
 use App\Http\Livewire\Helpers\Inscription\ExistingInscriptionCheckerHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Student;
+use App\Models\StudentResponsable;
 use App\Models\TypeOtherCost;
 use Livewire\Component;
 
@@ -18,7 +19,8 @@ class AddNewReinscription extends Component
     public  $student = null;
     public $classe_id, $cost_inscription_id, $classe_option_id;
     public $costInscriptionList = [], $listClasseOption = [];
-    public $defaultScolaryYear,$months=[];
+    public $defaultScolaryYear,$months=[],$student_responsable_id=0;
+    public  $listStudentResponsable=[];
     public array $typeCostSelected=[];
     public $listOldCostType=[];
     public $listTypeCost=[];
@@ -75,7 +77,7 @@ class AddNewReinscription extends Component
         if ($inscription) {
             $this->dispatchBrowserEvent('error', ['message' => "Cet élève est déjà inscrit !"]);
         } else {
-            (new CreateInscriptionHelper())
+          (new CreateInscriptionHelper())
                 ->create(
                     $this->defaultScolaryYear->id,
                     $this->cost_inscription_id,
@@ -84,6 +86,8 @@ class AddNewReinscription extends Component
                     $this->classe_option_id,
                     true
                 );
+            $this->student->student_responsable_id=$this->student_responsable_id;
+            $inscription-$this->student->update();
             $this->emit('refreshListInscription');
             $this->dispatchBrowserEvent('added', ['message' => "Reinscription bien sauvegargée !"]);
         }
@@ -99,10 +103,12 @@ class AddNewReinscription extends Component
         $this->defaultScolaryYear = (new SchoolHelper())->getCurrectScolaryYear();
         $this->listOldCostType=(new TypeCostHelper())->getListDisableOldTypeCost();
         $this->months=(new DateFormatHelper())->getMonthsForScolaryYear();
+
     }
 
     public function render()
     {
+        $this->listStudentResponsable=StudentResponsable::orderBy('created_at','DESC')->get();
         $this->listTypeCost=(new TypeCostHelper())->getListDisableTypeCostWithArrayId($this->typeCostSelected);
         $classeList = (new SchoolHelper())->getListClasseByOption($this->classe_option_id);
         return view('livewire.application.inscription.forms.add-new-reinscription', ['classeList' => $classeList]);

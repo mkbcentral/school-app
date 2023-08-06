@@ -11,6 +11,9 @@ class Payment extends Model
 {
     use HasFactory;
 
+    /**
+     * @var mixed|true
+     */
     protected $fillable=
         [
             'number_paiement',

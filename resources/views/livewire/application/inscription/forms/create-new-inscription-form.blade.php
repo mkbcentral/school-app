@@ -1,6 +1,7 @@
 <div>
     <!-- Modal -->
-    <div wire:ignore.self class="modal fade" id="formInscriptionModal" tabindex="-1" role="dialog"
+    <div wire:ignore.self class="modal fade" id="formInscriptionModal"
+         tabindex="-1" role="dialog"
          data-backdrop="static" data-keyboard="false"
         aria-labelledby="formInscriptionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
