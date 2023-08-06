@@ -58,7 +58,7 @@ class Payment extends Model
 
 
     public function getStudentClasseName(Payment $payment):string{
-        return ' '.$payment?->inscription->classe->name.'/'.$payment?->classe?->classeOption->name;
+        return ' '.$payment->inscription->classe->name.'/'.$payment->classe?->classeOption?->name;
     }
 
 }

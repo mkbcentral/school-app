@@ -27,6 +27,7 @@ class SchoolHelper
 
     public function getOldScolaryYear():ScolaryYear{
         return  ScolaryYear::where('is_last_year',true)->first();
+
     }
 
 

@@ -17,6 +17,7 @@
         "livewire/livewire": "^2.11",
         "mediumart/orange-sms": "^2.0",
         "mike42/escpos-php": "^2.2",
+        "phpoffice/phpspreadsheet": "^1.29",
         "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {

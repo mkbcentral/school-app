@@ -21,7 +21,6 @@ class CreateCostGeneralsTable extends Migration
             $table->double('amount')->default(0);
             $table->boolean('active')->default(true);
             $table->foreignIdFor(TypeOtherCost::class);
-            $table->foreignIdFor(ClasseOption::class);
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(Inscription::class);
             $table->foreignIdFor(CostGeneral::class);
             $table->foreignIdFor(Rate::class);
+            $table->foreignIdFor(\App\Models\Student::class);
             $table->foreignIdFor(User::class);
             $table->boolean('is_paid')->default(false);
             $table->boolean('is_printed')->default(false);
