@@ -55,6 +55,7 @@
                                              class="btn-sm text-secondary" type="button" >
                                        <i class="fa fa-print" aria-hidden="true"></i>
                                    </x-button>
+                                   <a href="{{route('receipt.payment',[$payment,$defaultCureencyName])}}" target="_blank"><i class="fas fa-print"></i></a>
                                </td>
                            </tr>
                            @php

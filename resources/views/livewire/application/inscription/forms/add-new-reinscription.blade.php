@@ -1,6 +1,7 @@
 <div>
     <!-- Modal -->
     <div wire:ignore.self class="modal fade" id="newReinscription" tabindex="-1" role="dialog"
+         data-backdrop="static" data-keyboard="false"
         aria-labelledby="newReinscriptionLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -18,7 +19,7 @@
                             <div class="card p-2">
                                 <h6><span class="text-bold text-info">Nom:</span>{{ $student->name }}</h6>
                                 <h6><span class="text-bold text-info">
-                                        Classe passée:{{$student->inscription->classe->name}} {{$student->inscription->getStudentClasseName($student->inscription)}}</span></h6>
+                                        Classe passée:{{$student->inscription->getStudentClasseName($student->inscription)}}</span></h6>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -62,7 +63,21 @@
                                                             <option value="">Choisir...</option>
                                                             @foreach ($classeList as $classe)
                                                                 <option value="{{ $classe->id }}">
-                                                                    {{ $classe->name  }}</option>
+                                                                    {{ $classe->name.'/'.$classe?->classOption?->name}}</option>
+                                                            @endforeach
+                                                        </x-select>
+                                                    </div>
+                                                    @error('classe_id')
+                                                    <span class="error text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <x-label value="{{ __('Nom famiille') }}" />
+                                                        <x-select wire:model='student_responsable_id'>
+                                                            <option value="">Choisir...</option>
+                                                            @foreach ($listStudentResponsable as $responsable)
+                                                                <option value="{{ $responsable->id }}">{{ $responsable->name_responsable  }}</option>
                                                             @endforeach
                                                         </x-select>
                                                     </div>
@@ -73,6 +88,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
@@ -115,12 +131,14 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+
+
                                 </div>
                             </div>
                         @endif
                     </div>
                     <div class="modal-footer">
-                        <x-button type="submit" class="btn btn-primary">Sauvegarder</x-button>
+                        <x-button type="submit" class="btn btn-primary">Terminer</x-button>
                         <x-button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</x-button>
                     </div>
                 </form>

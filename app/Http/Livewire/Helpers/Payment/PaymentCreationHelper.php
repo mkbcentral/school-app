@@ -9,7 +9,7 @@ use App\Models\Payment;
 
 class  PaymentCreationHelper
 {
-    public static function create($month,$cost_other_id,$classeOptionId,$inscriptionId):Paiment{
+    public static function create($month,$cost_other_id,$classeOptionId,$inscriptionId):Payment{
         $rate=(new SchoolHelper())->getCurrentRate();
         return Payment::create([
              'number_payment'=>(new FormatInvoiceNumberHelper())->formatPaymentInvoiceNumber($classeOptionId),

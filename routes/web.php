@@ -9,11 +9,12 @@ use App\Http\Livewire\Application\Payment\OtherCostPayment;
 use App\Http\Livewire\Application\Settings\AppLinkSettings;
 use App\Http\Livewire\Application\Settings\AppSettings;
 use App\Http\Livewire\Application\Rapport\PaymentRapport;
-use App\Http\Controllers\Application\Printings\RapportPaymentPrintingController;
+use App\Http\Controllers\Application\Printings\RapportInscriptionPaymentPrintingController;
 use App\Http\Livewire\Application\Rapport\Inscription\RapportInscriptionByClasse;
 use App\Http\Controllers\Application\Pages\CreateSchoolController;
 use App\Http\Livewire\Application\Payment\MainControlPayment;
 use App\Http\Livewire\Application\Rapport\Payment\RapportAllReceiptBySection;
+use App\Http\Controllers\Application\Printings\PrintingReceiptController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,7 +57,16 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
 
     //Pint rapport payment cost
     Route::prefix('printing')->group(function () {
-        Route::get('print-payments-rapport/{month}/{idSColaryYear}/{isCost}/{type}/{classeId}/{currency}',
-            [RapportPaymentPrintingController::class,'printRapport'])->name('print.rapport.payments');
+        Route::prefix('rapport-inscription')->group(function (){
+            Route::controller(RapportInscriptionPaymentPrintingController::class)->group(function (){
+                Route::get('by-date/{date}/{scolaryYear}/{currency}','printRepportInscriptionPaymentByDate')->name('print.rapport.inscription.payment.by.day');
+            });
+        });
+    });
+    Route::prefix('print-receipt')->group(function (){
+        Route::controller(PrintingReceiptController::class)->group(function (){
+            Route::get('inscription/{inscription}/{currency}','printReceiptInscription')->name('receipt.inscription');
+            Route::get('payment/{payment}/{currency}','printReceiptPayment')->name('receipt.payment');
+        });
     });
 });

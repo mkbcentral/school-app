@@ -36,13 +36,7 @@ class RestoreOldStudnet extends Command
         $students=Student::all();
         $inscDate=array();
         $nameNotInsc=array();
-        foreach ($students as $student){
-            $payments=Payment::where('student_id',$student->id)->get();
-            foreach ($payments as $payment){
-                $payment->inscription_id=$student->inscription->id;
-                $payment->update();
-            }
-        }
+
         $this->comment("Payment bien mis à jour");
     }
 

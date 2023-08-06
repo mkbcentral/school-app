@@ -116,6 +116,7 @@
                                                               class="btn-sm text-secondary" type="button">
                                                         <i class="fas {{$inscription->is_paied?' fa-times-circle text-danger':'fa-check-double'}} " aria-hidden="true"></i>
                                                     </x-button>
+                                                      <a href="{{route('receipt.inscription',[$inscription,'USD'])}}" target="_blank"><i class="fas fa-print"></i></a>
                                                 @endcan
                                             </td>
                                         </tr>
