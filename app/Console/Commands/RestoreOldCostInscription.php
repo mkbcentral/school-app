@@ -45,8 +45,8 @@ class RestoreOldCostInscription extends Command
                 'name'=>$cells[1],
                 'amount'=>$cells[2],
                 'active'=>$cells[3],
-                'school_id'=>$cells[4],
-                'scolary_year_id'=>$cells[5],
+                'school_id'=>1,
+                'scolary_year_id'=>1,
 
             ]);
         }

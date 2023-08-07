@@ -31,8 +31,8 @@
     <br>
     <div>----------------------------------------</div>
     <div><span style="font-weight: bold">N°: {{$payment->number_paiement}}</span></div>
-    <div><span style="font-weight: bold">Nom: {{ $payment->inscription->student->name}}</span></div>
-    <div><span style="font-weight: bold">Classe: {{ $payment->inscription->classe->name.'/'.$payment->inscription->classe->classeOption->name}}</span></div>
+    <div><span style="font-weight: bold">Nom: {{ $payment->student->name}}</span></div>
+    <div><span style="font-weight: bold">Classe: {{ $payment->classe->name.'/'.$payment->classe->classeOption->name}}</span></div>
     <div><span style="font-weight: bold">Motif:Paiement frais {{$payment->cost->name}}</span></div>
     <div><span style="font-weight: bold">Mois: {{app_get_month_name($payment->month_name)}}</span></div>
     <div><span style="font-weight: bold">Date: Le {{$payment->created_at->format('d-m-Y')}}</span></div>

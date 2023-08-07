@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\App;
 class RapportInscriptionPaymentPrintingController extends Controller
 {
 
-    public function printRepportInscriptionPaymentByDate($date, $currency, $scolaryYearId){
+    public function printRepportInscriptionPaymentByDate($date,$scolaryYearId,$currency, ){
         $inscriptionList= (new GetInscriptionByDateWithPaymentStatusHelper())
             ->getDateInscriptions($date, $scolaryYearId, 0, 0,$currency);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView(
             'livewire.application.printings.inscription.print-inscription-payment-by-date',
-            compact(['inscriptionList','currency'])
+            compact(['inscriptionList','currency','date'])
         );
         return $pdf->stream();
     }

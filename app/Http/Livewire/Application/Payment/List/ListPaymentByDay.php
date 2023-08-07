@@ -34,7 +34,7 @@ class ListPaymentByDay extends Component
         $this->emit('paymentToEdit',$payment);
     }
     public function printBill(Payment $payment):void{;
-        (new PosPrintingHelper())->printPayment($payment,$this->defaultCureencyName);
+        //(new PosPrintingHelper())->printPayment($payment,$this->defaultCureencyName);
     }
     public function mount(): void
     {

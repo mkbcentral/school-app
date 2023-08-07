@@ -2,26 +2,26 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Classe;
+use App\Models\Section;
 use Illuminate\Console\Command;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class RestoreOldClasse extends Command
+class RestoreOldSection extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:restore-old-classe';
+    protected $signature = 'app:restore-old-section';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Resaurer les ancienne classe';
+    protected $description = 'Command description';
 
     /**
      * Execute the console command.
@@ -29,7 +29,7 @@ class RestoreOldClasse extends Command
     public function handle()
     {
         $counter=0;
-        $worksheet=$this->getActiveSheet(storage_path('data/classes_up.xlsx'));
+        $worksheet=$this->getActiveSheet(storage_path('data/sections.xlsx'));
         foreach ($worksheet->getRowIterator() as $row) {
             if($counter++ ==0) continue;
             $iteratorCell=$row->getCellIterator();
@@ -38,13 +38,13 @@ class RestoreOldClasse extends Command
             foreach ($iteratorCell as $cell) {
                 $cells[]=$cell->getValue();
             }
-            Classe::create([
+            Section::create([
                 'id'=>$cells[0],
                 'name'=>$cells[1],
-                'classe_option_id'=>$cells[2],
+                'school_id'=>1,
             ]);
         }
-        $this->comment("Classes bien importées");
+        $this->comment("Sections bien importées");
     }
 
     public function getActiveSheet(string $path): Worksheet

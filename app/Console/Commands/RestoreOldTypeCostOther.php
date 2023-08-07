@@ -42,9 +42,9 @@ class RestoreOldTypeCostOther extends Command
             TypeOtherCost::create([
                 'id'=>$cells[0],
                 'name'=>$cells[1],
-                'school_id'=>$cells[2],
-                'active'=>$cells[3],
-                'scolary_year_id'=>$cells[4],
+                'active'=>$cells[2],
+                'scolary_year_id'=>$cells[3],
+                'school_id'=>1,
 
             ]);
         }

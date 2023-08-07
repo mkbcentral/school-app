@@ -15,10 +15,9 @@ class TypeCostHelper
      * @param $defaultScolaryYerId
      * @return Collection
      */
-    public function getListTypeCost($defaultScolaryYerId,$status=true):Collection{
+    public function getListTypeCost($defaultScolaryYerId):Collection{
         return TypeOtherCost::where('school_id',auth()->user()->school->id)
             ->where('scolary_year_id',$defaultScolaryYerId)
-            ->whereActive($status)
             ->with('school')
             ->get();
     }

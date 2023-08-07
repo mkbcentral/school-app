@@ -19,14 +19,15 @@ class GetAmountPaymentGroupingByTypeCost
                 '=',
                 'cost_generals.type_other_cost_id'
             )
-            ->join('students','students.id','payments.student_id')
+            ->join('students','students.id','=','payments.student_id')
             ->join('rates', 'rates.id', '=', 'payments.rate_id')
             ->where('payments.scolary_year_id', $scolaryYearId)
             ->where('payments.month_name', $month)
             ->where('students.school_id', auth()->user()->school->id)
-            ->with('Cost')
+            ->with('cost')
             ->with('student')
-            ->with('student.classe')
+            ->with('classe')
+            ->with('classe.optionClasse')
             ->select('type_other_costs.name', $currency == 'USD' ?
                 DB::raw("SUM(cost_generals.amount) as amount") :
                 DB::raw('SUM(cost_generals.amount*rates.rate)as amount'))
@@ -43,13 +44,13 @@ class GetAmountPaymentGroupingByTypeCost
                 '=',
                 'cost_generals.type_other_cost_id'
             )
+            ->join('students','students.id','=','payments.student_id')
             ->join('rates', 'rates.id', '=', 'payments.rate_id')
             ->where('payments.scolary_year_id', $scolaryYearId)
             ->whereDate('payments.created_at', $date)
             ->where('students.school_id', auth()->user()->school->id)
-            ->with('Cost')
+            ->with('cost')
             ->with('student')
-            ->with('student.classe')
             ->select(
                 'type_other_costs.name',
                 DB::raw("COUNT(payments.id) as number"),

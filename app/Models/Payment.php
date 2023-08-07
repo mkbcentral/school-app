@@ -16,15 +16,16 @@ class Payment extends Model
      */
     protected $fillable=
         [
-            'id',
             'number_payment',
             'month_name',
             'cost_general_id',
             'inscription_id',
+            'scolary_year_id',
             'student_id',
+            'classe_id',
             'user_id',
             'rate_id',
-            'school_id'
+            'school_id',
         ];
 
     /**
@@ -55,12 +56,12 @@ class Payment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function inscription(): BelongsTo
+    public function classe(): BelongsTo
     {
-        return $this->belongsTo(Inscription::class, 'inscription_id');
+        return $this->belongsTo(Classe::class, 'classe_id');
     }
     public function getStudentClasseName(Payment $payment):string{
-        return ' '.$payment->inscription->classe->name.'/'.$payment->classe?->classeOption?->name;
+        return ' '.$payment->classe->name.'/'.$payment->classe?->classeOption?->name;
     }
 
 }

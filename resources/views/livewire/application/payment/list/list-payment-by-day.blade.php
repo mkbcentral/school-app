@@ -37,7 +37,7 @@
                        <tbody>
                        @foreach ($listPayments as $payment)
                            <tr>
-                               <td>{{ $payment->inscription->student->name}} {{ $payment->inscription->getStudentClasseName($payment->inscription)}}
+                               <td>{{ $payment->student->name}} {{ $payment->getStudentClasseName($payment)}}
                                </td>
 
                                <td class="text-center">{{ $payment->cost->name }}

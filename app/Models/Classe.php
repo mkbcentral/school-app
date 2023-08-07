@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Classe extends Model
 {
     use HasFactory;
-    protected $fillable=['name','classe_option_id'];
+    protected $fillable=['id','name','classe_option_id'];
 
     /**
      * Get the classeoption that owns the Classe

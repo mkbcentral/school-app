@@ -35,12 +35,16 @@
                             </div>
                             <div class="col-md-8">
                                 @livewire('application.inscription.list.list-student-responsable',['index' => $selectedIndex])
+
                             </div>
                         </div>
                     </div>
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
+            </div>
+            <div class="mt-6">
+                @livewire('application.inscription.list.list-inscription',['index'=>$selectedIndex])
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->

@@ -27,7 +27,6 @@ class SchoolHelper
 
     public function getOldScolaryYear():ScolaryYear{
         return  ScolaryYear::where('is_last_year',true)->first();
-
     }
 
 
@@ -46,7 +45,7 @@ class SchoolHelper
             ->join('schools', 'schools.id', '=', 'sections.school_id')
             ->where('sections.school_id', auth()->user()->school->id)
             ->where('classes.classe_option_id', $id)
-            ->select('classes.*')
+            ->select('classes.*','classe_options.name as optioName')
             ->get();
     }
     //get list of classes
@@ -58,6 +57,7 @@ class SchoolHelper
             ->where('sections.school_id', auth()->user()->school->id)
             ->select('classes.*')
             ->orderBy('name','asc')
+            ->with('classeOption')
             ->get();
     }
     //get list of classes option

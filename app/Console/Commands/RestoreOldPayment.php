@@ -7,6 +7,7 @@ use App\Models\CostGeneral;
 use App\Models\Payment;
 use Illuminate\Console\Command;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class RestoreOldPayment extends Command
@@ -31,7 +32,7 @@ class RestoreOldPayment extends Command
     public function handle()
     {
         $counter = 0;
-        $worksheet = $this->getActiveSheet(storage_path('data/payments.xlsx'));
+        $worksheet = $this->getActiveSheet(storage_path('data/paiments.xlsx'));
         foreach ($worksheet->getRowIterator() as $row) {
             if ($counter++ == 0) continue;
             $iteratorCell = $row->getCellIterator();
@@ -40,19 +41,28 @@ class RestoreOldPayment extends Command
             foreach ($iteratorCell as $cell) {
                 $cells[] = $cell->getValue();
             }
+            $date=Date::excelToDateTimeObject($cells[7]);
+            $month='';
+            if ($cells[2] < 10){
+                $month="0".$cells[2];
+            }else{
+                $month=$cells[2];
+            }
             Payment::create([
                 'id' => $cells[0],
                 'number_payment' => $cells[1],
-                'month_name' => $cells[2],
+                'month_name' => $month,
                 'cost_general_id' => $cells[3],
                 'student_id' => $cells[4],
-                'is_paid' => $cells[5],
+                'classe_id'=>$cells[5],
+                'is_paid' => $cells[6],
+                'created_at'=>$date,
                 'rate_id' => 1,
-                'user_id' => 1,
-                'created_at' => $cells[7]
+                'user_id' => 4,
+                'school_id'=>1
             ]);
         }
-        $this->comment("Fiche bien importées");
+        $this->comment("Paiments bien importées");
     }
     public function getActiveSheet(string $path): Worksheet
     {

@@ -11,7 +11,6 @@ use Livewire\Component;
 class PaymentRapport extends Component
 {
     protected $listeners = [
-
         'scolaryYearFresh' => 'getScolaryYear',
     ];
     public string $keyToSearch = '';
@@ -19,6 +18,7 @@ class PaymentRapport extends Component
     public $listTypeCost=[];
     public $selectedIndex = 0;
     public  $status=true;
+    public $isActive=true;
 
     /**
      * Change index for selected Type cost
@@ -29,6 +29,7 @@ class PaymentRapport extends Component
     {
         $this->selectedIndex = $type->id;
         $this->emit('typeCostSelected', $this->selectedIndex);
+        $this->isActive=!$this->isActive;
     }
 
     /**
@@ -51,12 +52,13 @@ class PaymentRapport extends Component
         $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
         $this->defaultScolaryYerId=$scolaryYear->id;
 
-        $defaultTypeCost=(new TypeCostHelper())->getFirstTypeCostActive($scolaryYear->id);
+        $defaultTypeCost=(new TypeCostHelper())->getFirstTypeCostActive($scolaryYear->id,$this->isActive);
         $this->selectedIndex=$defaultTypeCost->id;
     }
     public function render()
     {
-        $this->listTypeCost=(new TypeCostHelper())->getListTypeCost($this->defaultScolaryYerId,$this->status);
+        $this->listTypeCost=(new TypeCostHelper())
+            ->getListTypeCost($this->defaultScolaryYerId);
         return view('livewire.application.rapport.payment-rapport');
     }
 }

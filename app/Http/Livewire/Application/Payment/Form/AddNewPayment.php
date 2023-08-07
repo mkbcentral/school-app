@@ -57,6 +57,9 @@ class AddNewPayment extends Component
                 $this->cost_other_id,
                 $this->student->inscription->classe->classeOption->id,
                 $this->student->inscription->id,
+                $this->student->id,
+                $this->defaultScolaryYerId,
+                $this->student->inscription->classe->id
             );
             $cost=CostGeneral::find($this->cost_other_id);
             //(new PosPrintingHelper())->printPayment($payment,'USD');

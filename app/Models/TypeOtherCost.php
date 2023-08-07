@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class TypeOtherCost extends Model
 {
     use HasFactory;
-    protected $fillable=['name','school_id','active','scolary_year_id'];
+    protected $fillable=['id','name','school_id','active','scolary_year_id'];
     /**
      * Get all of the comments for the TypeOtherCost
      *

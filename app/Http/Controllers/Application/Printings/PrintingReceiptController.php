@@ -14,7 +14,7 @@ class PrintingReceiptController extends Controller
         $inscription->update();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadView(
-            'livewire.application.printings.inscription.print-inscription-payment-by-date',
+            'livewire.application.printings.receipts.receipt-inscription-print',
             compact(['inscription', 'currency'])
         );
         return $pdf->stream();

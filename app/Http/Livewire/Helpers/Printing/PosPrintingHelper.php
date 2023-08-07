@@ -131,4 +131,65 @@ class PosPrintingHelper
             dd($th->getMessage());
         }
     }
+
+    public function printTest(){
+        $setting = AppSetting::first();
+        try {
+            $connector = new WindowsPrintConnector("EPSON-PRINTER");
+            $printer = new Printer($connector);
+
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            //$printer -> graphics($logo);
+            $printer->selectPrintMode(Printer::MODE_FONT_A);
+            $printer->text("ETS CENTRAL SHOP\n");
+            $printer->text("Commune MANIKA \n");
+            $printer->text("Av. Bondo coin BIYA\n");
+            $printer->text("------------------------------------------------\n");
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            $printer->text("Récu N°:0003.07.08.023 \n");
+            $printer->text("Client:BEN MWILA \n");
+            $printer->text("Caisse: C001\n");
+            $printer->text("Date: 07/08/2023 11:43\n");
+            $printer->text("------------------------------------------------\n");
+            /* Information for the receipt */
+            $items = array(
+                new item("-Savon LifeBoy",app_format_number(3000).' FC'),
+                new item("-OMO BOOM MIN",app_format_number(1500).' FC'),
+                new item("-SAVON SONA",app_format_number(2000).' FC'),
+            );
+            $total = new item('Total', app_format_number(6500).'Fc', true);
+            $date = date('d/m/Y');
+            /* Title of receipt */
+            $printer->setEmphasis(true);
+            $printer->text("DETAIL PIAMENT\n");
+            $printer->setEmphasis(false);
+            foreach ($items as $item) {
+                $printer->text($item);
+            }
+            $printer->text("------------------------------------------------\n");
+            /* Information for the receipt */
+            $printer->setEmphasis(true);
+            $printer->setEmphasis(false);
+            $printer->feed();
+
+            /* Tax and total */
+            $printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
+            $printer->text($total);
+            $printer->selectPrintMode();
+            $printer->text("------------------------------------------------\n");
+            /* Information for the receipt */
+            /* Footer */
+            $printer->feed(2);
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->text("Merci pour votre confiance\n");
+            $printer->text("Crédibilité,Serviabilité\n");
+            $printer->feed(2);
+            $printer->text($date . "\n");
+            $printer->text("\n");
+            $printer->cut();
+            $printer->close();
+        } catch (\Exception $th) {
+            dd($th->getMessage());
+        }
+    }
 }

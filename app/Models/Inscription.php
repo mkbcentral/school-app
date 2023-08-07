@@ -12,7 +12,19 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Inscription extends Model
 {
     use HasFactory;
-    protected $fillable = ['cost_inscription_id', 'user_id', 'classe_id', 'scolary_year_id', 'school_id', 'number_paiment', 'student_id', 'rate_id', 'is_old_student'];
+    protected $fillable = [
+        'id',
+        'cost_inscription_id',
+        'user_id',
+        'classe_id',
+        'scolary_year_id',
+        'school_id',
+        'number_paiment',
+        'student_id',
+        'rate_id',
+        'is_old_student',
+        'created_at'
+    ];
 
     /**
      * Get the Student that owns the Inscription

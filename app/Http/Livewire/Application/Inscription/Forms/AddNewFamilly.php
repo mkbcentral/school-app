@@ -18,6 +18,7 @@ class AddNewFamilly extends Component
         CreateNewResponsableHelper::create($data);
         $this->dispatchBrowserEvent('added', ['message' => "Famille bien créée !"]);
         $this->emit('refreshListResponsible');
+        $this->emit('refreshListInscription');
     }
     public function render()
     {

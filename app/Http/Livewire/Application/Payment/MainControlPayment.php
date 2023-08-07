@@ -9,6 +9,10 @@ use Livewire\Component;
 
 class MainControlPayment extends Component
 {
+    protected $listeners = [
+        'scolaryYearFresh' => 'getScolaryYear',
+    ];
+    public $defaultScolaryYerId;
     public $listTypeCost=[];
     public $selectedIndex = 0;
     public bool $isByTranch=false;
@@ -26,19 +30,31 @@ class MainControlPayment extends Component
     }
 
     /**
+     * Get selected scolaryYear id with emit ScolaryYearWidget listener
+     * @param $id
+     * @return void
+     */
+    public function getScolaryYear($id): void
+    {
+        $this->defaultScolaryYerId = $id;
+    }
+
+    /**
      * Mounted component
      * @return void
      */
     public function mount(): void
     {
         $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
-        $this->listTypeCost=(new TypeCostHelper())->getListTypeCost($scolaryYear->id);
-        $defaultTypeCost=(new TypeCostHelper())->getFirstTypeCostActive($scolaryYear->id);
-        $this->isByTranch=$defaultTypeCost->is_by_tranch;
-        $this->selectedIndex=$defaultTypeCost->id;
+        $this->defaultScolaryYerId=$scolaryYear->id;
+
     }
     public function render()
     {
+        $this->listTypeCost=(new TypeCostHelper())->getListTypeCost($this->defaultScolaryYerId);
+        $defaultTypeCost=(new TypeCostHelper())->getFirstTypeCostActive($this->defaultScolaryYerId);
+        $this->isByTranch=$defaultTypeCost?->is_by_tranch;
+        $this->selectedIndex=$defaultTypeCost->id;
         return view('livewire.application.payment.main-control-payment');
     }
 }

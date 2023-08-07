@@ -61,10 +61,7 @@
                                             <span class="badge badge-{{$inscription->getPaiementStatusColor($inscription)}}">{{$inscription->getPaiementStatus($inscription)}}</span>
                                         </td>
                                         <td class="text-center">
-                                            <x-button wire:click.prevent='printBill({{ $inscription }})'
-                                                      class="btn-sm text-info" type="button">
-                                                <i class="fas fa-print" aria-hidden="true"></i>
-                                            </x-button>
+                                            <a href="{{route('receipt.inscription',[$inscription,'USD'])}}" target="_blank"><i class="fas fa-print"></i></a>
 
                                         </td>
                                     </tr>

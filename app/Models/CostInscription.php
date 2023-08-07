@@ -10,7 +10,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CostInscription extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'amount', 'school_id','active','scolary_year_id'];
+    protected $fillable = [
+        'id',
+        'name',
+        'amount',
+        'school_id',
+        'active',
+        'scolary_year_id',
+        'created_at'
+    ];
 
     /**
      * Get all of the Inscription for the CostInscription

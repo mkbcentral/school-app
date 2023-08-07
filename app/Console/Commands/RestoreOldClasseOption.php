@@ -45,7 +45,7 @@ class RestoreOldClasseOption extends Command
                 'section_id'=>$cells[2],
             ]);
         }
-        $this->comment("Fiche bien importées");
+        $this->comment("Options bien importées");
     }
 
     public function getActiveSheet(string $path): Worksheet

@@ -111,6 +111,7 @@ class ListRapportPayment extends Component
      */
     public function loadData(): void
     {
+
         if($this->date_to_search==null){
             $this->listPayments=PaymentByMonthHelper::getMonthPayments(
                 $this->month,

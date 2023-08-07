@@ -55,7 +55,7 @@ class ListInscription extends Component
         if (!$inscription->is_paied){
             $inscription->is_paied=true;
             $inscription->update();
-            (new PosPrintingHelper())->printInscription($inscription,$this->defaultCureencyName);
+            //(new PosPrintingHelper())->printInscription($inscription,$this->defaultCureencyName);
         }else{
             $inscription->is_paied=false;
             $inscription->update();
