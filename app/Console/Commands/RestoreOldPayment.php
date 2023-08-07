@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Livewire\Helpers\DateFormatHelper;
 use App\Models\CostGeneral;
 use App\Models\Payment;
 use Illuminate\Console\Command;
@@ -29,29 +30,28 @@ class RestoreOldPayment extends Command
      */
     public function handle()
     {
-        $counter=0;
-        $worksheet=$this->getActiveSheet(storage_path('data/payments.xlsx'));
+        $counter = 0;
+        $worksheet = $this->getActiveSheet(storage_path('data/payments.xlsx'));
         foreach ($worksheet->getRowIterator() as $row) {
-            if($counter++ ==0) continue;
-            $iteratorCell=$row->getCellIterator();
+            if ($counter++ == 0) continue;
+            $iteratorCell = $row->getCellIterator();
             $iteratorCell->setIterateOnlyExistingCells(true);
-            $cells=[];
+            $cells = [];
             foreach ($iteratorCell as $cell) {
-                $cells[]=$cell->getValue();
-
+                $cells[] = $cell->getValue();
             }
-            /*
             Payment::create([
-                'id'=>$cells[0],
-                'name'=>$cells[1],
-                'amount'=>$cells[2],
-                'active'=>$cells[3],
-                'type_other_cost_id'=>$cells[4],
-
+                'id' => $cells[0],
+                'number_payment' => $cells[1],
+                'month_name' => $cells[2],
+                'cost_general_id' => $cells[3],
+                'student_id' => $cells[4],
+                'is_paid' => $cells[5],
+                'rate_id' => 1,
+                'user_id' => 1,
+                'created_at' => $cells[7]
             ]);
-            */
         }
-        dd($cells);
         $this->comment("Fiche bien importées");
     }
     public function getActiveSheet(string $path): Worksheet

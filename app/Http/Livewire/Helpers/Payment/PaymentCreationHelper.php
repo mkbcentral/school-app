@@ -9,13 +9,14 @@ use App\Models\Payment;
 
 class  PaymentCreationHelper
 {
-    public static function create($month,$cost_other_id,$classeOptionId,$inscriptionId):Payment{
+    public static function create($month,$cost_other_id,$classeOptionId,$inscriptionId,$studentId):Payment{
         $rate=(new SchoolHelper())->getCurrentRate();
         return Payment::create([
              'number_payment'=>(new FormatInvoiceNumberHelper())->formatPaymentInvoiceNumber($classeOptionId),
              'month_name'=>$month,
              'cost_general_id'=>$cost_other_id,
              'inscription_id'=>$inscriptionId,
+             'student_id'=>$studentId,
              'user_id'=>auth()->user()->id,
              'rate_id'=>$rate->id,
          ]);

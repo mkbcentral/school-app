@@ -16,11 +16,12 @@ class Payment extends Model
      */
     protected $fillable=
         [
-            'number_paiement',
+            'id',
+            'number_payment',
             'month_name',
-            'scolary_year_id',
             'cost_general_id',
             'inscription_id',
+            'student_id',
             'user_id',
             'rate_id',
             'school_id'
@@ -58,8 +59,6 @@ class Payment extends Model
     {
         return $this->belongsTo(Inscription::class, 'inscription_id');
     }
-
-
     public function getStudentClasseName(Payment $payment):string{
         return ' '.$payment->inscription->classe->name.'/'.$payment->classe?->classeOption?->name;
     }

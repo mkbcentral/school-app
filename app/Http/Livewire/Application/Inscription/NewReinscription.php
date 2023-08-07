@@ -14,11 +14,12 @@ class NewReinscription extends Component
 {
     use WithPagination;
     public string $keyToSearch = '';
-
+    public $studentId=0;
 
 
     public function show(Student $student){
         $this->emit('studentReinscription', $student);
+        $this->studentId=$student->id;
     }
     public function mount(){
         $scolaryYears=ScolaryYear::where('active',false)->get();
@@ -30,11 +31,11 @@ class NewReinscription extends Component
         foreach ((new DateFormatHelper())->getMonthsForYear() as $month){
             $mothData[]=$month;
         }
-        $payments=Payment::whereNotIn('inscriptions.scolary_year_id',$years)
-            ->join('inscriptions','inscriptions.id','payments.inscription_id')
-            ->where('student_id',25)
-            ->where('school_id',1)
-            ->whereIn('month_name',$mothData)
+        $payments=Payment::whereNotIn('students.scolary_year_id',$years)
+            ->join('students','students.id','=','payments.student_id')
+            ->where('payments.student_id',$this->studentId)
+            ->where('students.school_id',1)
+            ->whereIn('payments.month_name',$mothData)
             ->get();
     }
     public function render()

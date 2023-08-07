@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\Student::class)->after('inscription_id')->nullable();
+            $table->foreignIdFor(\App\Models\ScolaryYear::class)->after('inscription_id')->default(1);
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->dropColumn('student_id');
+            $table->dropColumn('scolary_year_id');
         });
     }
 };
