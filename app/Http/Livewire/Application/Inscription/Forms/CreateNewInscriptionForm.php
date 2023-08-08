@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Application\Inscription\Forms;
 
 use App\Http\Livewire\Helpers\Cost\CostInscriptionHelper;
-use App\Http\Livewire\Helpers\Inscription\CreateInscriptionHelper;
+use App\Http\Livewire\Helpers\Inscription\CreateNewInscriptionHelper;
 use App\Http\Livewire\Helpers\Responsable\CreateNewResponsableHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
-use App\Http\Livewire\Helpers\Student\StundentHelper;
+use App\Http\Livewire\Helpers\Student\CreateNewStundentHelper;
 use App\Http\Requests\NewStudentRequest;
 use App\Models\Student;
 use App\Models\StudentResponsable;
@@ -39,8 +39,8 @@ class CreateNewInscriptionForm extends Component
             $data['scolary_year_id']=$this->defaultScolaryYear->id;
             $data['school_id']=auth()->user()->school->id;
             $data['student_responsable_id']=$this->responsable->id;
-            $student= StundentHelper::create($data);
-            (new CreateInscriptionHelper())
+            $student= CreateNewStundentHelper::create($data);
+            (new CreateNewInscriptionHelper())
                 ->create(
                     $this->defaultScolaryYear->id,
                     $data['cost_inscription_id'],
@@ -49,7 +49,7 @@ class CreateNewInscriptionForm extends Component
                     $this->selectedOption
                 );
             $this->dispatchBrowserEvent('added', ['message' => "Action bien réalisée !"]);
-            //$this->emit('refreshListInscription');
+            $this->emit('refreshListInscription');
             $this->emit('refreshListResponsible');
         }
     }

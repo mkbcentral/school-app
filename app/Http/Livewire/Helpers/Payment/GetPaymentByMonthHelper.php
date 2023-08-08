@@ -5,10 +5,20 @@ namespace App\Http\Livewire\Helpers\Payment;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 
-class PaymentByMonthHelper
+class GetPaymentByMonthHelper
 {
-    //GET PAIMENT OF DAY
-    public static function getMonthPayments($month,$idSColaryYear,$idCost,$type,$classeId,$keySearch,$currency){
+    /**
+     * Récuperer les payments par mois
+     * @param $month
+     * @param $idSColaryYear
+     * @param $idCost
+     * @param $type
+     * @param $classeId
+     * @param $keySearch
+     * @param $currency
+     * @return mixed
+     */
+      public static function getMonthPayments($month,$idSColaryYear,$idCost,$type,$classeId,$keySearch,$currency){
         if ($classeId==0) {
                 if ($idCost==0) {
                     $payments=Payment::join('students','students.id','=','payments.student_id')
@@ -20,6 +30,7 @@ class PaymentByMonthHelper
                         ->where('cost_generals.type_other_cost_id',$type)
                         ->where('students.school_id',auth()->user()->school->id)
                         ->orderBy('payments.created_at','DESC')
+                        ->where('payments.is_paid',true)
                         ->with('cost')
                         ->with('student')
                         ->with('classe')
@@ -37,6 +48,7 @@ class PaymentByMonthHelper
                         ->where('cost_general_id',$idCost)
                         ->where('students.school_id',auth()->user()->school->id)
                         ->orderBy('payments.created_at','DESC')
+                        ->where('payments.is_paid',true)
                         ->with('cost')
                         ->with('student')
                         ->with('classe')
@@ -56,6 +68,7 @@ class PaymentByMonthHelper
                         ->where('payments.classe_id',$classeId)
                         ->where('students.school_id',auth()->user()->school->id)
                         ->orderBy('payments.created_at','DESC')
+                        ->where('payments.is_paid',true)
                         ->with('cost')
                         ->with('student')
                         ->with('classe')
@@ -74,6 +87,7 @@ class PaymentByMonthHelper
                         ->where('cost_general_id',$idCost)
                         ->where('students.school_id',auth()->user()->school->id)
                         ->orderBy('payments.created_at','DESC')
+                        ->where('payments.is_paid',true)
                         ->with('cost')
                         ->with('student')
                         ->with('classe')

@@ -4,7 +4,7 @@
             <div class="card-header"><h5><i class="fas fa-users"></i> CREATION NOUVELLE FAMILLE</h5></div>
             <div CLASS="card-body">
                   <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                           <div class="form-group">
                               <x-label value="{{ __('Nom de la famille') }}" />
                               <x-input class="" type='text' placeholder="Nom de la famille"
@@ -14,7 +14,7 @@
                               @enderror
                           </div>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                           <div class="form-group">
                               <x-label value="{{ __('Téléphone') }}" />
                               <x-input class="" type='text' placeholder="Tél"
@@ -24,7 +24,7 @@
                               @enderror
                           </div>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                           <div class="form-group">
                               <x-label value="{{ __('Autre Tél') }}" />
                               <x-input class="" type='text' placeholder="Autre tél"
@@ -34,7 +34,7 @@
                               @enderror
                           </div>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                           <div class="form-group">
                               <x-label value="{{ __('Adresse email') }}" />
                               <x-input class="" type='text' placeholder="Nom de la section"

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Application\Payment\List;
 
-use App\Http\Livewire\Helpers\Payment\PaymentByDateHelper;
+use App\Http\Livewire\Helpers\Payment\GetPaymentByDateHelper;
 use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Currency;
@@ -34,7 +34,14 @@ class ListPaymentByDay extends Component
         $this->emit('paymentToEdit',$payment);
     }
     public function printBill(Payment $payment):void{;
-        //(new PosPrintingHelper())->printPayment($payment,$this->defaultCureencyName);
+        if($payment->is_paid==true){
+            $payment->is_paid=false;
+            //(new PosPrintingHelper())->printPayment($payment,$this->defaultCureencyName);
+        }else{
+            $payment->is_paid=true;
+        }
+        $payment->update();
+        $this->dispatchBrowserEvent('added', ['message' => "Action réalisée avec succès !"]);
     }
     public function mount(): void
     {
@@ -50,7 +57,7 @@ class ListPaymentByDay extends Component
 
     public function render()
     {
-        $listPayments=PaymentByDateHelper::getDatePayments(
+        $listPayments=GetPaymentByDateHelper::getDatePayments(
             $this->date_to_search,
             $this->defaultScolaryYerId,
             0,

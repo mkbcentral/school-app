@@ -87,7 +87,7 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('view-total-amount', function () {
             $user=auth()->user();
-            return $user->hasRole(['Finance','Secretary','Coordinator']);
+            return $user->hasRole(['Coordinator','Finance']);
         });
         $this->registerPolicies();
 

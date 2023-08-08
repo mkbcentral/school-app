@@ -3,6 +3,7 @@ namespace  App\Http\Livewire\Helpers\Inscription;
 
 use App\Models\Inscription;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class GetInscriptionByDateWithPaymentStatusHelper{
@@ -14,9 +15,8 @@ class GetInscriptionByDateWithPaymentStatusHelper{
      * @param $costId
      * @param $currency
      * @param $ispaied
-     * @return Inscription[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Inscription_C|\LaravelIdea\Helper\App\Models\_IH_Inscription_QB[]
      */
-    public function getDateInscriptions($date,$scolaryYearId,$classeId,$costId,$currency,$ispaied=true){
+    public function getDateInscriptions($date,$scolaryYearId,$classeId,$costId,$currency,$ispaied=true):Collection{
         if ($classeId==0) {
            if ($costId==0) {
             $inscriptions=Inscription::join('students','inscriptions.student_id','=','students.id')

@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Application\Inscription\Forms;
 use App\Http\Livewire\Helpers\Cost\CostInscriptionHelper;
 use App\Http\Livewire\Helpers\Cost\TypeCostHelper;
 use App\Http\Livewire\Helpers\DateFormatHelper;
-use App\Http\Livewire\Helpers\Inscription\CreateInscriptionHelper;
+use App\Http\Livewire\Helpers\Inscription\CreateNewInscriptionHelper;
 use App\Http\Livewire\Helpers\Inscription\ExistingInscriptionCheckerHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Student;
@@ -77,7 +77,7 @@ class AddNewReinscription extends Component
         if ($inscription) {
             $this->dispatchBrowserEvent('error', ['message' => "Cet élève est déjà inscrit !"]);
         } else {
-          (new CreateInscriptionHelper())
+          (new CreateNewInscriptionHelper())
                 ->create(
                     $this->defaultScolaryYear->id,
                     $this->cost_inscription_id,

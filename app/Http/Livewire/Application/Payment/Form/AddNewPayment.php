@@ -6,7 +6,7 @@ use App\Http\Livewire\Helpers\Cost\CostGeneralHelper;
 use App\Http\Livewire\Helpers\Cost\TypeCostHelper;
 use App\Http\Livewire\Helpers\DateFormatHelper;
 use App\Http\Livewire\Helpers\Payment\CreatePaymentCheckerHelper;
-use App\Http\Livewire\Helpers\Payment\PaymentCreationHelper;
+use App\Http\Livewire\Helpers\Payment\CreateNewPaymentHelper;
 use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\CostGeneral;
@@ -52,7 +52,7 @@ class AddNewPayment extends Component
             $this->dispatchBrowserEvent('error',['message'=>'Désolé,cet élève a déjà un paiement pour ce mois']);
         }else{
             $cost=CostGeneral::find($this->cost_other_id);
-            $payment= PaymentCreationHelper::create(
+            $payment= CreateNewPaymentHelper::create(
                 $this->month,
                 $this->cost_other_id,
                 $this->student->inscription->classe->classeOption->id,

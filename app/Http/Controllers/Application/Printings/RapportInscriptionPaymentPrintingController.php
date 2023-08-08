@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Application\Printings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Livewire\Helpers\Inscription\GetInscriptionByDateWithPaymentStatusHelper;
-use App\Http\Livewire\Helpers\Payment\PaymentByDateHelper;
-use App\Http\Livewire\Helpers\Payment\PaymentByMonthHelper;
+use App\Http\Livewire\Helpers\Payment\GetPaymentByDateHelper;
+use App\Http\Livewire\Helpers\Payment\GetPaymentByMonthHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -24,7 +24,7 @@ class RapportInscriptionPaymentPrintingController extends Controller
     }
     public function printRapport($month,$idSColaryYear,$idCost,$type,$classeId,$currency)
     {
-        $listPayments=PaymentByMonthHelper::getMonthPayments(
+        $listPayments=GetPaymentByMonthHelper::getMonthPayments(
             $month,
             $idSColaryYear,
             $idCost,

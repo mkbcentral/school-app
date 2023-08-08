@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class GetCounterInscriptionHelper
 {
+    /**
+     * Récuperer le nombre toltal des nouvelles inscriptions par jour
+     * @param $date
+     * @param $scolaryYearId
+     * @return int
+     */
     public function getCountNewInscriptionsByDate($date,$scolaryYearId): int
     {
         return Inscription::join('students','inscriptions.student_id','=','students.id')
@@ -24,6 +30,13 @@ class GetCounterInscriptionHelper
             ->with('classe')
             ->count();
     }
+
+    /**
+     * Récuprer le nombre des réinscription par jour
+     * @param $date
+     * @param $scolaryYearId
+     * @return int
+     */
     public function getCountOldStudentInscriptionsByDate($date,$scolaryYearId): int
     {
         return Inscription::join('students','inscriptions.student_id','=','students.id')
@@ -42,6 +55,12 @@ class GetCounterInscriptionHelper
             ->count();
     }
 
+    /**
+     * Récuperer le nombre d'inscriprion par ssection
+     * @param $sectionId
+     * @param $scolaryYearId
+     * @return int
+     */
     public function getCountInscriptionsSection($sectionId,$scolaryYearId): int
     {
         return Inscription::join('classes','classes.id','=','inscriptions.classe_id')

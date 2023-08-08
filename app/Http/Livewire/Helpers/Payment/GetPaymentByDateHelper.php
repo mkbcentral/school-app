@@ -6,9 +6,19 @@ use App\Models\Payment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class PaymentByDateHelper
+class GetPaymentByDateHelper
 {
-    //GET PAIMENT OF DAY
+    /**
+     * Recuprer les payment par jour
+     * @param $date
+     * @param $idSColaryYear
+     * @param $idCost
+     * @param $type
+     * @param $classeId
+     * @param $keySearch
+     * @param $currency
+     * @return mixed
+     */
     public static function getDatePayments($date, $idSColaryYear, $idCost, $type, $classeId, $keySearch, $currency)
     {
         if ($type == 0) {
@@ -19,9 +29,10 @@ class PaymentByDateHelper
                         ->join('rates', 'rates.id', '=', 'payments.rate_id')
                         ->where('payments.scolary_year_id', $idSColaryYear)
                         ->whereDate('payments.created_at', $date)
-                        //->where('students.name', 'Like', '%' . $keySearch . '%')
+                        ->where('students.name', 'Like', '%' . $keySearch . '%')
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
+
                         ->with('cost')
                         ->with('classe')
                         ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))

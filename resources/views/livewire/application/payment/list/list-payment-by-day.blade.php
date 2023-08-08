@@ -1,13 +1,21 @@
 <div>
    <div CLASS="card">
        <div class="card-body">
-           <div class="d-flex justify-content-end">
+           <div class="d-flex justify-content-between">
+               <x-button wire:click.prevent="refreshList" type="button"  class="btn btn-warning"
+                         data-toggle="modal"
+                         data-target="#showListInscriptionPaymentByDateModal">
+                   @livewire('application.payment.widget.sum-payment-total-by-date',
+           ['date' => $date_to_search,'defaultScolaryYerId' => $defaultScolaryYerId,'currency' => $defaultCureencyName])
+               </x-button>
                <div class="col-md-4">
-                   <div class="form-group">
-                       <x-label value="{{ __('Filtrer par date') }}" />
-                       <x-input class="" type='date' placeholder="Lieu de naissance"
-                                wire:model='date_to_search' />
-                   </div>
+                  <div class="d-flex justify-content-between">
+                      <div class="form-group">
+                          <x-label value="{{ __('Filtrer par date') }}" />
+                          <x-input class="" type='date' placeholder="Lieu de naissance"
+                                   wire:model='date_to_search' />
+                      </div>
+                  </div>
                </div>
            </div>
            @livewire('application.payment.form.edit-payment-infos')
@@ -53,9 +61,11 @@
                                    </x-button>
                                    <x-button wire:click.prevent='printBill({{ $payment }})'
                                              class="btn-sm text-secondary" type="button" >
-                                       <i class="fa fa-print" aria-hidden="true"></i>
+                                       <i class="fas {{$payment->is_paid?' fa-times-circle text-danger':'fa-check-double'}} " aria-hidden="true"></i>
                                    </x-button>
-                                   <a href="{{route('receipt.payment',[$payment,$defaultCureencyName])}}" target="_blank"><i class="fas fa-print"></i></a>
+                                  @if($payment->is_paid)
+                                       <a href="{{route('receipt.payment',[$payment,$defaultCureencyName])}}" target="_blank"><i class="fas fa-print"></i></a>
+                                  @endif
                                </td>
                            </tr>
                            @php

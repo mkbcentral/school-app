@@ -7,6 +7,14 @@ use App\Models\Payment;
 
 class CreatePaymentCheckerHelper
 {
+    /**
+     * Vérifier si un élève a déjà un payment au cours du mois avant de faire passer une autre payment
+     * @param $student_id
+     * @param $month
+     * @param $type_other_cost
+     * @param $defaultScolaryYerId
+     * @return bool
+     */
     public static function checkIfPaymentExistBeforCreate($student_id, $month, $type_other_cost,$defaultScolaryYerId): bool
     {
         $status = false;

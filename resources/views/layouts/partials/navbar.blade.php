@@ -29,7 +29,6 @@
                         <small>{{Auth::user()->email}}</small>
                     </p>
                 </li>
-
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <form method="POST" action="{{ route('logout') }}">
@@ -39,7 +38,6 @@
                         this.closest('form').submit();"
                            class="btn btn-default btn-flat float-right">Déconnexion</a>
                     </form>
-
                 </li>
             </ul>
         </li>

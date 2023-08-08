@@ -30,10 +30,10 @@
                             </ul>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 @livewire('application.inscription.forms.add-new-familly')
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 @livewire('application.inscription.list.list-student-responsable',['index' => $selectedIndex])
 
                             </div>
@@ -44,7 +44,14 @@
                 <!-- /.col -->
             </div>
             <div class="mt-6">
-                @livewire('application.inscription.list.list-inscription',['index'=>$selectedIndex])
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list"></i>LISTE DES INSCRIPTIONS JOUNALIERES</h5>
+                    </div>
+                    <div CLASS="card-body">
+                        @livewire('application.inscription.list.list-inscription',['index'=>$selectedIndex])
+                    </div>
+                </div>
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->

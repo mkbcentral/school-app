@@ -4,8 +4,8 @@ namespace App\Http\Livewire\Application\Rapport\List;
 
 use App\Http\Livewire\Helpers\Cost\CostGeneralHelper;
 use App\Http\Livewire\Helpers\DateFormatHelper;
-use App\Http\Livewire\Helpers\Payment\PaymentByDateHelper;
-use App\Http\Livewire\Helpers\Payment\PaymentByMonthHelper;
+use App\Http\Livewire\Helpers\Payment\GetPaymentByDateHelper;
+use App\Http\Livewire\Helpers\Payment\GetPaymentByMonthHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\CostGeneral;
 use App\Models\Currency;
@@ -113,7 +113,7 @@ class ListRapportPayment extends Component
     {
 
         if($this->date_to_search==null){
-            $this->listPayments=PaymentByMonthHelper::getMonthPayments(
+            $this->listPayments=GetPaymentByMonthHelper::getMonthPayments(
                 $this->month,
                 $this->defaultScolaryYerId,
                 $this->cost_id,
@@ -123,7 +123,7 @@ class ListRapportPayment extends Component
                 $this->defaultCureencyName
             );
         }else{
-            $this->listPayments=PaymentByDateHelper::getDatePaiments(
+            $this->listPayments=GetPaymentByDateHelper::getDatePaiments(
                 $this->date_to_search,
                 $this->defaultScolaryYerId,
                 $this->cost_id,

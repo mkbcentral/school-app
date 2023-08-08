@@ -36,7 +36,13 @@
                                       wire:click.prevent="getResponsable({{$responsable}})"
                                       data-toggle="modal" data-target="#formInscriptionModal">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                Nouvelle inscription
+
+                            </x-button>
+                            <x-button class="btn-primary btn-sm" type="button"
+                                      wire:click.prevent="getResponsable({{$responsable}})"
+                                      data-toggle="modal" data-target="#formInscriptionModal">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+
                             </x-button>
                         </td>
                     </tr>

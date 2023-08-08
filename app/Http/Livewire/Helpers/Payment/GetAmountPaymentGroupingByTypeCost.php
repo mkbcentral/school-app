@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class GetAmountPaymentGroupingByTypeCost
 {
+    /**
+     * Recuperer la liste des totaux de payments mensuels grouper par type de frais (TypeOtherConst)
+     * @param $month
+     * @param $scolaryYearId
+     * @param $currency
+     * @return Collection
+     */
     public static  function getAmountPaymentByMonth($month, $scolaryYearId, $currency = 'USD'): Collection
     {
         return Payment::join('cost_generals', 'cost_generals.id', '=', 'payments.cost_general_id')
@@ -24,6 +31,7 @@ class GetAmountPaymentGroupingByTypeCost
             ->where('payments.scolary_year_id', $scolaryYearId)
             ->where('payments.month_name', $month)
             ->where('students.school_id', auth()->user()->school->id)
+            ->where('payments.is_paid',true)
             ->with('cost')
             ->with('student')
             ->with('classe')
@@ -35,6 +43,13 @@ class GetAmountPaymentGroupingByTypeCost
             ->get();
     }
 
+    /**
+     * Recuperer la liste des totaux de payments journlières grouper par type de frais (TypeOtherConst)
+     * @param $date
+     * @param $scolaryYearId
+     * @param $currency
+     * @return Collection
+     */
     public static  function getAmountPaymentByDate($date, $scolaryYearId, $currency = 'USD'): Collection
     {
         return Payment::join('cost_generals', 'cost_generals.id', '=', 'payments.cost_general_id')
@@ -49,6 +64,7 @@ class GetAmountPaymentGroupingByTypeCost
             ->where('payments.scolary_year_id', $scolaryYearId)
             ->whereDate('payments.created_at', $date)
             ->where('students.school_id', auth()->user()->school->id)
+            ->where('payments.is_paid',true)
             ->with('cost')
             ->with('student')
             ->select(

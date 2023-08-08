@@ -15,14 +15,14 @@
                 </div>
             </div>
         </div>
-      
+
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <div class="form-group d-flex justify-content-between align-items-center">
-                                <label><i class="fas fa-calendar-day"></i> Stiuation journalière</label>
+                                <label><i class="fas fa-calendar-day"></i> Stiuation opétions journalières</label>
                                 <x-input  class="form-control w-25" type='date' placeholder="Lieu de naissance"
                                          wire:model='day' />
                             </div>

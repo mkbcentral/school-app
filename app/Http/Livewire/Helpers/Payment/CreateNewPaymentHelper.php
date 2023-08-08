@@ -7,8 +7,19 @@ use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Paiment;
 use App\Models\Payment;
 
-class  PaymentCreationHelper
+class  CreateNewPaymentHelper
 {
+    /**
+     * Créer un nouveau  payment
+     * @param $month
+     * @param $cost_other_id
+     * @param $classeOptionId
+     * @param $inscriptionId
+     * @param $studentId
+     * @param $scolaryId
+     * @param $classeId
+     * @return Payment
+     */
     public static function create($month,$cost_other_id,$classeOptionId,$inscriptionId,$studentId,$scolaryId,$classeId):Payment{
         $rate=(new SchoolHelper())->getCurrentRate();
         return Payment::create([

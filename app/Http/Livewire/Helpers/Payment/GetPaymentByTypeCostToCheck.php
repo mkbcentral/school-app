@@ -7,8 +7,15 @@ use App\Models\Payment;
 
 class GetPaymentByTypeCostToCheck
 {
-    public static function getPaymentChecker($idType,$student_id,$month):?Payment{
-        $scolaryYear=(new SchoolHelper())->getOldScolaryYear();
+    /**
+     * Vérifier si un élève à une dette de payment mesuelle sur l'année passée par type frais (TypeOtherCost)
+     * @param $idType
+     * @param $student_id
+     * @param $month
+     * @return Payment|null
+     */
+    public static function getPaymentForLasYearChecker($idType,$student_id,$month):?Payment{
+        $scolaryYear=(new SchoolHelper())->getOldScolaryYear();//Recuperer l'année passée
         return Payment::join('cost_generals','cost_generals.id','=','payments.cost_general_id')
             ->where('payments.student_id',$student_id)
             ->where('payments.school_id',auth()->user()->school->id)
@@ -18,8 +25,15 @@ class GetPaymentByTypeCostToCheck
             ->first();
     }
 
+    /**
+     * Vérifier si l'élève a use dette payement mensuel au cours de l'année en cours par type frais (TypeOtherCost)
+     * @param $idType
+     * @param $student_id
+     * @param $month
+     * @return Payment|null
+     */
     public static function getCurrentYearPaymentChecker($idType,$student_id,$month):?Payment{
-        $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
+        $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();//Récuperer l'année en cours
         return Payment::join('cost_generals','cost_generals.id','=','payments.cost_general_id')
             ->join('type_other_costs','type_other_costs.id','=','cost_generals.type_other_cost_id')
             ->where('payments.student_id',134)
@@ -30,6 +44,14 @@ class GetPaymentByTypeCostToCheck
             ->first();
     }
 
+    /**
+     * Vérifier si l'élève a une dette sur l'année scolaire en cours par type par type frais (TypeOtherCost) et pa Frais (CostId)
+     * @param $idType
+     * @param $student_id
+     * @param $month
+     * @param $costId
+     * @return Payment|null
+     */
     public static function getCurrentYearCostPaymentChecker($idType,$student_id,$month,$costId):?Payment{
         $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
         return Payment::join('cost_generals','cost_generals.id','=','payments.cost_general_id')

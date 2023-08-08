@@ -3,11 +3,21 @@
 namespace App\Http\Livewire\Helpers\Inscription;
 
 use App\Models\Inscription;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class GetInscriptionByyDateHelper
 {
-    public function getDateInscriptions($date,$scolaryYearId,$classeId,$costId,$currency){
+    /**
+     * Récuprer la liste des inscription par date
+     * @param $date
+     * @param $scolaryYearId
+     * @param $classeId
+     * @param $costId
+     * @param $currency
+     * @return Collection
+     */
+    public function getDateInscriptions($date,$scolaryYearId,$classeId,$costId,$currency):Collection{
         if ($classeId==0) {
             if ($costId==0) {
                 $inscriptions=Inscription::join('students','inscriptions.student_id','=','students.id')

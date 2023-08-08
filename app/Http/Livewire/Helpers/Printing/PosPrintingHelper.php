@@ -5,12 +5,17 @@ namespace App\Http\Livewire\Helpers\Printing;
 use App\Models\AppSetting;
 use App\Models\Inscription;
 use App\Models\Paiment;
-use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
 
 class PosPrintingHelper
 {
+    /**
+     * Imprimer le reçu d'inscription
+     * @param Inscription $inscription
+     * @param $currency
+     * @return void
+     */
     public function printInscription(Inscription $inscription,$currency='USD'){
         $setting = AppSetting::first();
         try {
@@ -72,6 +77,12 @@ class PosPrintingHelper
         }
     }
 
+    /**
+     * Imprimer le recu de frais scolaire
+     * @param Paiment $payment
+     * @param $currency
+     * @return void
+     */
     public function printPayment(Paiment $payment,$currency='USD'){
         try {
             $connector = new WindowsPrintConnector("EPSON-PRINTER");
@@ -132,6 +143,10 @@ class PosPrintingHelper
         }
     }
 
+    /**
+     * Test l'imprimer
+     * @return void
+     */
     public function printTest(){
         $setting = AppSetting::first();
         try {

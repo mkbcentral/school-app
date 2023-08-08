@@ -13,6 +13,7 @@ class CurrencyWidget extends Component
 
     public function updatedCurrencyId($val){
         $this->emit('CurrancyFresh', $val);
+
     }
 
     public function mount(){

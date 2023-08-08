@@ -9,6 +9,10 @@ use Illuminate\Support\Collection;
 
 class CostInscriptionHelper
 {
+    /**
+     * Récuprer la liste des frais pour l'année en cours
+     * @return Collection
+     */
     public function getListCostInscription():Collection {
         $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
         return CostInscription::where('school_id', auth()->user()->school->id)

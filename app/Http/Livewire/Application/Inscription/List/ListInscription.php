@@ -82,7 +82,6 @@ class ListInscription extends Component
 
         $this->inscriptionList= (new GetInscriptionByyDateHelper())
         ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,$this->defaultCureencyName);
-        //dd( $this->inscriptionList);
     }
     public function edit(Student $student)
     {
