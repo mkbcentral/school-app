@@ -43,7 +43,10 @@ class CheckerRedirectUser
                 'main',
                 'dashboard.main',
                 'rapport.payments',
-                'rapport.inscription.by.classe'
+                'rapport.inscription.by.classe',
+                'inscription.payment.valide',
+                'payment.other.cost',
+                'filament.pages.dashboard',
             ],
             'Finance'=>[
                 'main',

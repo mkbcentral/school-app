@@ -67,15 +67,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         Gate::define('valid-payment', function () {
             $user=auth()->user();
-            return $user->hasRole(['Finance']);
+            return $user->hasRole(['Finance','Coordinator']);
         });
         Gate::define('view-administration-panel', function () {
             $user=auth()->user();
-            return $user->hasRole(['Super-Admin']);
+            return $user->hasRole(['Super-Admin',]);
         });
         Gate::define('view-links-settings', function () {
             $user=auth()->user();
-            return $user->hasRole(['App-Admin']);
+            return $user->hasRole(['App-Admin','Coordinator']);
         });
         Gate::define('edit-student-infos', function () {
             $user=auth()->user();
@@ -83,11 +83,11 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('edit-classe-inscription', function () {
             $user=auth()->user();
-            return $user->hasRole(['Secretaire','Financier']);
+            return $user->hasRole(['Secretary','Finance']);
         });
         Gate::define('view-total-amount', function () {
             $user=auth()->user();
-            return $user->hasRole(['Finance']);
+            return $user->hasRole(['Finance','Secretary','Coordinator']);
         });
         $this->registerPolicies();
 

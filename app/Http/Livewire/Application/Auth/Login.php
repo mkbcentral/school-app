@@ -16,16 +16,8 @@ class Login extends Component
         ]);
         try {
             if (AuthUserHleper::login($data)){
-                if (Auth::user()->hasRole('App-Admin')){
-                    return redirect()->route('main');
-                }elseif(Auth::user()->hasRole('Super-Admin')){
-                    if (auth()->user()->school == null){
-                        return redirect()->route('school.create');
-                    }else{
-                        return redirect()->route('main');
-                    }
-                }
                 $this->dispatchBrowserEvent('added', ['message' => "Connexion bien établie !"]);
+                return redirect()->route('main');
             }else{
                 $this->dispatchBrowserEvent('error', ['message' => "'Email ou mot de password incorrect.'"]);
             }

@@ -19,7 +19,7 @@
         <li class="nav-item dropdown user-menu text-white">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="{{ asset(auth()->user()->avatar ?'/storage/'.auth()->user()->avatar :'defautl-user.jpg') }}" class="user-image img-circle elevation-2" alt="User Image" />
-                <span class="d-none d-md-inline text-white">User name</span>
+                <span class="d-none d-md-inline text-white">{{auth()->user()->name}}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->

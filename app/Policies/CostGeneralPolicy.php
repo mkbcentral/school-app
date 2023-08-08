@@ -12,7 +12,7 @@ class CostGeneralPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -20,7 +20,7 @@ class CostGeneralPolicy
      */
     public function view(User $user, CostGeneral $costGeneral): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -28,7 +28,7 @@ class CostGeneralPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -36,7 +36,7 @@ class CostGeneralPolicy
      */
     public function update(User $user, CostGeneral $costGeneral): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -44,7 +44,7 @@ class CostGeneralPolicy
      */
     public function delete(User $user, CostGeneral $costGeneral): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -52,7 +52,7 @@ class CostGeneralPolicy
      */
     public function restore(User $user,CostGeneral $costGeneral): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -60,6 +60,6 @@ class CostGeneralPolicy
      */
     public function forceDelete(User $user, CostGeneral $costGeneral): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 }

@@ -13,7 +13,7 @@ class TypeOtherCostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -21,7 +21,7 @@ class TypeOtherCostPolicy
      */
     public function view(User $user, TypeOtherCost $typeOtherCost): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -29,7 +29,7 @@ class TypeOtherCostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -37,7 +37,7 @@ class TypeOtherCostPolicy
      */
     public function update(User $user, TypeOtherCost $typeOtherCost): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -45,7 +45,7 @@ class TypeOtherCostPolicy
      */
     public function delete(User $user, TypeOtherCost $typeOtherCost): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -53,7 +53,7 @@ class TypeOtherCostPolicy
      */
     public function restore(User $user, TypeOtherCost $typeOtherCost): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 
     /**
@@ -61,6 +61,6 @@ class TypeOtherCostPolicy
      */
     public function forceDelete(User $user, TypeOtherCost $typeOtherCost): bool
     {
-        return $user->hasRole(['Super-Admin']);
+        return $user->hasRole(['Super-Admin','Coordinator']);
     }
 }
