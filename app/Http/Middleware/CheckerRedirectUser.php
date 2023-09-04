@@ -60,7 +60,8 @@ class CheckerRedirectUser
                 'rapport.receipt.all.by.section',
                 'receipt.inscription',
                 'receipt.payment',
-                'print.rapport.inscription.payment.by.day'
+                'print.rapport.inscription.payment.by.day',
+                'depense.all'
             ],
             'Secretary'=>[
                 'main',

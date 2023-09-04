@@ -15,6 +15,8 @@ use App\Http\Controllers\Application\Pages\CreateSchoolController;
 use App\Http\Livewire\Application\Payment\MainControlPayment;
 use App\Http\Livewire\Application\Rapport\Payment\RapportAllReceiptBySection;
 use App\Http\Controllers\Application\Printings\PrintingReceiptController;
+use App\Http\Livewire\Application\Depense\MyDepense;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +54,11 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
         Route::get('payments',PaymentRapport::class)->name('rapport.payments');
         Route::get('payment-all-receipt-by-section',RapportAllReceiptBySection::class)->name('rapport.receipt.all.by.section');
         Route::get('inscription-by-classe',RapportInscriptionByClasse::class)->name('rapport.inscription.by.classe');
+    });
+
+    //Depense
+    Route::prefix('depense')->group(function(){
+        Route::get('all',MyDepense::class)->name('depense.all');
     });
 
 

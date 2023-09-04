@@ -35,7 +35,6 @@
                             </div>
                             <div class="col-md-6">
                                 @livewire('application.inscription.list.list-student-responsable',['index' => $selectedIndex])
-
                             </div>
                         </div>
                     </div>
