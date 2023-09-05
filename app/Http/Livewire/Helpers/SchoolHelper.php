@@ -79,4 +79,8 @@ class SchoolHelper
     public function getListOfGender():Collection{
         return Gender::all();
     }
+
+    public static function getCurrencyList():Collection{
+        return Currency::all();
+    }
 }

@@ -12,6 +12,7 @@ class DepenseSourceHelper
     }
     public static function create(array $inputs):DepenseSource
     {
+        $inputs['school_id']=auth()->user()->school->id;
         return DepenseSource::create($inputs);
     }
     public static function show(string $id):DepenseSource

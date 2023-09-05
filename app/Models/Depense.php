@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Depense extends Model
 {
     use HasFactory;
-    protected $fillable=['name','amount','currency_id','depense_source_id'];
+    protected $fillable=['name','amount','currency_id','depense_source_id','school_id'];
 
     /**
      * Get the currency that owns the Depense

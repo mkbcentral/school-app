@@ -125,6 +125,16 @@
                                                 <span class="error text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                        @if($isEditing == true)
+                                        <div class="form-group">
+                                            <x-label value="{{ __('Date emprunt') }}" />
+                                            <x-input class="" type='date' placeholder="Date emprunt"
+                                                wire:model.defer='created_at' />
+                                            @error('created_at')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        @endif
                                     </div>
                                     <div class="card-footer text-muted">
                                         <x-button type="submit" class="btn btn-primary">

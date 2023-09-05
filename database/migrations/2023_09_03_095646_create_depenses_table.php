@@ -2,6 +2,7 @@
 
 use App\Models\Currency;
 use App\Models\DepenseSource;
+use App\Models\School;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->float('amount')->default(0);
             $table->foreignIdFor(DepenseSource::class);
             $table->foreignIdFor(Currency::class);
+            $table->foreignIdFor(School::class)->nullable();
             $table->timestamps();
         });
     }

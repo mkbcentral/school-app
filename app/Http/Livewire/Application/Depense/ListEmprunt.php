@@ -13,7 +13,7 @@ use Livewire\Component;
 class ListEmprunt extends Component
 {
 
-    public $amount, $currency_id;
+    public $amount, $currency_id, $created_at;
     public Emprunt $emprunt;
     public bool $isEditing = false;
     public Collection $listCurrency;
@@ -37,13 +37,18 @@ class ListEmprunt extends Component
     {
         $this->emprunt = $emprunt;
         $this->amount = $emprunt->amount;
+        $this->created_at = $emprunt->created_at->format('Y-m-d');
         $this->currency_id = $emprunt->currency_id;
         $this->isEditing = true;
     }
 
     public function update()
     {
-        $inputs = $this->validate(['amount' => ['required', 'numeric'], 'currency_id' => ['required', 'numeric']]);
+        $inputs = $this->validate([
+            'amount' => ['required', 'numeric'],
+            'currency_id' => ['required', 'numeric'],
+            'created_at'=>['date','required']
+        ]);
         EmpruntHelper::update($this->emprunt, $inputs);
         $this->dispatchBrowserEvent('updated', ['message' => "Emprunt bien modifié !"]);
         $this->amount = '';

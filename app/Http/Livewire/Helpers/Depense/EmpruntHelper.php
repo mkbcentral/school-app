@@ -14,6 +14,7 @@ class EmpruntHelper
     }
     public static function create(array $inputs): Emprunt
     {
+        $inputs['school_id']=auth()->user()->school->id;
         $inputs['code'] = 'AQ-' . date('d') . '-' . date('m') . '-' . date('y') . '-' . rand(1000, 10000);
         return Emprunt::create($inputs);
     }
