@@ -46,7 +46,8 @@ class CheckerRedirectUser
                 'rapport.inscription.by.classe',
                 'inscription.payment.valide',
                 'payment.other.cost',
-                'filament.pages.dashboard',
+                ' filament.pages.dashboard',
+                'payment.control',
             ],
             'Finance'=>[
                 'main',
@@ -61,7 +62,8 @@ class CheckerRedirectUser
                 'receipt.inscription',
                 'receipt.payment',
                 'print.rapport.inscription.payment.by.day',
-                'depense.all'
+                'depense.all',
+                'payment.late'
             ],
             'Secretary'=>[
                 'main',

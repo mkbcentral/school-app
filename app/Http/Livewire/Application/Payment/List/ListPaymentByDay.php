@@ -6,7 +6,6 @@ use App\Http\Livewire\Helpers\Payment\GetPaymentByDateHelper;
 use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Currency;
-use App\Models\Paiment;
 use App\Models\Payment;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
@@ -29,7 +28,7 @@ class ListPaymentByDay extends Component
         $this->defaultCureencyName=$currency;
     }
 
-    public function edit(Paiment $payment): void
+    public function edit(Payment $payment): void
     {
         $this->emit('paymentToEdit',$payment);
     }

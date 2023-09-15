@@ -34,7 +34,6 @@
                                 <span hidden>Loading...</span>
                             </div>
                         </div>
-
                         @if($isByTranch)
                             @livewire('application.payment.list.list-student-control-by-tranch',['index' => $selectedIndex])
                         @else

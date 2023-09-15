@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Application\Inscription;
 
 use App\Http\Livewire\Helpers\DateFormatHelper;
-use App\Models\Paiment;
+use App\Http\Livewire\Helpers\Student\ListStudentHeleper;
 use App\Models\Payment;
 use App\Models\ScolaryYear;
 use App\Models\Student;
@@ -40,13 +40,7 @@ class NewReinscription extends Component
     }
     public function render()
     {
-        $studentList = Student::join('scolary_years', 'scolary_years.id', '=', 'students.scolary_year_id')
-            ->where('scolary_years.active', false)
-            ->where('students.school_id',auth()->user()->school->id)
-            ->where('students.name', 'Like', '%' . $this->keyToSearch . '%')
-            ->select('students.*')
-            ->orderBy('students.name','ASC')
-            ->paginate(20);
+        $studentList = ListStudentHeleper::getListStudentForLastYear($this->keyToSearch,20);
         return view('livewire.application.inscription.new-reinscription', ['studentList'=> $studentList]);
     }
 }

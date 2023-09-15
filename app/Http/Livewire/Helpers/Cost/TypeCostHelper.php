@@ -79,7 +79,7 @@ class TypeCostHelper
             $type=TypeOtherCost::find($cost);
             foreach ($months as $month ){
                 //Recuperer le paiement par (eleve,typeFrais,mois)
-                $payment=GetPaymentByTypeCostToCheck::getPaymentChecker($cost,$studentId,$month);
+                $payment=GetPaymentByTypeCostToCheck::getPaymentForLasYearChecker($cost,$studentId,$month);
                 //Vérifier s'il y n a pas de paiemnt pour chaque et retourner les mois non payé
                 if(!$payment){
                     if($month=='06' || $month=='07' || $month=='08'){

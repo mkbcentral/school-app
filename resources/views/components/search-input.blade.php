@@ -1,4 +1,4 @@
-<div class="w-75 d-flex align-items-center">
+<div class="d-flex align-items-center">
     <div class="card-tools">
         <div class="input-group input-group-sm">
             <input wire:model.debounce.500ms='keyToSearch' type="text"

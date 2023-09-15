@@ -32,7 +32,7 @@ class AddNewReinscription extends Component
     ];
 
     /**
-     * Mise ç jour automatique du système de validation
+     * Mise à jour automatique du système de validation
      * @param $propertyName
      * @return void
      */

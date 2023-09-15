@@ -24,4 +24,12 @@ class FormatInvoiceNumberHelper
             substr($classeOption->name,0,1).'-'
             .substr($scolaryYear->name,-3).'-FR';
     }
+    public function formatLatePaymentInvoiceNumber($classeOptionId):string{
+        $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
+        $classeOption=ClasseOption::find($classeOptionId);
+        return substr(auth()->user()->school->name,0,2)
+            .'-'.rand(1000,10000).'-'.
+            substr($classeOption->name,0,1).'-'
+            .substr($scolaryYear->name,-3).'-ARR';
+    }
 }

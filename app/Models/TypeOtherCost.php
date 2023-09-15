@@ -49,7 +49,7 @@ class TypeOtherCost extends Model
      * @return string
      */
     public  function getPaymentCheckerStatus($idType,$studentId,$month):string{
-        $payment=GetPaymentByTypeCostToCheck::getPaymentChecker($idType,$studentId,$month);
+        $payment=GetPaymentByTypeCostToCheck::getPaymentForLasYearChecker($idType,$studentId,$month);
         $status='';
         if($payment){
             return   $status='OK';
@@ -66,7 +66,7 @@ class TypeOtherCost extends Model
      * @return string
      */
     public  function getPaymentCheckerBgtatus($idType,$studentId,$month):string{
-        $payment=GetPaymentByTypeCostToCheck::getPaymentChecker($idType,$studentId,$month);
+        $payment=GetPaymentByTypeCostToCheck::getPaymentForLasYearChecker($idType,$studentId,$month);
         $status='';
         if($payment){
             return $status;

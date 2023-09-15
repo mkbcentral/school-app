@@ -94,8 +94,7 @@ class ListDepense extends Component
         } else {
             $this->listDepense = DepenseHelper::get($this->month, $this->currency, $this->source);
         }
-
-        //dd(DepenseHelper::getAmountGoupingByCurrency($this->date));
+        $this->emit('getMonthDepense', $this->month);
         return view('livewire.application.depense.list.list-depense',);
     }
 }

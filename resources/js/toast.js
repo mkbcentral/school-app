@@ -10,6 +10,7 @@ window.$(document).ready(function () {
         $('#newReinscription').modal('hide');
         $('#newPayment').modal('hide');
         $('#formDepenseModal').modal('hide');
+        $('#newLatePayment').modal('hide');
     });
     window.addEventListener('added-inscription', function (event) {
         toastr.success(event.detail.message, 'Validation');
@@ -20,6 +21,7 @@ window.$(document).ready(function () {
         $('#formEditInscriptionModal').modal('hide');
         $('#editPayment').modal('hide');
         $('#formDepenseModal').modal('hide');
+        $('#newLatePayment').modal('hide');
     });
     window.addEventListener('error', function (event) {
         toastr.error(event.detail.message, 'Alert !');

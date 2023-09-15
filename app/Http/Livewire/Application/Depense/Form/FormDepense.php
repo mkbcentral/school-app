@@ -67,6 +67,7 @@ class FormDepense extends Component
             'depense_source_id' => ['required', 'numeric'],
         ]);
         DepenseHelper::update($this->depense,$inputs);
+        $this->emit('refreshListDepense');
         $this->dispatchBrowserEvent('updated', ['message' => "Dépense bien modifiée !"]);
         $this->resetForm();
     }

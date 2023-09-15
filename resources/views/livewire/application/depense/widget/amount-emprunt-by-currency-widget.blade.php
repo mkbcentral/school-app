@@ -9,15 +9,15 @@
         <div class="card-body">
             @if ($listEmprunt->isEmpty())
             <div class="d-flex justify-content-center">
-                <span colspan="6" class="text-center text-success">
-                    <i class="fa fa-database" aria-hidden="true"></i>
+                <span colspan="6" class="text-center text-white">
+                    <i class="fa fa-database  aria-hidden="true"></i>
                     Aucun emprunt pour le mois {{app_get_month_name($month)}} !
                 </span>
             </div>
             @else
             @foreach ($listEmprunt as $emprunt)
             <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                <p class="text-secondary">
+                <p class="text-white">
                     <i class="fas fa-hand-holding-usd text"></i>
                 </p>
                 <p class="d-flex flex-column text-right">
