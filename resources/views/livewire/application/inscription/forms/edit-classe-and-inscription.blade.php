@@ -45,6 +45,16 @@
                                                 </x-select>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <x-label value="{{ __('Date de paiment') }}" />
+                                                <x-input class="" type='date' placeholder="Date de paiement"
+                                                    wire:model.defer='created_at' />
+                                                @error('created_at')
+                                                    <span class="error text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

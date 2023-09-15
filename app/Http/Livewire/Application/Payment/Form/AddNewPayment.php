@@ -22,13 +22,18 @@ class AddNewPayment extends Component
         ];
     public  $student = null;
     public $listTypeCost=[],$listOtherCost;
-    public $type_other_cost_id,$cost_other_id;
+    public $type_other_cost_id,$cost_general_id;
     public $months=[],$month;
     public $defaultScolaryYerId;
+    public  $amountLabel='';
 
     public function updatedTypeOtherCostId($val): void
     {
         $this->type_other_cost_id=$val;
+    }
+
+    public function updatedCostGeneralId($val): void{
+        $this->amountLabel=CostGeneralHelper::getCostById($val)->amount;
     }
     public function getStudent(Student $student): void
     {
@@ -45,23 +50,23 @@ class AddNewPayment extends Component
         $paymentChecker=CreatePaymentCheckerHelper::checkIfPaymentExistBeforCreate(
             $this->student->id,
             $this->month,
-            $this->cost_other_id,
+            $this->cost_general_id,
             $this->defaultScolaryYerId
         );
         if ($paymentChecker){
             $this->dispatchBrowserEvent('error',['message'=>'Désolé,cet élève a déjà un paiement pour ce mois']);
         }else{
-            $cost=CostGeneral::find($this->cost_other_id);
+            $cost=CostGeneral::find($this->cost_general_id);
             $payment= CreateNewPaymentHelper::create(
                 $this->month,
-                $this->cost_other_id,
+                $this->cost_general_id,
                 $this->student->inscription->classe->classeOption->id,
                 $this->student->inscription->id,
                 $this->student->id,
                 $this->defaultScolaryYerId,
                 $this->student->inscription->classe->id
             );
-            $cost=CostGeneral::find($this->cost_other_id);
+            $cost=CostGeneral::find($this->cost_general_id);
             //(new PosPrintingHelper())->printPayment($payment,'USD');
             /*
             SmsNotificationHelper::sendSMS( '+243898337969','+243971330007',auth()->user()->school->name."\nBonjour Votre enfant "
@@ -77,7 +82,7 @@ class AddNewPayment extends Component
     {
         $this->validate([
             'month' => ['required', 'string'],
-            'cost_other_id' => ['required', 'numeric'],
+            'cost_general_id' => ['required', 'numeric'],
             'type_other_cost_id' => ['required', 'numeric'],
         ]);
     }

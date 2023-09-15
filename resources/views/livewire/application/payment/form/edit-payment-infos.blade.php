@@ -52,7 +52,7 @@
                                                 <x-select wire:model.defer='month'>
                                                     <option value="">Choisir...</option>
                                                     @foreach ($months as $month)
-                                                        <option value="{{ $month }}">{{ $month }}</option>
+                                                        <option value="{{ $month }}">{{ app_get_month_name($month) }}</option>
                                                     @endforeach
                                                 </x-select>
                                             </div>

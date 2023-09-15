@@ -17,8 +17,14 @@ class ListPaymentByDay extends Component
         'scolaryYearFresh' => 'getScolaryYear',
         'CurrancyFresh' => 'getCurrency'
     ];
+
+    public function updatedDateToSearch($val){
+        $this->emit('changeDatePayment',$val);
+    }
+
     public $keyToSearch='',$date_to_search,$defaultCureencyName;
     public $defaultScolaryYerId;
+
     public function getScolaryYear($id):void
     {
         $this->defaultScolaryYerId = $id;
@@ -31,6 +37,7 @@ class ListPaymentByDay extends Component
     public function edit(Payment $payment): void
     {
         $this->emit('paymentToEdit',$payment);
+       
     }
     public function printBill(Payment $payment):void{;
         if($payment->is_paid==true){
@@ -40,6 +47,7 @@ class ListPaymentByDay extends Component
             $payment->is_paid=true;
         }
         $payment->update();
+        $this->emit('refreshSumByDayPayment');
         $this->dispatchBrowserEvent('added', ['message' => "Action réalisée avec succès !"]);
     }
     public function mount(): void

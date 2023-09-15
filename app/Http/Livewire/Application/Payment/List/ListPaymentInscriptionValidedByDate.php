@@ -15,43 +15,67 @@ class ListPaymentInscriptionValidedByDate extends Component
     protected $listeners = [
         'scolaryYearFresh' => 'getScolaryYear',
         'CurrancyFresh' => 'getCurrency',
-        'refreshInscriptionByDay'=>'$refresh',
+        'refreshInscriptionByDay' => '$refresh',
         'changeDateInscription' => 'changeDate',
     ];
-    public  $inscriptionList=[];
-    public $keySearch = '', $date_to_search, $defaultScolaryYerId,$defaultCureencyName;
-    public function updatedDateToSearch($val){
-        $this->date_to_search=$val;
+    public  $inscriptionList = [];
+    public $keySearch = '', $date_to_search, $defaultScolaryYerId, $defaultCureencyName;
+    public Inscription $inscription;
+    public $idSelected = 0;
+    public bool $isEditing = false;
+    public $created_at;
+
+    public function updatedDateToSearch($val)
+    {
+        $this->date_to_search = $val;
     }
     public function getScolaryYear($id)
     {
         $this->defaultScolaryYerId = $id;
     }
-    public  function  getCurrency($currency){
-        $this->defaultCureencyName=$currency;
+    public  function  getCurrency($currency)
+    {
+        $this->defaultCureencyName = $currency;
     }
     public function changeDate($date)
     {
-        $this->date_to_search=$date;
+        $this->date_to_search = $date;
     }
 
-    public function printBill(Inscription $inscription){
-        (new PosPrintingHelper())->printInscription($inscription,$this->defaultCureencyName);
+    public function printBill(Inscription $inscription)
+    {
+        (new PosPrintingHelper())->printInscription($inscription, $this->defaultCureencyName);
+    }
+
+    public function edit(Inscription $inscription, $id)
+    {
+        $this->inscription=$inscription;
+        $this->idSelected = $id;
+        $this->isEditing=true;
+        $this->created_at=$inscription->created_at->format('Y-m-d');
+    }
+
+    public function update($loandingId){
+        $this->inscription->created_at=$this->created_at;
+        $this->inscription->update();
+        $this->isEditing=false;
+        $this->idSelected = 0;
+        $this->dispatchBrowserEvent('updated',['message'=>'Date paiment bien changée']);
     }
 
     public function mount()
     {
-        $this->date_to_search=date('Y-m-d');
+        $this->date_to_search = date('Y-m-d');
         $defaultScolaryYer = (new SchoolHelper())->getCurrectScolaryYear();
-        $defaultCurrency =(new SchoolHelper())->getCurrentCurrency();
+        $defaultCurrency = (new SchoolHelper())->getCurrentCurrency();
         $this->defaultScolaryYerId = $defaultScolaryYer->id;
-        $this->defaultCureencyName=$defaultCurrency->currency;
+        $this->defaultCureencyName = $defaultCurrency->currency;
     }
     public function render()
     {
 
-        $this->inscriptionList= (new GetInscriptionByDateWithPaymentStatusHelper())
-            ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, 0, 0,$this->defaultCureencyName);
+        $this->inscriptionList = (new GetInscriptionByDateWithPaymentStatusHelper())
+            ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, 0, 0, $this->defaultCureencyName);
         return view('livewire.application.payment.list.list-payment-inscription-valided-by-date', ['inscriptions' => $this->inscriptionList]);
     }
 }

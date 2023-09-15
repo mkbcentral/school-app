@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Application\Payment\Form;
 use App\Http\Livewire\Helpers\Cost\CostGeneralHelper;
 use App\Http\Livewire\Helpers\DateFormatHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
-use App\Models\Paiment;
+use App\Models\Payment;
 use Livewire\Component;
 
 class EditPaymentInfos extends Component
@@ -14,7 +14,7 @@ class EditPaymentInfos extends Component
     public $payment=null;
     public $cost_other_id=0,$created_at,$defaultScolaryYerId;
     public $months=[],$month,$listOtherCost=[];
-    public function getPayment(Paiment $payment)
+    public function getPayment(Payment $payment)
     {
         $this->payment = $payment;
     }
@@ -30,7 +30,7 @@ class EditPaymentInfos extends Component
     public function update(){
         $this->validateForm();
         $this->payment->cost_general_id=$this->cost_other_id;
-        $this->payment->mounth_name=$this->month;
+        $this->payment->month_name=$this->month;
         $this->payment->created_at=$this->created_at;
         $this->payment->update();
         $this->emit('paymentListRefresh');
@@ -46,7 +46,7 @@ class EditPaymentInfos extends Component
     public function render()
     {
         $this->cost_other_id=$this->payment?->cost_general_id;
-        $this->month=$this->payment?->mounth_name;
+        $this->month=$this->payment?->month_name;
         $this->created_at=$this->payment?->created_at->format('Y-m-d');
 
         $this->listOtherCost=(new CostGeneralHelper())

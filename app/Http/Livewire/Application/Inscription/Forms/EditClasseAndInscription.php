@@ -11,7 +11,7 @@ class EditClasseAndInscription extends Component
 {
     protected $listeners = ['inscriptionToEdit' => 'getInscription'];
     public  $inscription = null;
-    public $classe_id=0,$cost_inscription_id=0;
+    public $classe_id=0,$cost_inscription_id=0,$created_at='';
     public $costInscriptionList = [];
 
     public function getInscription(Inscription $inscription)
@@ -27,6 +27,7 @@ class EditClasseAndInscription extends Component
     }
     public function update(){
         $this->inscription->classe_id=$this->classe_id;
+        $this->inscription->created_at=$this->created_at;
         $this->inscription->cost_inscription_id=$this->cost_inscription_id;
         $this->inscription->update();
         $this->dispatchBrowserEvent('updated', ['message' => "Info bien mise jour!"]);
@@ -34,8 +35,9 @@ class EditClasseAndInscription extends Component
     }
     public function render()
     {
-        $this->classe_id=$this->inscription?->classe_id;;
-        $this->cost_inscription_id=$this->inscription?->cost_inscription_id;;
+        $this->classe_id=$this->inscription?->classe_id;
+        $this->created_at=$this->inscription?->created_at->format('Y-m-d');
+        $this->cost_inscription_id=$this->inscription?->cost_inscription_id;
         $classeList = Classe::join('classe_options', 'classe_options.id', '=', 'classes.classe_option_id')
             ->join('sections', 'sections.id', '=', 'classe_options.section_id')
             ->join('schools', 'schools.id', '=', 'sections.school_id')

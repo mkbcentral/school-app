@@ -15,6 +15,7 @@ class ValideInscriptionPayment extends Component
         'scolaryYearFresh' => 'getScolaryYear',
     ];
     public  $inscriptionList = [];
+    public $defaultScolaryYerId;
 
     public function getScolaryYear($id)
     {
@@ -23,7 +24,7 @@ class ValideInscriptionPayment extends Component
     public function loadData():Collection
     {
       return  $this->inscriptionList = (new GetInscriptionByDateWithPaymentStatusHelper())
-            ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0);
+            ->getDateInscriptions($this->date_to_search, $this->defaultScolaryYerId, $this->classe_id, 0,'USD');
     }
     public function render()
     {

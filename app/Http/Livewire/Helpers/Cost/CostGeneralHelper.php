@@ -31,4 +31,8 @@ class CostGeneralHelper
     public function getCostByTypeId(int $id):CostGeneral{
         return CostGeneral::whereTypeOtherCostId($id)->first();
     }
+
+    public static function getCostById($id){
+        return CostGeneral::find($id);
+    }
 }

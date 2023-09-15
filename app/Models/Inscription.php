@@ -89,7 +89,6 @@ class Inscription extends Model
     {
         return $this->hasMany(Payment::class);
     }
-
     //Get status inscription with payment
     public  function getPaiementStatus(Inscription $inscription): string
     {
