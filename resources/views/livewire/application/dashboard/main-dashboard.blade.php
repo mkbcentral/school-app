@@ -30,6 +30,8 @@
                         <div class="card-body">
                             @can('view-total-amount')
                                 @livewire('application.receipts.cost-other-payment-receipts-by-date')
+                            @endcan
+                            @can('view-depense-emprunt')
                                 @livewire('application.depense.widget.amount-emprunt-by-currency-widget')
                             @endcan
                            @can('edit-student-infos')
@@ -71,6 +73,8 @@
                 <div class="col-md-6">
                     @can('view-total-amount')
                         @livewire('application.receipts.cost-other-payment-receipts-by-month')
+                    @endcan
+                    @can('view-depense-emprunt')
                         @livewire('application.depense.widget.amount-depense-by-currency-widget')
                     @endcan
                 </div>

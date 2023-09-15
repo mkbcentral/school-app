@@ -89,6 +89,10 @@ class AuthServiceProvider extends ServiceProvider
             $user=auth()->user();
             return $user->hasRole(['Coordinator','Finance']);
         });
+        Gate::define('view-depense-emprunt', function () {
+            $user=auth()->user();
+            return $user->hasRole(['Finance']);
+        });
         $this->registerPolicies();
 
     }
