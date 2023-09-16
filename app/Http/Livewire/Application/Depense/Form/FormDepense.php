@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Application\Depense\Form;
 
+use App\Http\Livewire\Helpers\Depense\CategoryDepenseHelser;
 use App\Http\Livewire\Helpers\Depense\DepenseHelper;
+use App\Http\Livewire\Helpers\Depense\DepenseSourceHelper;
 use App\Models\Currency;
 use App\Models\Depense;
 use App\Models\DepenseSource;
@@ -11,8 +13,8 @@ use Livewire\Component;
 
 class FormDepense extends Component
 {
-    public $name, $amount = 0, $currency_id, $depense_source_id;
-    public Collection $listCurrency, $listDepenseSource;
+    public $name, $amount = 0, $currency_id, $depense_source_id,$category_depense_id;
+    public Collection $listCurrency, $listDepenseSource,$listCategoryDepense;
     public ?Depense $depense;
     public bool $isEditing;
 
@@ -42,7 +44,9 @@ class FormDepense extends Component
     public function mount()
     {
         $this->listCurrency = Currency::all();
-        $this->listDepenseSource = DepenseSource::all();
+        $this->listDepenseSource = DepenseSourceHelper::get();
+        $this->listCategoryDepense=CategoryDepenseHelser::get();
+
     }
 
     public function store()
@@ -51,6 +55,7 @@ class FormDepense extends Component
             'name' => ['required', 'string'],
             'amount' => ['required', 'numeric'],
             'currency_id' => ['required', 'numeric'],
+            'category_depense_id' => ['required', 'numeric'],
             'depense_source_id' => ['required', 'numeric'],
         ]);
         DepenseHelper::create($inputs);
@@ -64,6 +69,7 @@ class FormDepense extends Component
             'name' => ['required', 'string'],
             'amount' => ['required', 'numeric'],
             'currency_id' => ['required', 'numeric'],
+            'category_depense_id' => ['required', 'numeric'],
             'depense_source_id' => ['required', 'numeric'],
         ]);
         DepenseHelper::update($this->depense,$inputs);

@@ -14,11 +14,12 @@ class DepenseHelper
      * @param string $month
      * @return Collection
      */
-    public static function get(string $month, $curreny = "", $source = ""): Collection
+    public static function get(string $month, $curreny = "", $source = "",$category=""): Collection
     {
         return Depense::whereMonth('depenses.created_at', $month)
             ->join('currencies', 'currencies.id', 'depenses.currency_id')
             ->join('depense_sources', 'depense_sources.id', 'depenses.depense_source_id')
+            ->join('category_depenses', 'category_depenses.id', 'depenses.category_depense_id')
             ->orderBy('depenses.created_at', 'DESC')
             ->select(
                 'depenses.*',
@@ -28,6 +29,7 @@ class DepenseHelper
             ->with(['currency', 'depenseSource'])
             ->where('currencies.currency', 'LIKE', '%' . $curreny . '%')
             ->where('depense_sources.name', 'LIKE', '%' . $source . '%')
+            ->where('category_depenses.name', 'LIKE', '%' . $category . '%')
             ->get();
     }
     /**
@@ -37,20 +39,23 @@ class DepenseHelper
      * @param string $source
      * @return Collection
      */
-    public static function getDate(string $date, string $curreny = '', $source = ""): Collection
+    public static function getDate(string $date, string $curreny = '', $source = "",$category=""): Collection
     {
         return Depense::whereDate('depenses.created_at', $date)
             ->join('currencies', 'currencies.id', 'depenses.currency_id')
             ->join('depense_sources', 'depense_sources.id', 'depenses.depense_source_id')
+            ->join('category_depenses', 'category_depenses.id', 'depenses.category_depense_id')
             ->orderBy('depenses.created_at', 'DESC')
             ->select(
                 'depenses.*',
                 DB::raw('currencies.currency as currency_name'),
-                DB::raw('depense_sources.name as source')
+                DB::raw('depense_sources.name as source'),
+                DB::raw('category_depenses.name as category')
             )
             ->with(['currency', 'depenseSource'])
             ->where('currencies.currency', 'LIKE', '%' . $curreny . '%')
             ->where('depense_sources.name', 'LIKE', '%' . $source . '%')
+            ->where('category_depenses.name', 'LIKE', '%' . $category . '%')
             ->get();
     }
 

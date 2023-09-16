@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Depense extends Model
 {
     use HasFactory;
-    protected $fillable=['name','amount','currency_id','depense_source_id','school_id'];
+    protected $fillable=['name','amount','currency_id','depense_source_id','school_id','category_depense_id'];
 
     /**
      * Get the currency that owns the Depense
@@ -29,5 +29,15 @@ class Depense extends Model
     public function depenseSource(): BelongsTo
     {
         return $this->belongsTo(depenseSource::class, 'depnse_source_id');
+    }
+
+    /**
+     * Get the categoryDepense that owns the Depense
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function categoryDepense(): BelongsTo
+    {
+        return $this->belongsTo(CategoryDepense::class, 'category_depense_id');
     }
 }

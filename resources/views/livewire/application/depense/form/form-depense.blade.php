@@ -2,7 +2,7 @@
     <!-- Modal -->
     <div wire:ignore.self class="modal fade" id="formDepenseModal" tabindex="-1" role="dialog" data-backdrop="static"
         data-keyboard="false" aria-labelledby="formDepenseModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="formDepenseModalLabel">
@@ -19,7 +19,7 @@
                     wire:submit.prevent='store'
                      @else wire:submit.prevent='update'
                       @endif>
-                    <div class="modal-body"  wire:loading.class="d-none">
+                    <div class="modal-body">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
@@ -49,6 +49,32 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                                <x-label value="{{ __('Catégorie dépenses') }}" />
+                                                <x-select wire:model.defer='category_depense_id'>
+                                                    <option value="">Choisir...</option>
+                                                    @foreach ($listCategoryDepense as $category)
+                                                    <option value="{{ $category->id }}">
+                                                        {{ $category->name }}</option>
+                                                    @endforeach
+                                                </x-select>
+                                                @error('category_depense_id')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <x-label value="{{ __('Montant') }}" />
+                                                <x-input class="" type='text' placeholder="Montant" wire:model.defer='amount' />
+                                                @error('amount')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <x-label value="{{ __('Devise') }}" />
                                                 <x-select wire:model.defer='currency_id'>
                                                     <option value="">Choisir...</option>
@@ -63,13 +89,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <x-label value="{{ __('Montant') }}" />
-                                        <x-input class="" type='text' placeholder="Montant" wire:model.defer='amount' />
-                                        @error('amount')
-                                        <span class="error text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
                                 </div>
                             </div>

@@ -20,6 +20,10 @@
                 <img class="card-img-top" src="holder.js/100x180/" alt="">
                 <div class="card-body">
                     <x-button type="button" class="btn-primary w-100" data-toggle="modal"
+                        data-target="#listCategoryDepenseModal">
+                        <i class="fas fa-coins    "></i> Catégorie dépennse
+                    </x-button>
+                    <x-button type="button" class="btn-danger w-100 mt-2" data-toggle="modal"
                         data-target="#listSourceDepenseModal">
                         <i class="fas fa-coins    "></i> Source dépennse
                     </x-button>
@@ -31,6 +35,7 @@
             </div>
             @livewire('application.depense.widget.amount-depense-by-currency-widget')
             @livewire('application.depense.widget.amount-emprunt-by-currency-widget')
+            @livewire('application.depense.list-category-depense')
         </div>
     </div>
 </div>

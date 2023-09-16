@@ -41,6 +41,18 @@
                 </th>
                 <th>
                     <div class="d-flex align-items-center ">
+                        <span class="mr-2">Categorie</span>
+                        <select wire:model='category' id="">
+                            <option value="">Source</option>
+                            @foreach ($listCategoryDepense as $category)
+                            <option value="{{ $category->name }}">{{$category->name}}</option>
+                            @endforeach
+                            <option value="">Tous</option>
+                        </select>
+                    </div>
+                </th>
+                <th>
+                    <div class="d-flex align-items-center ">
                         <span class="mr-2">Montant</span>
                         <select wire:model='currency' id="">
                             <option value="">Dévise</option>
@@ -69,6 +81,7 @@
                 <td>{{ $depense->created_at->format('d/m/Y') }}</td>
                 <td>{{ $depense->name }}</td>
                 <td>{{$depense->source}}</td>
+                <td>{{$depense->category}}</td>
                 <td>{{$depense->currency_name}} {{ app_format_number($depense->amount) }} </td>
                 <td>
                     <x-button wire:click.prevent='edit({{ $depense }},{{ $depense->id }})' class="btn-sm text-primary"

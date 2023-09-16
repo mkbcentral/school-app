@@ -13,7 +13,7 @@ use Livewire\Component;
 class ListEmprunt extends Component
 {
 
-    public $amount, $currency_id, $created_at;
+    public $amount, $description, $currency_id, $created_at;
     public Emprunt $emprunt;
     public bool $isEditing = false;
     public Collection $listCurrency;
@@ -28,15 +28,23 @@ class ListEmprunt extends Component
 
     public function store()
     {
-        $inputs = $this->validate(['amount' => ['required', 'numeric'], 'currency_id' => ['required', 'numeric']]);
+        $inputs = $this->validate(
+            [
+                'amount' => ['required', 'numeric'],
+                'description' => ['required', 'string'],
+                'currency_id' => ['required', 'numeric']
+            ]
+        );
         EmpruntHelper::create($inputs);
         $this->dispatchBrowserEvent('added', ['message' => "Emprunt bien ajouté !"]);
         $this->amount = '';
+        $this->description = '';
     }
     public function edit(Emprunt $emprunt, string $id)
     {
         $this->emprunt = $emprunt;
         $this->amount = $emprunt->amount;
+        $this->description = $emprunt->description;
         $this->created_at = $emprunt->created_at->format('Y-m-d');
         $this->currency_id = $emprunt->currency_id;
         $this->isEditing = true;
@@ -46,12 +54,14 @@ class ListEmprunt extends Component
     {
         $inputs = $this->validate([
             'amount' => ['required', 'numeric'],
+            'description' => ['required', 'string'],
             'currency_id' => ['required', 'numeric'],
-            'created_at'=>['date','required']
+            'created_at' => ['date', 'required']
         ]);
         EmpruntHelper::update($this->emprunt, $inputs);
         $this->dispatchBrowserEvent('updated', ['message' => "Emprunt bien modifié !"]);
         $this->amount = '';
+        $this->description = '';
         $this->currency_id = '';
         $this->isEditing = false;
     }

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Emprunt extends Model
 {
     use HasFactory;
-    protected $fillable=['code','amount','currency_id','created_at'];
+    protected $fillable=['code','amount','currency_id','created_at','description','school_id'];
 
     /**
      * Get the currecny that owns the Emprunt

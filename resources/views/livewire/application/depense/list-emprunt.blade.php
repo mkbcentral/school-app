@@ -20,7 +20,6 @@
                                     LISTE DES EMPRUNTS
                                 </div>
                                 <div class="card-body">
-
                                     <div class="d-flex justify-content-between ">
                                         <h4 class="bg-secondary p-2 rounded">Total:
                                             @foreach ($totalByCurrency as $total)
@@ -42,11 +41,12 @@
                                     </div>
                                     <table class="table table-sm">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-uppercase">
                                                 <th>#</th>
                                                 <th>Date</th>
                                                 <th>Code</th>
-                                                <th>Monent</th>
+                                                <th>Description</th>
+                                                <th>Montant</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
@@ -64,6 +64,7 @@
                                                         <td scope="row">{{ $index + 1 }}</td>
                                                         <td>{{ $emprunt->created_at->format('d/m/Y') }}</td>
                                                         <td>{{ $emprunt->code }}</td>
+                                                        <td>{{ $emprunt->description }}</td>
                                                         <td>{{ $emprunt->amount }}</td>
                                                         <td class="text-center">
                                                             <x-button
@@ -104,6 +105,14 @@
                                         {{ $isEditing == false ? 'NOUVEAU EMPRUNT' : 'MODIFICATION EMPRUNT' }}
                                     </div>
                                     <div class="card-body">
+                                        <div class="form-group">
+                                            <x-label value="{{ __('Description') }}" />
+                                            <x-input class="" type='text' placeholder="Description"
+                                                wire:model.defer='description' />
+                                            @error('description')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                         <div class="form-group">
                                             <x-label value="{{ __('Montant') }}" />
                                             <x-input class="" type='text' placeholder="Montant"

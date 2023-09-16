@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Application\Depense\List;
 
 use App\Http\Livewire\Helpers\DateFormatHelper;
+use App\Http\Livewire\Helpers\Depense\CategoryDepenseHelser;
 use App\Http\Livewire\Helpers\Depense\DepenseHelper;
 use App\Http\Livewire\Helpers\Depense\DepenseSourceHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
@@ -17,17 +18,20 @@ class ListDepense extends Component
     public bool $isByDate = true;
     public ?Depense $depense;
     public bool $isEditing = false;
-    public string $currency = '';
-    public string $source = '';
+    public string $source = '',$category='',$currency = '';
     public ?Collection $currencyList;
     public ?Collection $listDepense;
-    public ?Collection $listDepenseSource;
+    public ?Collection $listDepenseSource,$listCategoryDepense;
     public string $depenseId;
     protected $listeners = [
         'refreshListDepense' => '$refresh',
         'deleteDepenseListner'=>'delete'
     ];
 
+    public function updatedCategory($val)
+    {
+        $this->category = $val;
+    }
     public function updatedCurrency($val)
     {
         $this->currency = $val;
@@ -85,6 +89,7 @@ class ListDepense extends Component
         $this->months = (new DateFormatHelper())->getMonthsForScolaryYear();
         $this->currencyList = SchoolHelper::getCurrencyList();
         $this->listDepenseSource = DepenseSourceHelper::get();
+        $this->listCategoryDepense=CategoryDepenseHelser::get();
     }
 
     public function render()
