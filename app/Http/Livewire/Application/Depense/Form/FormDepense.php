@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class FormDepense extends Component
 {
-    public $name, $amount = 0, $currency_id, $depense_source_id,$category_depense_id;
+    public $name, $amount = 0, $currency_id, $depense_source_id,$category_depense_id,$created_at;
     public Collection $listCurrency, $listDepenseSource,$listCategoryDepense;
     public ?Depense $depense;
     public bool $isEditing;
@@ -46,18 +46,12 @@ class FormDepense extends Component
         $this->listCurrency = Currency::all();
         $this->listDepenseSource = DepenseSourceHelper::get();
         $this->listCategoryDepense=CategoryDepenseHelser::get();
+        $this->created_at=date('Y-m-d');
 
     }
-
     public function store()
     {
-        $inputs = $this->validate([
-            'name' => ['required', 'string'],
-            'amount' => ['required', 'numeric'],
-            'currency_id' => ['required', 'numeric'],
-            'category_depense_id' => ['required', 'numeric'],
-            'depense_source_id' => ['required', 'numeric'],
-        ]);
+        $inputs =$this->validateForm();
         DepenseHelper::create($inputs);
         $this->emit('refreshListDepense');
         $this->dispatchBrowserEvent('added', ['message' => "Dépense bien créée !"]);
@@ -65,13 +59,7 @@ class FormDepense extends Component
     }
 
     public function update(){
-        $inputs = $this->validate([
-            'name' => ['required', 'string'],
-            'amount' => ['required', 'numeric'],
-            'currency_id' => ['required', 'numeric'],
-            'category_depense_id' => ['required', 'numeric'],
-            'depense_source_id' => ['required', 'numeric'],
-        ]);
+        $inputs =$this->validateForm();
         DepenseHelper::update($this->depense,$inputs);
         $this->emit('refreshListDepense');
         $this->dispatchBrowserEvent('updated', ['message' => "Dépense bien modifiée !"]);
@@ -83,7 +71,20 @@ class FormDepense extends Component
         $this->amount = '';
         $this->currency_id = '';
         $this->depense_source_id = '';
+        $this->created_at=date('Y-m-d');
     }
+    public function validateForm():array{
+        return $this->validate([
+            'name' => ['required', 'string'],
+            'amount' => ['required', 'numeric'],
+            'currency_id' => ['required', 'numeric'],
+            'category_depense_id' => ['required', 'numeric'],
+            'depense_source_id' => ['required', 'numeric'],
+            'created_at' => ['required', 'date'],
+        ]);
+    }
+
+
 
 
     public function render()

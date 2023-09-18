@@ -90,6 +90,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <x-label value="{{ __('Date dépense') }}" />
+                                                <x-input class="" type='date' placeholder="Date dépense"
+                                                wire:model.defer='created_at' />
+                                                @error('created_at')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
