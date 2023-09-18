@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CostGeneral extends Model
 {
     use HasFactory;
-    protected $fillable=['id','name','amount','type_other_cost_id','classe_option_id'];
+    protected $fillable=['id','name','amount','type_other_cost_id','classe_option_id','currency_id'];
 
     /**
      * Get the Paiement associated with the CostGeneral

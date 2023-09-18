@@ -483,4 +483,50 @@ window.addEventListener('data-dialog-deleted',event=>{
     );
 });
 
+window.addEventListener('delete-depense-dialog', event => {
+    Swal.fire({
+        title: 'Voulez-vous vraimant ',
+        text: "supprimer ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Livewire.emit('deleteDepenseListner');
+        }
+    })
+})
+window.addEventListener('depense-dialog-deleted', event => {
+    Swal.fire(
+        'Oprétion !',
+        event.detail.message,
+        'success'
+    );
+});
+
+window.addEventListener('delete-cost-dialog', event => {
+    Swal.fire({
+        title: 'Voulez-vous vraimant ',
+        text: "supprimer ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Livewire.emit('deleteTarifListner');
+        }
+    })
+})
+window.addEventListener('cost-dialog-deleted', event => {
+    Swal.fire(
+        'Oprétion !',
+        event.detail.message,
+        'success'
+    );
+});
+
 

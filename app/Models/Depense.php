@@ -28,7 +28,7 @@ class Depense extends Model
      */
     public function depenseSource(): BelongsTo
     {
-        return $this->belongsTo(depenseSource::class, 'depnse_source_id');
+        return $this->belongsTo(DepenseSource::class, 'depense_source_id');
     }
 
     /**

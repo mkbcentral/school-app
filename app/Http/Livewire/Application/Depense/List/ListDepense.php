@@ -59,11 +59,18 @@ class ListDepense extends Component
         $this->isEditing = false;
         $this->emit('getDepenseCreateFormData', $this->isEditing);
     }
+    public function show(Depense $depense, string $id)
+    {
+       $this->depense=$depense;
+       $this->emit('getDepenseData',$depense);
+    }
+
     public function edit(Depense $depense, string $id)
     {
         $this->isEditing = true;
         $this->emit('getDepenseEditFormData', $depense, $this->isEditing);
     }
+
 
     public function showDeleteDialog(string $id): void
     {

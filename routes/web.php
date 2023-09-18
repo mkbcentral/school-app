@@ -17,6 +17,7 @@ use App\Http\Livewire\Application\Rapport\Payment\RapportAllReceiptBySection;
 use App\Http\Controllers\Application\Printings\PrintingReceiptController;
 use App\Http\Livewire\Application\Depense\MyDepense;
 use App\Http\Livewire\Application\Payment\MyLatePayment;
+use App\Http\Livewire\Application\Tarification\CostTarification;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,11 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
     //Depense
     Route::prefix('depense')->group(function(){
         Route::get('all',MyDepense::class)->name('depense.all');
+    });
+
+    //Depense
+    Route::prefix('tarification')->group(function(){
+        Route::get('cost',CostTarification::class)->name('tarification.cost.general');
     });
 
 

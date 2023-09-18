@@ -3,7 +3,7 @@
     @livewire('application.depense.list-emprunt')
     @livewire('application.depense.form.form-depense')
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="card">
                 <img class="card-img-top" src="holder.js/100x180/" alt="">
                 <div class="card-body">

@@ -11,6 +11,7 @@ window.$(document).ready(function () {
         $('#newPayment').modal('hide');
         $('#formDepenseModal').modal('hide');
         $('#newLatePayment').modal('hide');
+        $('#formTarifModal').modal('hide');
     });
     window.addEventListener('added-inscription', function (event) {
         toastr.success(event.detail.message, 'Validation');
@@ -22,6 +23,7 @@ window.$(document).ready(function () {
         $('#editPayment').modal('hide');
         $('#formDepenseModal').modal('hide');
         $('#newLatePayment').modal('hide');
+        $('#formTarifModal').modal('hide');
     });
     window.addEventListener('error', function (event) {
         toastr.error(event.detail.message, 'Alert !');

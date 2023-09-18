@@ -1,5 +1,5 @@
 <div>
-
+    @livewire('application.depense.list-retour-caisse')
     <x-button type="button" wire:click.prevent='new' class="btn-danger" data-toggle="modal"
         data-target="#formDepenseModal">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouvelle dépense
@@ -17,47 +17,45 @@
                     </option>
                 @endforeach
             </select>
-           
+
         </div>
-       
+
     </div>
     <div class="d-flex justify-content-center">
         <span wire:loading class="spinner-border" role="status" aria-hidden="true"></span>
     </div>
-    <div class="d-flex justify-content-between align-items-center">
-        <h4 class="text-success">({{ $listDepense->count() }} {{ Str::plural('Depense', $listDepense->count()) }})</h4>
+    <h4 class="text-success">({{ $listDepense->count() }} {{ Str::plural('Depense', $listDepense->count()) }})</h4>
+    <div class="d-flex align-items-center">
+        <h4 class="mr-1">Filtrer</h4>
         <div class="d-flex align-items-center">
-            <h4 class="mr-1">Filtrer</h4>
-            <div class="d-flex align-items-center">
-                <div class="form-group d-flex align-items-center mr-2">
-                    <select wire:model='source' id="" class="form-control">
-                        <option value="">Tous</option>
-                        <option value="">Source</option>
-                        @foreach ($listDepenseSource as $source)
-                            <option value="{{ $source->name }}">{{ $source->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group d-flex align-items-center mr-2">
-                    <select wire:model='category' id="" class="form-control">
-                        <option value="">Tous</option>
-                        <option value="">Catégorie...</option>
-                        @foreach ($listCategoryDepense as $category)
-                            <option value="{{ $category->name }}">{{ $category->name }}</option>
-                        @endforeach
-    
-                    </select>
-                </div>
-                <div class="form-group d-flex align-items-center">
-                    <select wire:model='currency' id="" class="form-control">
-                        <option value="">Tous</option>
-                        <option value="">Dévise</option>
-                        @foreach ($currencyList as $currency)
-                            <option value="{{ $currency->currency }}">{{ $currency->currency }}</option>
-                        @endforeach
-                        
-                    </select>
-                </div>
+            <div class="form-group d-flex align-items-center mr-2">
+                <select wire:model='source' id="" class="form-control">
+                    <option value="">Tous</option>
+                    <option value="">Source</option>
+                    @foreach ($listDepenseSource as $source)
+                        <option value="{{ $source->name }}">{{ $source->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group d-flex align-items-center mr-2 w-25">
+                <select wire:model='category' id="" class="form-control">
+                    <option value="">Tous</option>
+                    <option value="">Catégorie...</option>
+                    @foreach ($listCategoryDepense as $category)
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+            <div class="form-group d-flex align-items-center">
+                <select wire:model='currency' id="" class="form-control">
+                    <option value="">Tous</option>
+                    <option value="">Dévise</option>
+                    @foreach ($currencyList as $currency)
+                        <option value="{{ $currency->currency }}">{{ $currency->currency }}</option>
+                    @endforeach
+
+                </select>
             </div>
         </div>
     </div>
@@ -77,7 +75,7 @@
                 <th>
                     <div class="d-flex align-items-center ">
                         <span class="mr-2">Montant</span>
-                        
+
                     </div>
                 </th>
                 <th>Actions</th>
@@ -102,14 +100,25 @@
                         <td>{{ $depense->currency_name }} {{ app_format_number($depense->amount) }} </td>
                         <td>
                             <x-button wire:click.prevent='edit({{ $depense }},{{ $depense->id }})'
-                                class="btn-sm text-primary" data-toggle="modal" data-target="#formDepenseModal"
+                                class="text-primary" data-toggle="modal"
+                                data-target="#formDepenseModal"
                                 type="button">
                                 <span wire:loading wire:target="edit({{ $depense }},{{ $depense->id }})"
-                                    class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    class="spinner-border spinner-border-sm"
+                                     role="status" aria-hidden="true"></span>
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </x-button>
+                            <x-button wire:click.prevent='show({{ $depense }},{{ $depense->id }})'
+                                class="text-primary" data-toggle="modal"
+                                data-target="#listRetourCaisseModal"
+                                type="button">
+                                <span wire:loading wire:target="edit({{ $depense }},{{ $depense->id }})"
+                                    class="spinner-border spinner-border-sm"
+                                     role="status" aria-hidden="true"></span>
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                            </x-button>
                             <x-button wire:click.prevent='showDeleteDialog({{ $depense->id }})'
-                                class="btn-sm text-danger" type="button">
+                                class="text-danger" type="button">
                                 <span wire:loading wire:target="delete({{ $depense->id }})"
                                     class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 <i class="fa fa-trash" aria-hidden="true"></i>
@@ -120,30 +129,4 @@
             @endif
         </tbody>
     </table>
-
-    <script type="module">
-        //Confirmation dialog for delete role
-        window.addEventListener('delete-depense-dialog', event => {
-            Swal.fire({
-                title: 'Voulez-vous vraimant ',
-                text: "supprimer ?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emit('deleteDepenseListner');
-                }
-            })
-        })
-        window.addEventListener('depense-dialog-deleted', event => {
-            Swal.fire(
-                'Oprétion !',
-                event.detail.message,
-                'success'
-            );
-        });
-    </script>
 </div>
