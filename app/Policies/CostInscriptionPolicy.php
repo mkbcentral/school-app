@@ -12,7 +12,7 @@ class CostInscriptionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Super-Admin','Coordinator']);
+        return $user->hasRole(['Super-Admin','Coordinator','Finance']);
     }
 
     /**
@@ -20,7 +20,7 @@ class CostInscriptionPolicy
      */
     public function view(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Super-Admin','Coordinator']);
+        return $user->hasRole(['Super-Admin','Coordinator','Finance']);
     }
 
     /**
@@ -28,7 +28,7 @@ class CostInscriptionPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Super-Admin','Coordinator']);
+        return $user->hasRole(['Super-Admin','Finance','Coordinator','Finance']);
     }
 
     /**
@@ -36,7 +36,7 @@ class CostInscriptionPolicy
      */
     public function update(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Super-Admin','Coordinator']);
+        return $user->hasRole(['Super-Admin','Finance','Coordinator','Finance']);
     }
 
     /**
@@ -44,7 +44,7 @@ class CostInscriptionPolicy
      */
     public function delete(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Super-Admin','Coordinator']);
+        return $user->hasRole(['Super-Admin','Finance','Coordinator','Finance']);
     }
 
     /**
@@ -52,7 +52,7 @@ class CostInscriptionPolicy
      */
     public function restore(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Super-Admin','Coordinator']);
+        return $user->hasRole(['Super-Admin','Finance','Coordinator','Finance']);
     }
 
     /**
@@ -60,6 +60,6 @@ class CostInscriptionPolicy
      */
     public function forceDelete(User $user, CostInscription $costInscription): bool
     {
-        return $user->hasRole(['Super-Admin','Coordinator']);
+        return $user->hasRole(['Super-Admin','Finance','Coordinator','Finance']);
     }
 }

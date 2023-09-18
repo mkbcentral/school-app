@@ -75,7 +75,7 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('view-links-settings', function () {
             $user=auth()->user();
-            return $user->hasRole(['App-Admin','Coordinator']);
+            return $user->hasRole(['App-Admin','Coordinator','Finance']);
         });
         Gate::define('edit-student-infos', function () {
             $user=auth()->user();
