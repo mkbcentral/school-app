@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Livewire\Helpers\Payment\GetPaymentByTypeCostToCheck;
+use App\Http\Livewire\Helpers\SchoolHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -114,6 +115,16 @@ class Inscription extends Model
 
     public function getStudentClasseName(Inscription $inscription): string
     {
+
+        return ' ' . $inscription?->classe->name . '/' . $inscription?->classe?->classeOption->name;
+    }
+
+    public function getStudentClasseNameForCurrentYear(string $idStudent): string
+    {
+        $scoalyYear=(new SchoolHelper())->getCurrectScolaryYear();
+        $inscription=Inscription::where('student_id', $idStudent)
+            ->where('scolary_year_id', $scoalyYear->id)
+            ->first();
         return ' ' . $inscription?->classe->name . '/' . $inscription?->classe?->classeOption->name;
     }
 

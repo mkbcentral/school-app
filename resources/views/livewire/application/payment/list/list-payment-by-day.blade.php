@@ -5,7 +5,7 @@
                 @livewire('application.payment.widget.sum-payment-total-by-date', ['date' => $date_to_search, 'defaultScolaryYerId' => $defaultScolaryYerId, 'currency' => $defaultCureencyName])
             </div>
             <div class="d-flex justify-content-between">
-              
+
                 <div class="col-md-4">
                     <div class="d-flex justify-content-between">
                         <div class="form-group">
@@ -34,6 +34,7 @@
                                 <th>Noms élève</th>
                                 <th class="text-center">Type</th>
                                 <th class="text-center">Montant</th>
+                                <th class="text-center">Mois</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -47,6 +48,9 @@
                                     </td>
                                     <td class="text-center">
                                         {{ app_format_number($payment->amount) }} {{ $defaultCureencyName }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ app_get_month_name($payment->month_name) }}
                                     </td>
                                     <td class="text-center">
                                         <x-button wire:click.prevent='edit({{ $payment }})'

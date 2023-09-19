@@ -20,7 +20,7 @@
                                     <div class="card p-2">
                                         <h6><span class="text-bold text-info">Nom:</span>{{ $student->name }}</h6>
                                         <h6><span class="text-bold text-info">Classe:
-                                                {{ $student->inscription->getStudentClasseName($student->inscription) }}</span>
+                                                {{ $student->inscription->getStudentClasseNameForCurrentYear($student->id) }}</span>
                                         </h6>
                                     </div>
                                     <div class="card">

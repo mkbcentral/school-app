@@ -15,7 +15,7 @@
                                 <x-select wire:model='month'>
                                     <option value="">Choisir...</option>
                                     @foreach ($months as $m)
-                                        <option value="{{$m}}">
+                                        <option value="{{ $m }}">
                                             {{ app_get_month_name($m) }}</option>
                                     @endforeach
                                 </x-select>
@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <x-label value="{{ __('Filtrer par date') }}" />
                                 <x-input class="" type='date' placeholder="Lieu de naissance"
-                                         wire:model='date_to_search' />
+                                    wire:model='date_to_search' />
                             </div>
                         </div>
                         <div class="d-flex justify-content-end align-items-center">
@@ -52,36 +52,42 @@
                     </div>
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
-                            <x-search-input/>
+                            <x-search-input />
 
                         </div>
-                        @if($listPayments->isEmpty())
-                            <x-data-empty/>
+                        @if ($listPayments->isEmpty())
+                            <x-data-empty />
                         @else
-                        <table class="table table-stripped table-sm ">
-                            <thead class="thead-light">
-                            <tr class="text-uppercase">
-                                <th>Date</th>
-                                <th>Noms élève</th>
-                                <th class="text-right">Type frais</th>
-                                <th class="text-right">Montant</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                               @foreach($listPayments as $payment)
-                                   <tr>
-                                       <td>{{$payment->created_at->format('d/m/Y')}}</td>
-                                       <td>{{$payment->student->name}}/{{$payment->getStudentClasseName($payment)}}</td>
-                                       <td class="text-right">{{$payment->cost->name}}</td>
-                                       <td class="text-right">{{app_format_number($payment->amount)}} {{$defaultCureencyName}}</td>
-                                       <td>
+                            <table class="table table-stripped table-sm ">
+                                <thead class="thead-light">
+                                    <tr class="text-uppercase">
+                                        <th>Date</th>
+                                        <th>Noms élève</th>
+                                        <th class="text-right">Type frais</th>
+                                        <th class="text-right">Montant</th>
+                                        <th class="text-right">Mois</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($listPayments as $payment)
+                                        <tr>
+                                            <td>{{ $payment->created_at->format('d/m/Y') }}</td>
+                                            <td>{{ $payment->student->name }}/{{ $payment->getStudentClasseName($payment) }}
+                                            </td>
+                                            <td class="text-right">{{ $payment->cost->name }}</td>
+                                            <td class="text-right">{{ app_format_number($payment->amount) }}
+                                                {{ $defaultCureencyName }}</td>
+                                            <td class="text-center">
+                                                {{ app_get_month_name($payment->month_name) }}
+                                            </td>
+                                            <td>
 
-                                       </td>
-                                   </tr>
-                               @endforeach
-                            </tbody>
-                        </table>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         @endif
                     </div>
                 </div>
