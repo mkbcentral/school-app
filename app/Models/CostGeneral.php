@@ -36,6 +36,16 @@ class CostGeneral extends Model
         return $this->belongsTo(ClasseOption::class,'classe_option_id');
     }
 
+    /**
+     * Get the currency that owns the CostGeneral
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
+    }
+
 
 
 }

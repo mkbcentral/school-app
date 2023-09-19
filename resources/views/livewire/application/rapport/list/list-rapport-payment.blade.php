@@ -77,7 +77,7 @@
                                             </td>
                                             <td class="text-right">{{ $payment->cost->name }}</td>
                                             <td class="text-right">{{ app_format_number($payment->amount) }}
-                                                {{ $defaultCureencyName }}</td>
+                                                {{ $payment->cost->currency->currency }}</td>
                                             <td class="text-center">
                                                 {{ app_get_month_name($payment->month_name) }}
                                             </td>
