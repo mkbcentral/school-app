@@ -25,6 +25,7 @@ class ListRapportPayment extends Component
     public $classeList=[];
     public $months=[],$month;
     public $listPayments;
+    public $amountPayments;
 
     /**
      * Reset date to search on null after month property is updated
@@ -102,7 +103,6 @@ class ListRapportPayment extends Component
 
         $defaultCurrency = (new SchoolHelper())->getCurrentCurrency();
         $this->defaultCureencyName=$defaultCurrency->currency;
-
     }
 
     /**
@@ -122,8 +122,26 @@ class ListRapportPayment extends Component
                 $this->keyToSearch,
                 $this->defaultCureencyName
             );
+            $this->amountPayments=GetPaymentByMonthHelper::getAmoutMonthPayments(
+                $this->month,
+                $this->defaultScolaryYerId,
+                $this->cost_id,
+                $this->index,
+                $this->classe_id,
+                $this->keyToSearch,
+                $this->defaultCureencyName
+            );
         }else{
-            $this->listPayments=GetPaymentByDateHelper::getDatePaiments(
+            $this->listPayments=GetPaymentByDateHelper::getDatePayments(
+                $this->date_to_search,
+                $this->defaultScolaryYerId,
+                $this->cost_id,
+                $this->index,
+                $this->classe_id,
+                $this->keyToSearch,
+                $this->defaultCureencyName
+            );
+            $this->amountPayments=GetPaymentByMonthHelper::getAmoutDatePayments(
                 $this->date_to_search,
                 $this->defaultScolaryYerId,
                 $this->cost_id,
@@ -140,6 +158,9 @@ class ListRapportPayment extends Component
         $listCost=(new CostGeneralHelper())->getListCostGeneral($this->index,$this->defaultScolaryYerId);
         $this->loadData();
         return view('livewire.application.rapport.list.list-rapport-payment',
-            ['listCost' => $listCost,'listPayments'=>$this->listPayments]);
+            [
+                'listCost' => $listCost,'listPayments'=>$this->listPayments,
+                'amountPayments'=>$this->amountPayments
+            ]);
     }
 }

@@ -49,6 +49,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{$listResponsible->links('vendor.livewire.simple-bootstrap')}}
         @endif
     </div>
 </div>

@@ -70,7 +70,7 @@
                                     </td>
                                 </tr>
                                 @php
-                                    $total += 0;
+                                    $total += $payment->amount;
                                 @endphp
                             @endforeach
                         </tbody>
@@ -80,6 +80,7 @@
                     <span wire:loading
         class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 </div>
+                
             </div>
         </div>
     </div>

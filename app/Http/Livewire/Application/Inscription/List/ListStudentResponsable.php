@@ -35,7 +35,7 @@ class ListStudentResponsable extends Component
                     auth()->user()->school->id)
                     ->where('name_responsable','like','%'.$this->keyToSearch.'%')
                     ->orderBy('created_at','DESC')
-                    ->get()
+                    ->paginate(10)
             ]
         );
     }

@@ -26,10 +26,7 @@ class EditStudentRequest extends FormRequest
             'date_of_birth' => 'date|required',
             'place_of_birth' => 'string|required',
             'gender' => 'required',
-            'name_responsable' => ['required','string'],
-            'phone' => ['string','nullable'],
-            'other_phone' => ['string','nullable'],
-            'email' => ['string','nullable','email'],
+            'student_responsable_id' => ['required','numeric'],
         ];
     }
 }

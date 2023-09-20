@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <x-label value="{{ __('Lieu de naissance') }}" />
                                         <x-input class="" type='text' placeholder="Lieu de naissance"
@@ -62,47 +62,19 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <x-label value="{{ __('Nom du responsable') }}" />
-                                        <x-input class="" type='text' placeholder="Nom du responsable"
-                                            wire:model.defer='name_responsable' />
-                                        @error('name_responsable')
-                                            <span class="error text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <x-label value="{{ __('Téléphone') }}" />
-                                        <x-input class="" type='text' placeholder="Tél"
-                                            wire:model.defer='phone' />
-                                        @error('phone')
-                                            <span class="error text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <x-label value="{{ __('Autre Tél') }}" />
-                                        <x-input class="" type='text' placeholder="Autre tél"
-                                            wire:model.defer='other_phone' />
-                                        @error('other_phone')
-                                            <span class="error text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <x-label value="{{ __('Genre/Sexe') }}" />
+                                        <x-select wire:model.defer='student_responsable_id'>
+                                            <option value="">Choisir...</option>
+                                            @foreach ($listResonsable as $responsable)
+                                                <option value="{{ $responsable->id }}">{{ $responsable->name_responsable }}</option>
+                                            @endforeach
+                                        </x-select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <x-label value="{{ __('Adresse email') }}" />
-                                        <x-input class="" type='text' placeholder="Nom de la section"
-                                            wire:model.defer='email' />
-                                        @error('email')
-                                            <span class="error text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                    @error('student_responsable_id')
+                                        <span class="error text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

@@ -67,8 +67,8 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-md-7">
-                    @livewire('application.inscription.list.list-inscription',['index'=>0])
                     @livewire('application.inscription.forms.add-new-familly')
+                    @livewire('application.inscription.list.list-inscription',['index'=>0])
                 </div>
             </div>
             <!-- /.row -->

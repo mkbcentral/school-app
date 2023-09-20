@@ -4,7 +4,12 @@
             <div class="tab-content">
                 <div class="active tab-pane" id="inscription">
                     <div class="d-flex justify-content-end">
-                        <x-button type="button" wire:click.prevent='loadData' class="btn btn-sm btn-primary">
+                        <div class="bg-warning mr-2 p-2">
+                            @foreach ($amountPayments as $payment)
+                                <h3>Total: {{ app_format_number($payment->amount) }} {{$payment->currency}}</h3>
+                            @endforeach
+                        </div>
+                        <x-button type="button" wire:click.prevent='loadData' class="btn btn-primary">
                             <i class="fas fa-sync" aria-hidden="true"></i>
                         </x-button>
                     </div>
@@ -53,7 +58,6 @@
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <x-search-input />
-
                         </div>
                         @if ($listPayments->isEmpty())
                             <x-data-empty />
