@@ -92,6 +92,24 @@ class ListInscription extends Component
         $this->emit('inscriptionToEdit', $inscription,$this->selectedIndex==0?$this->classe_option_id:$this->selectedIndex);
     }
 
+    public function delete($id){
+        $inscription=Inscription::find($id);
+        $student=Student::find($inscription->student_id);
+
+        $scolayYear=(new SchoolHelper())->getCurrectScolaryYear();
+
+        if($inscription->payments->isEmpty()){
+            $inscription->delete();
+            if($student->scolaryYear->id==$scolayYear->id){
+                $student->delete();
+            }
+            $this->dispatchBrowserEvent('added', ['message' => "Famille bien rétirée !"]);
+        }else{
+            $this->dispatchBrowserEvent('error', ['message' => "Impossible, Famille déjà remplie"]);
+        }
+
+    }
+
     public function render()
     {
         if ($this->classe_option_id == 0) {

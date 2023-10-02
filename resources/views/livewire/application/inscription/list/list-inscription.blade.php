@@ -8,16 +8,14 @@
                     @can('view-total-amount')
                         <div class="d-flex justify-content-end">
                             @can('view-total-amount')
-                                <x-button wire:click.prevent="refreshList" type="button"  class="btn btn-warning"
-                                          data-toggle="modal"
-                                          data-target="#showListInscriptionPaymentByDateModal">
-                                    @livewire('application.payment.widget.sum-inscription-by-day-widget',
-                                                [
-                                                    'date' => $date_to_search,
-                                                    'defaultScolaryYerId'=> $defaultScolaryYerId,
-                                                    'classeId' => $classe_id,
-                                                    'currency' => $defaultCureencyName
-                                                ])
+                                <x-button wire:click.prevent="refreshList" type="button" class="btn btn-warning"
+                                    data-toggle="modal" data-target="#showListInscriptionPaymentByDateModal">
+                                    @livewire('application.payment.widget.sum-inscription-by-day-widget', [
+                                        'date' => $date_to_search,
+                                        'defaultScolaryYerId' => $defaultScolaryYerId,
+                                        'classeId' => $classe_id,
+                                        'currency' => $defaultCureencyName,
+                                    ])
                                 </x-button>
                             @endcan
                             <x-button type="button" wire:click.prevent='loadData' class="btn btn-info ml-2">
@@ -26,17 +24,17 @@
                         </div>
                     @endcan
                     <div class="d-flex justify-content-between align-items-center">
-                        @if ($selectedIndex ==0)
-                        <div class="form-group ">
-                            <x-label value="{{ __('Choisir une option') }}" />
-                            <x-select wire:model='classe_option_id'>
-                                <option value="">Choisir...</option>
-                                @foreach ($classeOptionList as $classeOptionList)
-                                    <option value="{{ $classeOptionList->id }}">
-                                        {{ $classeOptionList->name }}</option>
-                                @endforeach
-                            </x-select>
-                        </div>
+                        @if ($selectedIndex == 0)
+                            <div class="form-group ">
+                                <x-label value="{{ __('Choisir une option') }}" />
+                                <x-select wire:model='classe_option_id'>
+                                    <option value="">Choisir...</option>
+                                    @foreach ($classeOptionList as $classeOptionList)
+                                        <option value="{{ $classeOptionList->id }}">
+                                            {{ $classeOptionList->name }}</option>
+                                    @endforeach
+                                </x-select>
+                            </div>
                         @endif
                         <div class="form-group ">
                             <x-label value="{{ __('Filtrer par par classe') }}" />
@@ -51,8 +49,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <x-label value="{{ __('Filtrer par date') }}" />
-                                <x-input class="" type='date'
-                                    wire:model='date_to_search' />
+                                <x-input class="" type='date' wire:model='date_to_search' />
                             </div>
                         </div>
                     </div>
@@ -81,9 +78,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($inscriptions as  $index=> $inscription)
+                                    @foreach ($inscriptions as $index => $inscription)
                                         <tr>
-                                            <td class="text-center">{{$index+1}}</td>
+                                            <td class="text-center">{{ $index + 1 }}</td>
                                             <td>{{ $inscription->student->name . '/' . $inscription->classe->name . ' ' . $inscription->classe->classeOption->name }}
                                             </td>
 
@@ -93,31 +90,42 @@
                                                 {{ $inscription->student->getAge($inscription->student->date_of_birth) }}
                                             </td>
                                             <td class="text-center">
-                                                <span class="badge badge-{{$inscription->getPaiementStatusColor($inscription)}}">{{$inscription->getPaiementStatus($inscription)}}</span>
+                                                <span
+                                                    class="badge badge-{{ $inscription->getPaiementStatusColor($inscription) }}">{{ $inscription->getPaiementStatus($inscription) }}</span>
                                             </td>
                                             <td class="text-center">
-                                              @can('edit-student-infos')
+                                                @can('edit-student-infos')
                                                     <x-button wire:click.prevent='edit({{ $inscription->student }})'
-                                                              class="btn-sm" type="button" data-toggle="modal"
-                                                              data-target="#formEditInscriptionModal">
+                                                        class="btn-sm" type="button" data-toggle="modal"
+                                                        data-target="#formEditInscriptionModal">
                                                         <i class="fas fa-edit text-primary"></i>
                                                     </x-button>
-                                              @endcan
+                                                    <x-button class=" btn-sm" type="button"
+                                                        wire:click.prevent="delete({{ $inscription->id }})">
+                                                        <span wire:loading wire:target="delete({{ $inscription->id }})"
+                                                            class="spinner-border spinner-border-sm" role="status"
+                                                            aria-hidden="true"></span>
+                                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                    </x-button>
+                                                @endcan
 
                                                 @can('edit-classe-inscription')
-                                                      <x-button wire:click.prevent='editInscription({{ $inscription }})'
-                                                                class="btn-sm text-secondary" type="button" data-toggle="modal"
-                                                                data-target="#editClasseAnInscription">
-                                                          <i class="fa fa-cog" aria-hidden="true"></i>
-                                                      </x-button>
+                                                    <x-button wire:click.prevent='editInscription({{ $inscription }})'
+                                                        class="btn-sm text-secondary" type="button" data-toggle="modal"
+                                                        data-target="#editClasseAnInscription">
+                                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                                    </x-button>
                                                 @endcan
                                                 @can('valid-payment')
-                                                    <x-button wire:click.prevent='valideInscriptionPayement({{ $inscription }})'
-                                                              class="btn-sm text-secondary" type="button">
-                                                        <i class="fas {{$inscription->is_paied?' fa-times-circle text-danger':'fa-check-double'}} " aria-hidden="true"></i>
+                                                    <x-button
+                                                        wire:click.prevent='valideInscriptionPayement({{ $inscription }})'
+                                                        class="btn-sm text-secondary" type="button">
+                                                        <i class="fas {{ $inscription->is_paied ? ' fa-times-circle text-danger' : 'fa-check-double' }} "
+                                                            aria-hidden="true"></i>
                                                     </x-button>
-                                                    @if($inscription->is_paied)
-                                                          <a href="{{route('receipt.inscription',[$inscription,'USD'])}}" target="_blank"><i class="fas fa-print"></i></a>
+                                                    @if ($inscription->is_paied)
+                                                        <a href="{{ route('receipt.inscription', [$inscription, 'USD']) }}"
+                                                            target="_blank"><i class="fas fa-print"></i></a>
                                                     @endif
                                                 @endcan
                                             </td>

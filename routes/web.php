@@ -12,6 +12,7 @@ use App\Http\Livewire\Application\Rapport\PaymentRapport;
 use App\Http\Controllers\Application\Printings\RapportInscriptionPaymentPrintingController;
 use App\Http\Livewire\Application\Rapport\Inscription\RapportInscriptionByClasse;
 use App\Http\Controllers\Application\Pages\CreateSchoolController;
+use App\Http\Controllers\Application\Printings\PrintingDepenseAndEmpruntController;
 use App\Http\Livewire\Application\Payment\MainControlPayment;
 use App\Http\Livewire\Application\Rapport\Payment\RapportAllReceiptBySection;
 use App\Http\Controllers\Application\Printings\PrintingReceiptController;
@@ -83,6 +84,13 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
         Route::controller(PrintingReceiptController::class)->group(function (){
             Route::get('inscription/{inscription}/{currency}','printReceiptInscription')->name('receipt.inscription');
             Route::get('payment/{payment}/{currency}','printReceiptPayment')->name('receipt.payment');
+        });
+    });
+
+    Route::prefix('print-depense-emprunt')->group(function (){
+        Route::controller(PrintingDepenseAndEmpruntController::class)->group(function (){
+            Route::get('depense/{month}','printDepenseMonth')->name('depense.month');
+            Route::get('emprunt/{month}','printEmpruntByMonth')->name('emprunt.month');
         });
     });
 });

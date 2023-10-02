@@ -30,6 +30,7 @@ class ListDepense extends Component
 
     public function updatedCategory($val)
     {
+        dd($val);
         $this->category = $val;
     }
     public function updatedCurrency($val)
@@ -106,6 +107,7 @@ class ListDepense extends Component
         } else {
             $this->listDepense = DepenseHelper::get($this->month, $this->currency, $this->source);
         }
+        dd(DepenseHelper::getAmountByMonthAndByCurrency('08','USD',4));
         $this->emit('getMonthDepense', $this->month);
         return view('livewire.application.depense.list.list-depense',);
     }

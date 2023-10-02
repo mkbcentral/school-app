@@ -23,6 +23,17 @@ class ListStudentResponsable extends Component
         $this->selectedIndex=$index;
     }
 
+    public function delete($id){
+        $responsable=StudentResponsable::find($id);
+        if($responsable->students->isEmpty()){
+            $responsable->delete();
+            $this->dispatchBrowserEvent('added', ['message' => "Famille bien rétirée !"]);
+        }else{
+            $this->dispatchBrowserEvent('error', ['message' => "Impossible, Famille déjà remplie"]);
+        }
+
+    }
+
     public function getResponsable(StudentResponsable $responsable): void
     {
         $this->emit('selectRresposableId',$responsable);

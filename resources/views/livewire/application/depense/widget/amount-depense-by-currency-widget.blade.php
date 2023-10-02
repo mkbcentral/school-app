@@ -4,7 +4,7 @@
     </div>
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title">Depense</h3>
+            <h3 class="card-title">Depense mensuelle</h3>
         </div>
         <div class="card-body">
             @if ($listDepebse->isEmpty())

@@ -17,14 +17,18 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header">
-                                    LISTE DES EMPRUNTS
+                                   <div class="d-flex justify-content-between align-items-center">
+                                    <h5>LISTE DES EMPRUNTS</h5>
+                                    <a href="{{ route('emprunt.month', [$month]) }}" target="_blank" class="btn btn-primary"><i class="fa fa-print"
+                                        aria-hidden="true"></i> Imprimer</a>
+                                   </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between ">
                                         <h4 class="bg-secondary p-2 rounded">Total:
                                             @foreach ($totalByCurrency as $total)
                                                 <span class="text-info">{{ $total->currency }}:
-                                                    </span><span>{{ app_format_number($total->total) }}</span>
+                                                </span><span>{{ app_format_number($total->total) }}</span>
                                             @endforeach
                                         </h4>
                                         <select class="form-control w-25" wire:model='month' id="">
@@ -35,18 +39,17 @@
                                         </select>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <span wire:loading
-                                        class="spinner-border spinner-border-sm"
-                                        role="status" aria-hidden="true"></span>
+                                        <span wire:loading class="spinner-border spinner-border-sm" role="status"
+                                            aria-hidden="true"></span>
                                     </div>
                                     <table class="table table-sm">
                                         <thead>
                                             <tr class="text-uppercase">
                                                 <th>#</th>
                                                 <th>Date</th>
-                                                <th>Code</th>
                                                 <th>Description</th>
-                                                <th>Montant</th>
+                                                <th>MT USD</th>
+                                                <th>MT CDF</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
@@ -63,9 +66,13 @@
                                                     <tr>
                                                         <td scope="row">{{ $index + 1 }}</td>
                                                         <td>{{ $emprunt->created_at->format('d/m/Y') }}</td>
-                                                        <td>{{ $emprunt->code }}</td>
                                                         <td>{{ $emprunt->description }}</td>
-                                                        <td>{{ $emprunt->amount }}</td>
+                                                        <td>
+                                                            {{$emprunt->currency_name=='USD'?$emprunt->amount.' $':'-'}}
+                                                        </td>
+                                                        <td>
+                                                            {{$emprunt->currency_name=='CDF'?$emprunt->amount.' Fc':'-'}}
+                                                        </td>
                                                         <td class="text-center">
                                                             <x-button
                                                                 wire:click.prevent='edit({{ $emprunt }},{{ $emprunt->id }})'
@@ -134,15 +141,15 @@
                                                 <span class="error text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        @if($isEditing == true)
-                                        <div class="form-group">
-                                            <x-label value="{{ __('Date emprunt') }}" />
-                                            <x-input class="" type='date' placeholder="Date emprunt"
-                                                wire:model.defer='created_at' />
-                                            @error('created_at')
-                                                <span class="error text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                                        @if ($isEditing == true)
+                                            <div class="form-group">
+                                                <x-label value="{{ __('Date emprunt') }}" />
+                                                <x-input class="" type='date' placeholder="Date emprunt"
+                                                    wire:model.defer='created_at' />
+                                                @error('created_at')
+                                                    <span class="error text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
                                         @endif
                                     </div>
                                     <div class="card-footer text-muted">

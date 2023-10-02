@@ -64,7 +64,9 @@ class CheckerRedirectUser
                 'print.rapport.inscription.payment.by.day',
                 'depense.all',
                 'payment.late',
-                'tarification.cost.general'
+                'tarification.cost.general',
+                'depense.month',
+                'emprunt.month'
             ],
             'Secretary'=>[
                 'main',

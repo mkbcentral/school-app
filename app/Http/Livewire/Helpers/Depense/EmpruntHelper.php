@@ -10,11 +10,15 @@ class EmpruntHelper
 {
     public static function get(string $month): Collection
     {
-        return Emprunt::whereMonth('created_at', $month)->orderBy('created_at', 'DESC')->get();
+        return Emprunt::join('currencies', 'currencies.id', 'emprunts.currency_id')
+            ->whereMonth('emprunts.created_at', $month)
+            ->orderBy('emprunts.created_at', 'DESC')
+            ->select('emprunts.*','currencies.currency as currency_name')
+            ->get();
     }
     public static function create(array $inputs): Emprunt
     {
-        $inputs['school_id']=auth()->user()->school->id;
+        $inputs['school_id'] = auth()->user()->school->id;
         $inputs['code'] = 'AQ-' . date('d') . '-' . date('m') . '-' . date('y') . '-' . rand(1000, 10000);
         return Emprunt::create($inputs);
     }
