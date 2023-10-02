@@ -20,6 +20,7 @@ window.$(document).ready(function () {
         toastr.info(event.detail.message, 'Validation');
         $('#editClasseAnInscription').modal('hide');
         $('#formEditInscriptionModal').modal('hide');
+        $('#editFamillyModal').modal('hide');
         $('#editPayment').modal('hide');
         $('#formDepenseModal').modal('hide');
         $('#newLatePayment').modal('hide');

@@ -55,6 +55,16 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <x-label value="{{ __('Famille') }}" />
+                                                <x-select wire:model.defer='student_responsable_id '>
+                                                    @foreach ($famillyList as $familly)
+                                                        <option value="{{ $familly->id }}">{{ $familly->name_responsable }}</option>
+                                                    @endforeach
+                                                </x-select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

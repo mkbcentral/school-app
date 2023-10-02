@@ -1,5 +1,8 @@
 <div>
     @livewire('application.inscription.forms.create-new-inscription-form', ['index' => $selectedIndex])
+    @include('livewire.application.inscription.modals.list-student-in-familly-modal')
+    @livewire('application.messaging.forms.send-new-sms-form')
+    @include('livewire.application.inscription.modals.edit-familly-modal')
     <div>
         <div>
             <div class="d-flex justify-content-between mb-2">
@@ -39,10 +42,15 @@
 
                                 </x-button>
                                 <x-button class="btn-primary btn-sm" type="button"
-                                    wire:click.prevent="getResponsable({{ $responsable }})" data-toggle="modal"
-                                    data-target="#formInscriptionModal">
+                                    wire:click.prevent="show({{ $responsable }})" data-toggle="modal"
+                                    data-target="#lisStudentInFamillyModal">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
-
+                                </x-button>
+                               
+                                <x-button class="btn-info btn-sm" type="button"
+                                    wire:click.prevent="show({{ $responsable }})" data-toggle="modal"
+                                    data-target="#editFamillyModal">
+                                    <i class="fas fa-edit    "></i>
                                 </x-button>
                                 <x-button class="btn-danger btn-sm" type="button"
                                     wire:click.prevent="delete({{ $responsable->id }})">

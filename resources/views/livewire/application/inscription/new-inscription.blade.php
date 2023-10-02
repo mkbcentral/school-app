@@ -30,10 +30,10 @@
                             </ul>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 @livewire('application.inscription.forms.add-new-familly')
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 @livewire('application.inscription.list.list-student-responsable',['index' => $selectedIndex])
                             </div>
                         </div>

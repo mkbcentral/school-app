@@ -5,14 +5,15 @@ namespace App\Http\Livewire\Application\Inscription\Forms;
 use App\Models\Classe;
 use App\Models\CostInscription;
 use App\Models\Inscription;
+use App\Models\StudentResponsable;
 use Livewire\Component;
 
 class EditClasseAndInscription extends Component
 {
     protected $listeners = ['inscriptionToEdit' => 'getInscription'];
     public  $inscription = null;
-    public $classe_id=0,$cost_inscription_id=0,$created_at='';
-    public $costInscriptionList = [];
+    public $classe_id=0,$cost_inscription_id=0,$created_at='',$student_responsable_id;
+    public $costInscriptionList = [],$famillyList=[];
 
     public function getInscription(Inscription $inscription)
     {
@@ -24,14 +25,18 @@ class EditClasseAndInscription extends Component
     {
         $this->costInscriptionList = CostInscription::where('school_id', auth()->user()->school->id)
             ->orderBy('created_at', 'DESC')->get();
+        $this->famillyList=StudentResponsable::orderBy('created_at', 'DESC')->get();
     }
     public function update(){
         $this->inscription->classe_id=$this->classe_id;
         $this->inscription->created_at=$this->created_at;
         $this->inscription->cost_inscription_id=$this->cost_inscription_id;
         $this->inscription->update();
+        $this->inscription->student->student_responsable_id=$this->student_responsable_id;
+        $this->inscription->student->update();
         $this->dispatchBrowserEvent('updated', ['message' => "Info bien mise jour!"]);
         $this->emit('refreshListInscription');
+        $this->emit('refreshListResponsible');
     }
     public function render()
     {
