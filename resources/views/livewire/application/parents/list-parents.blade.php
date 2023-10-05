@@ -1,8 +1,7 @@
 <div>
-    @livewire('application.inscription.forms.create-new-inscription-form', ['index' => $selectedIndex])
-    @include('livewire.application.inscription.modals.list-student-in-familly-modal')
     @livewire('application.messaging.forms.send-new-sms-form')
     @include('livewire.application.inscription.modals.edit-familly-modal')
+    @include('livewire.application.inscription.modals.list-student-in-familly-modal')
     <div>
         <div>
             <div class="mb-2">
@@ -43,17 +42,15 @@
                             <td class="text-center">{{ $responsable->students->count() }}</td>
                             <td class="text-center">
                                 <x-button class="btn-primary btn-sm" type="button"
-                                    wire:click.prevent="getResponsable({{ $responsable }})" data-toggle="modal"
-                                    data-target="#formInscriptionModal">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-
-                                </x-button>
-                                <x-button class="btn-primary btn-sm" type="button"
                                     wire:click.prevent="show({{ $responsable }})" data-toggle="modal"
                                     data-target="#lisStudentInFamillyModal">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </x-button>
-                               
+                                <x-button class="btn-success btn-sm" type="button"
+                                    wire:click.prevent="showFromSoSendSms({{ $responsable }})" data-toggle="modal"
+                                    data-target="#sendNewSmsModal">
+                                    <i class="fab fa-telegram" aria-hidden="true"></i>
+                                </x-button>
                                 <x-button class="btn-info btn-sm" type="button"
                                     wire:click.prevent="show({{ $responsable }})" data-toggle="modal"
                                     data-target="#editFamillyModal">

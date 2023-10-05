@@ -1,4 +1,5 @@
 <div>
+    @livewire('application.payment.form.edit-payment-infos')
     <div class="card">
         <div class="card-body">
             <div class="tab-content">
@@ -6,7 +7,7 @@
                     <div class="d-flex justify-content-end">
                         <div class="bg-warning mr-2 p-2">
                             @foreach ($amountPayments as $payment)
-                                <h3>Total: {{ app_format_number($payment->amount) }} {{$payment->currency}}</h3>
+                                <h3>Total: {{ app_format_number($payment->amount) }} {{ $payment->currency }}</h3>
                             @endforeach
                         </div>
                         <x-button type="button" wire:click.prevent='loadData' class="btn btn-primary">
@@ -85,8 +86,19 @@
                                             <td class="text-center">
                                                 {{ app_get_month_name($payment->month_name) }}
                                             </td>
-                                            <td>
-
+                                            <td class="text-center">
+                                                <x-button wire:click.prevent='edit({{ $payment }})'
+                                                    class="btn-sm text-secondary" type="button" data-toggle="modal"
+                                                    data-target="#editPayment">
+                                                    <i class="fa fa-cog" aria-hidden="true"></i>
+                                                </x-button>
+                                                <x-button class="btn-danger btn-sm" type="button"
+                                                    wire:click.prevent="delete({{ $payment->id }})">
+                                                    <span wire:loading wire:target="delete({{ $payment->id }})"
+                                                        class="spinner-border spinner-border-sm" role="status"
+                                                        aria-hidden="true"></span>
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </x-button>
                                             </td>
                                         </tr>
                                     @endforeach

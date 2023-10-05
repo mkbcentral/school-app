@@ -1,5 +1,5 @@
 <div class="card">
-   <div class="card-header"><h3>CONTROL MENSUEL</h3></div>
+   <div class="card-header text-uppercase"><h3>CONTROL MENSUEL {{$typeCost->name}}</h3></div>
     <div class="card-body">
         <div class="d-flex">
             <div class="form-group ml-2">
@@ -23,6 +23,7 @@
                 </x-select>
             </div>
         </div>
+
         @if($listStudent->isEmpty())
             <x-data-empty/>
         @else

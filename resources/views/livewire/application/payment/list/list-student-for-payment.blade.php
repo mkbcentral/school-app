@@ -52,6 +52,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    {{ $listInscription->links('livewire::bootstrap') }}
                 </div>
             @endif
         </div>

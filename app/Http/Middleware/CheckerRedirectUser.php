@@ -66,13 +66,15 @@ class CheckerRedirectUser
                 'payment.late',
                 'tarification.cost.general',
                 'depense.month',
-                'emprunt.month'
+                'emprunt.month',
+                'parent.list'
             ],
             'Secretary'=>[
                 'main',
                 'dashboard.main',
                 'inscription.new',
-                'reinscription.new'
+                'reinscription.new',
+                'parent.list'
             ],
         ];
     }

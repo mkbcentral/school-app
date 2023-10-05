@@ -36,7 +36,7 @@ class GetPaymentByTypeCostToCheck
         $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();//Récuperer l'année en cours
         return Payment::join('cost_generals','cost_generals.id','=','payments.cost_general_id')
             ->join('type_other_costs','type_other_costs.id','=','cost_generals.type_other_cost_id')
-            ->where('payments.student_id',134)
+            ->where('payments.student_id',$student_id)
             ->where('payments.school_id',auth()->user()->school->id)
             ->where('payments.scolary_year_id',$scolaryYear->id)
             ->where('type_other_costs.id',$idType)

@@ -50,6 +50,11 @@ class ListPaymentByDay extends Component
         $this->emit('refreshSumByDayPayment');
         $this->dispatchBrowserEvent('added', ['message' => "Action réalisée avec succès !"]);
     }
+    public function delete(string $id){
+        $payment=Payment::find($id);
+        $payment->delete();
+        $this->dispatchBrowserEvent('updated', ['message' => "Payment bien rétiré !"]);
+    }
     public function mount(): void
     {
         $defaultScolaryYer = (new SchoolHelper())->getCurrectScolaryYear();

@@ -27,6 +27,7 @@ class MainControlPayment extends Component
         $this->selectedIndex = $type->id;
         $this->isByTranch=$type->is_by_tranch;
         $this->emit('typeCostSelected', $this->selectedIndex);
+        //dd($this->selectedIndex);
     }
 
     /**

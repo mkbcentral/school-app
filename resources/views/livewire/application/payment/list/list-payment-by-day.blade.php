@@ -1,7 +1,7 @@
 <div>
     <div class="card">
         <div class="card-body">
-            <div  class="bg-warning d-flex justify-content-end p-2">
+            <div class="bg-warning d-flex justify-content-end p-2">
                 @livewire('application.payment.widget.sum-payment-total-by-date', ['date' => $date_to_search, 'defaultScolaryYerId' => $defaultScolaryYerId, 'currency' => $defaultCureencyName])
             </div>
             <div class="d-flex justify-content-between">
@@ -67,6 +67,13 @@
                                             <a href="{{ route('receipt.payment', [$payment, $defaultCureencyName]) }}"
                                                 target="_blank"><i class="fas fa-print"></i></a>
                                         @endif
+                                        <x-button class="btn-danger btn-sm" type="button"
+                                            wire:click.prevent="delete({{ $payment->id }})">
+                                            <span wire:loading wire:target="delete({{ $payment->id }})"
+                                                class="spinner-border spinner-border-sm" role="status"
+                                                aria-hidden="true"></span>
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </x-button>
                                     </td>
                                 </tr>
                                 @php
@@ -77,10 +84,10 @@
                     </table>
                 @endif
                 <div class="d-flex justify-content-center mt-2">
-                    <span wire:loading
-        class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
                 </div>
-                
+
             </div>
         </div>
     </div>

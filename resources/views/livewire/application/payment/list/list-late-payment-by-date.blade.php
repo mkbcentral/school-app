@@ -107,6 +107,7 @@
                                                     aria-hidden="true"></span>
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </x-button>
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

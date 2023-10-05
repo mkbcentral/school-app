@@ -6,9 +6,11 @@ use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\Inscription;
 use App\Models\Student;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListStudentForPayment extends Component
 {
+    use WithPagination;
     protected $listeners = [
         'scolaryYearFresh' => 'getScolaryYear',
     ];
@@ -34,7 +36,7 @@ class ListStudentForPayment extends Component
             ->where('inscriptions.scolary_year_id',$this->defaultScolaryYerId)
             ->select('inscriptions.*')
             ->orderBy('students.name','ASC')
-            ->get();
+            ->paginate(25);
         return view('livewire.application.payment.list.list-student-for-payment',['listInscription'=> $listInscription]);
     }
 }

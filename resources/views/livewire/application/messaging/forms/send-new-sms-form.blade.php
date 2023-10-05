@@ -12,7 +12,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent='update'>
+                <form wire:submit.prevent='sendSMS'>
                     <div class="modal-body">
                         @if ($studentResponsable)
                             <div class="card">
@@ -21,10 +21,12 @@
                                 </div>
                                 <div class="card p-2">
                                     <h6><span class="text-bold text-info">Nom: </span>
-                                         <i class="fa fa-user" aria-hidden="true"></i>  {{ $studentResponsable->name_responsable }}
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        {{ $studentResponsable->name_responsable }}
                                     </h6>
                                     <h6><span class="text-bold text-info">Classe:</span>
-                                      <i class="fa fa-phone" aria-hidden="true"></i>  +243 {{ $studentResponsable->phone }}
+                                        <i class="fa fa-phone" aria-hidden="true"></i> +243
+                                        {{ $studentResponsable->phone }}
                                     </h6>
                                 </div>
                             </div>
@@ -32,12 +34,19 @@
                                 <x-label value="{{ __('Message') }}" />
                                 <textarea wire:model.defer='body' id="" class="form-control" cols="15" rows="5">
                                 </textarea>
+                                @error('body')
+                                    <span class="error text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         @endif
                     </div>
                     <div class="modal-footer">
-                        <x-button type="submit" class="btn btn-primary">Sauvegarder</x-button>
-                        <x-button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</x-button>
+                        <x-button type="submit" class="btn btn-primary">
+                            <span wire:loading wire:target="sendSMS"
+                                class="spinner-border spinner-border-sm" role="status"
+                                aria-hidden="true"></span>
+                            <i class="fab fa-telegram" aria-hidden="true"></i> Envoyer
+                        </x-button>
                     </div>
                 </form>
             </div>

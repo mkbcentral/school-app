@@ -9,6 +9,7 @@ use App\Http\Livewire\Helpers\Payment\GetPaymentByMonthHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\CostGeneral;
 use App\Models\Currency;
+use App\Models\Payment;
 use Livewire\Component;
 
 class ListRapportPayment extends Component
@@ -103,6 +104,18 @@ class ListRapportPayment extends Component
 
         $defaultCurrency = (new SchoolHelper())->getCurrentCurrency();
         $this->defaultCureencyName=$defaultCurrency->currency;
+    }
+
+    public function delete(string $id){
+        $payment=Payment::find($id);
+        $payment->delete();
+        $this->dispatchBrowserEvent('updated', ['message' => "Payment bien rétiré !"]);
+    }
+
+    public function edit(Payment $payment): void
+    {
+        $this->emit('paymentToEdit',$payment);
+       
     }
 
     /**

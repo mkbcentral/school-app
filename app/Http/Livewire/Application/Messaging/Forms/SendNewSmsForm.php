@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Application\Messaging\Forms;
 
-use App\Models\Student;
+use App\Http\Livewire\Helpers\Notifications\SmsNotificationHelper;
 use App\Models\StudentResponsable;
+use Exception;
 use Livewire\Component;
 
 class SendNewSmsForm extends Component
@@ -12,8 +13,24 @@ class SendNewSmsForm extends Component
     public $body;
     public StudentResponsable $studentResponsable;
 
-    public function getStudent(StudentResponsable $studentResponsable) {
-        $this->studentResponsable=$studentResponsable;
+    public function getStudent(StudentResponsable $studentResponsable)
+    {
+        $this->studentResponsable = $studentResponsable;
+    }
+    
+    public function sendSMS()
+    {
+        try {
+            $this->validate(['body' => ['required', 'nullable']]);
+            SmsNotificationHelper::sendSMS(
+                '+243898337969',
+                '+243' . $this->studentResponsable->phone,
+                'C.S.'.auth()->user()->school->name."\n".$this->body."\nA: ".date('Y-m-d H:i:s')
+            );
+            $this->dispatchBrowserEvent('added', ['message' => 'Message bien envoyer']);
+        } catch (Exception $ex) {
+            $this->dispatchBrowserEvent('error', ['message' => $ex->getMessage()]);
+        }
     }
     public function render()
     {

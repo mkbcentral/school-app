@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Application\Inscription\List;
+namespace App\Http\Livewire\Application\Parents;
 
 use App\Http\Livewire\Helpers\Notifications\SmsNotificationHelper;
 use App\Models\Student;
@@ -10,9 +10,10 @@ use Exception;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ListStudentResponsable extends Component
+class ListParents extends Component
 {
     use WithPagination;
+
     protected $listeners = [
         'selectedClasseOption' => 'getOptionSelected',
         'refreshListResponsible' => '$refresh'
@@ -22,9 +23,8 @@ class ListStudentResponsable extends Component
     public  int $selectedIndex = 0;
     public string $keyToSearch = '';
     public StudentResponsable $studentResponsable;
-    public function mount(int $index): void
+    public function mount(): void
     {
-        $this->selectedIndex = $index;
     }
     public  function getOptionSelected($index): void
     {
@@ -76,14 +76,15 @@ class ListStudentResponsable extends Component
         $this->dispatchBrowserEvent('updated', ['message' => "Infos bien mise à jour !"]);
     }
 
-    public function sendBulkSMS(){
+    public function sendBulkSMS()
+    {
         try {
-            $users=User::all();
+            $users = User::all();
             foreach ($users as $user) {
                 SmsNotificationHelper::sendSMS(
                     '+243898337969',
                     '+243' . $user->phone,
-                    'C.S.'.auth()->user()->school->name."\n Juste un essaie technique \nA: ".date('Y-m-d H:i:s')
+                    'C.S.' . auth()->user()->school->name . "\n Juste un essaie technique \nA: " . date('Y-m-d H:i:s')
                 );
             }
             $this->dispatchBrowserEvent('added', ['message' => 'Message bien envoyer']);
@@ -92,7 +93,7 @@ class ListStudentResponsable extends Component
         }
     }
 
-    
+
     public function showFromSoSendSms(StudentResponsable $studentResponsable)
     {
         $this->emit('studentToSedSMS', $studentResponsable);
@@ -105,14 +106,14 @@ class ListStudentResponsable extends Component
     public function render()
     {
         return view(
-            'livewire.application.inscription.list.list-student-responsable',
+            'livewire.application.parents.list-parents',
             [
                 'listResponsible' => StudentResponsable::where(
                     'school_id',auth()->user()->school->id)
                     ->where('name_responsable', 'like', '%' . $this->keyToSearch . '%')
-                    ->orderBy('created_at', 'DESC')
+                    ->orderBy('name_responsable', 'asc')
                     ->with('students')
-                    ->paginate(10)
+                    ->paginate(25)
             ]
         );
     }
