@@ -125,7 +125,7 @@ class ListRapportPayment extends Component
             SmsNotificationHelper::sendSMS(
                 '+243898337969',
                 '+243' . $payment->student->studentResponsable->phone,
-                    "C.S.".auth()->user()->school->name . "\nBonjour Votre enfant"
+                    "C.S.".auth()->user()->school->name . "\nBonjour Votre enfant "
                     . $payment->student->name
                     . " est en ordre avec le frais "
                     . $payment->cost->name . "\nCout:" . $payment->cost->amount . " " .

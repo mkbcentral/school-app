@@ -71,6 +71,7 @@
                             <table class="table table-stripped table-sm mt-2">
                                 <thead class="thead-light">
                                     <tr class="text-uppercase">
+                                        <th>#</th>
                                         <th>Date</th>
                                         <th>Noms élève</th>
                                         <th class="text-center">sms status</th>
@@ -81,8 +82,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($listPayments as $payment)
+                                    @foreach ($listPayments as $index => $payment)
                                         <tr>
+                                            <td>{{$index+1}}</td>
                                             <td>{{ $payment->created_at->format('d/m/Y') }}</td>
                                             <td>{{ $payment->student->name }}
                                                 /{{ $payment->getStudentClasseNameForCurrentYear($payment->student->id) }}
