@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Helpers\SchoolHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -62,6 +63,20 @@ class Payment extends Model
     }
     public function getStudentClasseName(Payment $payment):string{
         return ' '.$payment->classe->name.'/'.$payment->classe?->classeOption?->name;
+    }
+
+    public function getStudentClasseNameForCurrentYear(string $idStudent): string
+    {
+        $scoalyYear=(new SchoolHelper())->getCurrectScolaryYear();
+        $payment=Payment::where('student_id', $idStudent)
+            ->where('scolary_year_id', $scoalyYear->id)
+            ->first();
+        return ' ' . $payment?->classe->name . '/' . $payment?->classe?->classeOption->name;
+    }
+
+    public function getCurrencyByTypeCostName($name){
+        $type=TypeOtherCost::where('name',$name)->first();
+        return $type?->cureency?->currency;
     }
 
 }

@@ -68,11 +68,6 @@ class AddNewPayment extends Component
             );
             $cost=CostGeneral::find($this->cost_general_id);
             //(new PosPrintingHelper())->printPayment($payment,'USD');
-            /*
-            SmsNotificationHelper::sendSMS( '+243898337969','+243971330007',auth()->user()->school->name."\nBonjour Votre enfant "
-                .$this->student->name."\n vient de payer le ".$cost->name."\nCout:".$cost->amount." USD"."\nA:".$payment->created_at->format('d/m/Y H:i'));
-
-            */
             $this->emit('paymentListRefresh');
             $this->dispatchBrowserEvent('added',['message'=>'Paiement bien effectué']);
         }

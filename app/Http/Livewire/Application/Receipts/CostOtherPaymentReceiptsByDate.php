@@ -50,7 +50,7 @@ class CostOtherPaymentReceiptsByDate extends Component
     }
     public function render()
     {
-        $listReceipt=GetAmountPaymentGroupingByTypeCost::getAmountPaymentByDate($this->day,$this->defaultScolaryYerId,$this->defaultCureencyName);
+        $listReceipt=GetAmountPaymentGroupingByTypeCost::getAmountPaymentByDate($this->day,$this->defaultScolaryYerId);
         return view('livewire.application.receipts.cost-other-payment-receipts-by-date',['listReceipt'=>$listReceipt]);
     }
 }

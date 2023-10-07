@@ -1,5 +1,6 @@
 <div>
     @livewire('application.tarification.form.form-tarification')
+    @livewire('application.tarification.type-cost-tarification')
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -16,8 +17,13 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center ">
-                            <i class="fa fa-list mr-1" aria-hidden="true"></i>
-                            <h4> LISTE DES TARIFS</h4>
+                            <div class="col-sm-12 d-flex justify-content-between align-items-center">
+                                <h4> <i class="fa fa-list mr-1" aria-hidden="true"></i> LISTE DES TARIFS</h4>
+                                <x-button type="button" wire:click.prevent='new' class="btn-danger" data-toggle="modal"
+                                    data-target="#typeCostTarif">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau type frais
+                                </x-button>
+                            </div> 
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between">

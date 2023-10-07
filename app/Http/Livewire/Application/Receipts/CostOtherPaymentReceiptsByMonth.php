@@ -57,7 +57,8 @@ class CostOtherPaymentReceiptsByMonth extends Component
     {
         $this->amountInscription=(new GetInscriptionByDateWithPaymentStatusHelper())
             ->getSumTotalAmountInscriptionByMonth($this->month,$this->scolaryYearId,0,0,$this->defaultCureencyName,true);
-        $listReceipt=GetAmountPaymentGroupingByTypeCost::getAmountPaymentByMonth($this->month,$this->scolaryYearId,$this->defaultCureencyName);
+        $listReceipt=GetAmountPaymentGroupingByTypeCost::getAmountPaymentByMonth($this->month,$this->scolaryYearId);
+        //dd($listReceipt);
         return view('livewire.application.receipts.cost-other-payment-receipts-by-month',['listReceipt'=>$listReceipt]);
     }
 }

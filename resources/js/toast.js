@@ -25,6 +25,7 @@ window.$(document).ready(function () {
         $('#formDepenseModal').modal('hide');
         $('#newLatePayment').modal('hide');
         $('#formTarifModal').modal('hide');
+    
     });
     window.addEventListener('error', function (event) {
         toastr.error(event.detail.message, 'Alert !');

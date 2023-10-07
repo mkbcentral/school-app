@@ -38,6 +38,7 @@ class CheckerRedirectUser
                 'dashboard.main',
                 'settings.app.links',
                 'settings.app',
+                'user.account'
             ],
             'Coordinator'=>[
                 'main',
@@ -48,6 +49,7 @@ class CheckerRedirectUser
                 'payment.other.cost',
                 ' filament.pages.dashboard',
                 'payment.control',
+                'user.account'
             ],
             'Finance'=>[
                 'main',
@@ -67,14 +69,16 @@ class CheckerRedirectUser
                 'tarification.cost.general',
                 'depense.month',
                 'emprunt.month',
-                'parent.list'
+                'parent.list',
+                'user.account'
             ],
             'Secretary'=>[
                 'main',
                 'dashboard.main',
                 'inscription.new',
                 'reinscription.new',
-                'parent.list'
+                'parent.list',
+                "user.account"
             ],
         ];
     }

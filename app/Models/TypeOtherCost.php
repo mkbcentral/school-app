@@ -12,7 +12,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class TypeOtherCost extends Model
 {
     use HasFactory;
-    protected $fillable=['id','name','school_id','active','scolary_year_id'];
+    protected $fillable=['id','name','school_id','active','scolary_year_id','currency_id'];
+
+    /**
+     * Get the currency that owns the TypeOtherCost
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
+    }
     /**
      * Get all of the comments for the TypeOtherCost
      *

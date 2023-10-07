@@ -15,14 +15,21 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
+        <div class="d-flex justify-content-center align-items-center">
+            <span wire:loading
+                class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
+        </div>
+        <div class="row mt-2">
            @foreach($listReceipt as $receipt)
                 <div class="col-sm-6 col-12">
                     <div class="info-box bg-indigo">
                         <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">{{$receipt->name}}</span>
-                            <span class="info-box-number">{{app_format_number($receipt->amount)}} {{$defaultCureencyName}}</span>
+                            <span class="info-box-number">
+                                {{app_format_number($receipt->amount)}} 
+                                {{$receipt->getCurrencyByTypeCostName($receipt->name)}}</span>
                             <div class="progress">
                                 <div class="progress-bar" style="width: {{app_get_percentage($receipt->amount)}}%"></div>
                             </div>
@@ -33,21 +40,6 @@
                     </div>
                 </div>
            @endforeach
-               <div class="col-sm-6 col-12">
-                   <div class="info-box bg-indigo">
-                       <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-                       <div class="info-box-content">
-                           <span class="info-box-text">Inscription</span>
-                           <span class="info-box-number">{{app_format_number($amountInscription)}} {{$defaultCureencyName}}</span>
-                           <div class="progress">
-                               <div class="progress-bar" style="width: {{app_get_percentage($amountInscription)}}%"></div>
-                           </div>
-                           <span class="progress-description">
-                                {{app_get_percentage($amountInscription)>=100?'+100':app_get_percentage($amountInscription)}} % de Paiment par mois
-                            </span>
-                       </div>
-                   </div>
-               </div>
         </div>
     </div>
 </div>

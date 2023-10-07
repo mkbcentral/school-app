@@ -21,6 +21,7 @@ use App\Http\Livewire\Application\Inscription\List\ListStudentResponsable;
 use App\Http\Livewire\Application\Parents\ListParents;
 use App\Http\Livewire\Application\Payment\MyLatePayment;
 use App\Http\Livewire\Application\Tarification\CostTarification;
+use App\Http\Livewire\Application\User\MyAccount;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,11 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
     Route::prefix('parent')->group(function(){
         Route::get('list',ListParents::class)->name('parent.list');
     });
+    //User
+    Route::prefix('user')->group(function(){
+        Route::get('my-account',MyAccount::class)->name('user.account');
+    });
+
 
 
     //Pint rapport payment cost
