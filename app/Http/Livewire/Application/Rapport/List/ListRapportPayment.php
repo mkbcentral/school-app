@@ -125,12 +125,12 @@ class ListRapportPayment extends Component
             SmsNotificationHelper::sendSMS(
                 '+243898337969',
                 '+243' . $payment->student->studentResponsable->phone,
-                    "C.S.".auth()->user()->school->name . "\nBonjour Votre enfant "
+                    "C.S.".auth()->user()->school->name . "\nBonjour Mr/Mm Votre enfant "
                     . $payment->student->name
                     . " est en ordre avec le frais "
-                    . $payment->cost->name . "\nCout:" . $payment->cost->amount . " " .
+                    . $payment->cost->name . "\nCout: " . $payment->cost->amount . " " .
                     $payment->cost->currency->currency .
-                    "\nDépuis le:" . $payment->created_at->format('d/m/Y')
+                    "\n Pour le mois de: " . app_get_month_name($payment->month_name)
             );
             $payment->has_sms=true;
             $payment->update();
