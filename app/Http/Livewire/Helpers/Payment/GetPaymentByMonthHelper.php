@@ -18,7 +18,7 @@ class GetPaymentByMonthHelper
      * @param $currency
      * @return mixed
      */
-    public static function getMonthPayments($month, $idSColaryYear, $idCost, $type, $classeId, $keySearch, $currency)
+    public static function getMonthPayments($month, $idSColaryYear, $idCost, $type, $classeId, $keySearch)
     {
         if ($classeId == 0) {
             if ($idCost == 0) {
@@ -32,11 +32,8 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
-                    ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                    ->select('payments.*')
                     ->get();
             } else {
                 $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -50,11 +47,8 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
-                    ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                    > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                    ->select('payments.*')
                     ->get();
             }
         } else {
@@ -70,11 +64,8 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
-                    ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                    > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                    ->select('payments.*')
                     ->get();
             } else {
                 $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -89,18 +80,14 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
-                    ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                    > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                    ->select('payments.*')
                     ->get();
             }
         }
         return $payments;
     }
-
-    public static function getDatePaiments($date, $idSColaryYear, $idCost, $type, $classeId, $keySearch, $currency)
+    public static function getDatePaiments($date, $idSColaryYear, $idCost, $type, $classeId, $keySearch)
     {
         if ($classeId == 0) {
             if ($idCost == 0) {
@@ -113,12 +100,8 @@ class GetPaymentByMonthHelper
                     ->where('cost_generals.type_other_cost_id', $type)
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
-                    ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
-                    ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                    > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                    ->select('payments.*')
                     ->get();
             } else {
                 $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -132,11 +115,8 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
-                    ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                    > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                    ->select('payments.*')
                     ->get();
             }
         } else {
@@ -152,11 +132,8 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
-                    ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                    > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                    ->select('payments.*')
                     ->get();
             } else {
                 $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -171,17 +148,14 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
-                    ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                    > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                    ->select('payments.*')
                     ->get();
             }
         }
         return $payments;
     }
-    public static function getAmoutMonthPayments($month, $idSColaryYear, $idCost, $type, $classeId, $keySearch, $currency)
+    public static function getAmoutMonthPayments($month, $idSColaryYear, $idCost, $type, $classeId, $keySearch)
     {
         if ($classeId == 0) {
             if ($idCost == 0) {
@@ -196,10 +170,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
                     ->select('currencies.currency', DB::raw('SUM(cost_generals.amount) as amount'))
                     ->groupBy('currencies.currency')
                     ->get();
@@ -216,10 +187,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
                     ->select('currencies.currency', DB::raw('SUM(cost_generals.amount) as amount'))
                     ->groupBy('currencies.currency')
                     ->get();
@@ -238,10 +206,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
                     ->select('currencies.currency', DB::raw('SUM(cost_generals.amount) as amount'))
                     ->groupBy('currencies.currency')
                     ->get();
@@ -259,10 +224,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
                     ->select('currencies.currency', DB::raw('SUM(cost_generals.amount) as amount'))
                     ->groupBy('currencies.currency')
                     ->get();
@@ -270,8 +232,7 @@ class GetPaymentByMonthHelper
         }
         return $payments;
     }
-
-    public static function getAmoutDatePayments($date, $idSColaryYear, $idCost, $type, $classeId, $keySearch, $currency)
+    public static function getAmoutDatePayments($date, $idSColaryYear, $idCost, $type, $classeId, $keySearch)
     {
         if ($classeId == 0) {
             if ($idCost == 0) {
@@ -286,10 +247,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
                     ->select('currencies.currency', DB::raw('SUM(cost_generals.amount) as amount'))
                     ->groupBy('currencies.currency')
                     ->get();
@@ -306,10 +264,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
                     ->select('currencies.currency', DB::raw('SUM(cost_generals.amount) as amount'))
                     ->groupBy('currencies.currency')
                     ->get();
@@ -328,10 +283,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
                     ->select('currencies.currency', DB::raw('SUM(cost_generals.amount) as amount'))
                     ->groupBy('currencies.currency')
                     ->get();
@@ -349,10 +301,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
-                    ->with('cost')
-                    ->with('student')
-                    ->with('classe')
-                    ->with('classe.classeOption')
+                    ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
                     ->select('currencies.currency', DB::raw('SUM(cost_generals.amount) as amount'))
                     ->groupBy('currencies.currency')
                     ->get();

@@ -19,7 +19,7 @@ class MyLatePayment extends Component
     public function show(Student $student)
     {
         $this->emit('studentLatePayment', $student);
-        $this->studentId = $student->id;
+        //$this->studentId = $student->id;
     }
 
     public function render()

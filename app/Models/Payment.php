@@ -53,6 +53,16 @@ class Payment extends Model
     }
 
     /**
+     * Get the scolaryyear that owns the Payment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function scolaryYear(): BelongsTo
+    {
+        return $this->belongsTo(ScolaryYear::class, 'scolary_year_id');
+    }
+
+    /**
      * Get the inscription that owns the Payment
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -61,17 +71,29 @@ class Payment extends Model
     {
         return $this->belongsTo(Classe::class, 'classe_id');
     }
+
+    /**
+     * Get the inscription that owns the Payment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function inscription(): BelongsTo
+    {
+        return $this->belongsTo(Inscription::class, 'inscription_id');
+    }
     public function getStudentClasseName(Payment $payment):string{
-        return ' '.$payment->classe->name.'/'.$payment->classe?->classeOption?->name;
+        return ' '.$payment?->inscription?->classe->name.'/'.$payment?->classe?->classeOption?->name;
     }
 
-    public function getStudentClasseNameForCurrentYear(string $idStudent): string
+    public function getStudentClasseNameForCurrentYear($name): string
     {
-        $scoalyYear=(new SchoolHelper())->getCurrectScolaryYear();
-        $payment=Payment::where('student_id', $idStudent)
-            ->where('scolary_year_id', $scoalyYear->id)
-            ->first();
-        return ' ' . $payment?->classe->name . '/' . $payment?->classe?->classeOption->name;
+        $inscription = Inscription::join('students','students.id','inscriptions.student_id')
+                    ->where('inscriptions.scolary_year_id',2)
+                    ->where('students.name',$name)
+                    ->select('inscriptions.*')
+                    ->first();
+        //dd($inscription);
+        return $inscription?->student?->name.'-ID-'.$inscription?->id.'-CL-'.$inscription?->classe?->id;
     }
 
     public function getCurrencyByTypeCostName($name){

@@ -10,11 +10,14 @@ use App\Http\Livewire\Helpers\Payment\GetPaymentByMonthHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\CostGeneral;
 use App\Models\Currency;
+use App\Models\Inscription;
 use App\Models\Payment;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListRapportPayment extends Component
 {
+    use WithPagination;
     protected $listeners = [
         'paymentListRefresh' => '$refresh',
         'scolaryYearFresh' => 'getScolaryYear',
@@ -33,9 +36,15 @@ class ListRapportPayment extends Component
      * Reset date to search on null after month property is updated
      * @return void
      */
-    public function updatedMonth(): void
+    public function updatedMonth($val): void
     {
-        $this->date_to_search = null;
+        $this->month=$val;
+        $this->date_to_search=null;;
+    }
+
+    public function updatedDateToSearch($val)
+    {
+        $this->date_to_search=$val;
     }
 
     /**
@@ -99,12 +108,8 @@ class ListRapportPayment extends Component
         $this->classeList = (new SchoolHelper())->getListClasse();
         $this->months = (new DateFormatHelper())->getMonthsForYear();
         $this->month = date('m');
-
-        $defaultScolaryYer = (new SchoolHelper())->getCurrectScolaryYear();
-        $this->defaultScolaryYerId = $defaultScolaryYer->id;
-
-        $defaultCurrency = (new SchoolHelper())->getCurrentCurrency();
-        $this->defaultCureencyName = $defaultCurrency->currency;
+        $this->defaultScolaryYerId = (new SchoolHelper())->getCurrectScolaryYear()->id;
+        $this->defaultCureencyName =  (new SchoolHelper())->getCurrentCurrency()->currency;
     }
 
     public function delete(string $id)
@@ -118,6 +123,10 @@ class ListRapportPayment extends Component
     {
         $this->emit('paymentToEdit', $payment);
     }
+    /**
+     * Send sms for specific payment
+     * @param string $id
+     */
     public function sendPaymentSMS($id)
     {
         $payment = Payment::find($id);
@@ -125,29 +134,45 @@ class ListRapportPayment extends Component
             SmsNotificationHelper::sendSMS(
                 '+243898337969',
                 '+243' . $payment->student->studentResponsable->phone,
-                    "C.S.".auth()->user()->school->name . "\nBonjour Mr/Mm Votre enfant "
+                "C.S." . auth()->user()->school->name . "\nBonjour Mr/Mm Votre enfant "
                     . $payment->student->name
                     . " est en ordre avec le frais "
                     . $payment->cost->name . "\nCout: " . $payment->cost->amount . " " .
                     $payment->cost->currency->currency .
                     "\n Pour le mois de: " . app_get_month_name($payment->month_name)
             );
-            $payment->has_sms=true;
+            $payment->has_sms = true;
             $payment->update();
             $this->dispatchBrowserEvent('added', ['message' => 'Message bien envoyé']);
         } else {
             $this->dispatchBrowserEvent('error', ["message'=>'Echec d'envoi"]);
         }
     }
+    /**
+     * Fix update inscription inscriptions by month for inscription_id and classe_id problems.
+     */
+    public function updateSoclyYearInscrption()
+    {
+        foreach ($this->listPayments as $payment) {
+            $inscription = Inscription::join('students', 'students.id', 'inscriptions.student_id')
+                ->where('inscriptions.scolary_year_id', 2)
+                ->where('students.name', $payment->student->name)
+                ->select('inscriptions.*')
+                ->first();
+            $payment->inscription_id = $inscription->id;
+            $payment->classe_id = $inscription->classe_id;
+            $payment->update();
+        }
+        $this->dispatchBrowserEvent('added', ['message' => 'Action bein rélisée']);
+    }
 
     /**
      * Loading initial data
      * @return void
      */
-    public function loadData(): void
-    {
 
-        if ($this->date_to_search == null) {
+    public function loadData() {
+        if ($this->date_to_search==null) {
             $this->listPayments = GetPaymentByMonthHelper::getMonthPayments(
                 $this->month,
                 $this->defaultScolaryYerId,
@@ -155,7 +180,6 @@ class ListRapportPayment extends Component
                 $this->index,
                 $this->classe_id,
                 $this->keyToSearch,
-                $this->defaultCureencyName
             );
             $this->amountPayments = GetPaymentByMonthHelper::getAmoutMonthPayments(
                 $this->month,
@@ -173,8 +197,7 @@ class ListRapportPayment extends Component
                 $this->cost_id,
                 $this->index,
                 $this->classe_id,
-                $this->keyToSearch,
-                $this->defaultCureencyName
+                $this->keyToSearch
             );
             $this->amountPayments = GetPaymentByMonthHelper::getAmoutDatePayments(
                 $this->date_to_search,
@@ -182,12 +205,10 @@ class ListRapportPayment extends Component
                 $this->cost_id,
                 $this->index,
                 $this->classe_id,
-                $this->keyToSearch,
-                $this->defaultCureencyName
+                $this->keyToSearch
             );
         }
     }
-
     public function render()
     {
         $listCost = (new CostGeneralHelper())->getListCostGeneral($this->index, $this->defaultScolaryYerId);
@@ -195,7 +216,7 @@ class ListRapportPayment extends Component
         return view(
             'livewire.application.rapport.list.list-rapport-payment',
             [
-                'listCost' => $listCost, 'listPayments' => $this->listPayments,
+                'listCost' => $listCost,
                 'amountPayments' => $this->amountPayments
             ]
         );

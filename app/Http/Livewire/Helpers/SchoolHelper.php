@@ -46,6 +46,8 @@ class SchoolHelper
             ->where('sections.school_id', auth()->user()->school->id)
             ->where('classes.classe_option_id', $id)
             ->select('classes.*','classe_options.name as optioName')
+            ->orderBy('classes.name')
+            ->with('classeOption')
             ->get();
     }
     //get list of classes

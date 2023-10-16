@@ -10,9 +10,7 @@
                                 <h3>Total: {{ app_format_number($payment->amount) }} {{ $payment->currency }}</h3>
                             @endforeach
                         </div>
-                        <x-button type="button" wire:click.prevent='loadData' class="btn btn-primary">
-                            <i class="fas fa-sync" aria-hidden="true"></i>
-                        </x-button>
+
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
@@ -53,17 +51,25 @@
                                     @endforeach
                                 </x-select>
                             </div>
+
                         </div>
 
                     </div>
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <x-search-input />
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <span wire:loading
-                                class="spinner-border spinner-border-sm" role="status"
-                                aria-hidden="true"></span>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <span wire:loading class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
+                            </div>
+                            <div>
+                                <x-button type="button" wire:click.prevent='loadData' class="btn btn-primary btn-sm">
+                                    <i class="fas fa-sync" aria-hidden="true"></i> Actualiser
+                                </x-button>
+                                <x-button type="button" wire:click.prevent='updateSoclyYearInscrption' class="btn btn-danger btn-sm">
+                                   <i class="fas fa-toolbox    "></i> Fixing
+                                </x-button>
+                            </div>
                         </div>
                         @if ($listPayments->isEmpty())
                             <x-data-empty />
@@ -84,17 +90,21 @@
                                 <tbody>
                                     @foreach ($listPayments as $index => $payment)
                                         <tr>
-                                            <td>{{$index+1}}</td>
+                                            <td>{{ $index + 1 }}</td>
                                             <td>{{ $payment->created_at->format('d/m/Y') }}</td>
-                                            <td>{{ $payment->student->name }}
-                                                /{{ $payment->getStudentClasseNameForCurrentYear($payment->student->id) }}
+                                            <td>
+                                                {{ $payment->student->name .
+                                                    '/' .
+                                                    $payment?->inscription?->classe->name .
+                                                    '/' .
+                                                    $payment?->inscription?->classe->classeOption->name }}
                                             </td>
                                             <td class="text-center">
-                                                <span class="{{$payment->has_sms?'text-success':'text-danger'}}">
-                                                    {{$payment->has_sms?'Envoyé':'Non envoyé'}}
-                                                    
+                                                <span class="{{ $payment->has_sms ? 'text-success' : 'text-danger' }}">
+                                                    {{ $payment->has_sms ? 'Envoyé' : 'Non envoyé' }}
+
                                                 </span>
-                                                {{$payment?->student?->studentResponsable?->phone}}
+                                                {{ $payment?->student?->studentResponsable?->phone }}
                                             </td>
                                             <td class="text-right">{{ $payment->cost->name }}</td>
                                             <td class="text-right">{{ app_format_number($payment->amount) }}
@@ -103,9 +113,10 @@
                                                 {{ app_get_month_name($payment->month_name) }}
                                             </td>
                                             <td class="text-center">
+
                                                 <x-button class="btn-success btn-sm" type="button"
-                                                    wire:click.prevent="sendPaymentSMS({{$payment->id }})">
-                                                    
+                                                    wire:click.prevent="sendPaymentSMS({{ $payment->id }})">
+
                                                     <i class="fab fa-telegram" aria-hidden="true"></i>
                                                 </x-button>
                                                 <x-button wire:click.prevent='edit({{ $payment }})'

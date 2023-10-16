@@ -78,7 +78,10 @@ class CheckerRedirectUser
                 'inscription.new',
                 'reinscription.new',
                 'parent.list',
-                "user.account"
+                "user.account",
+                "inscription.list.all",
+                "inscription.list.by.classe",
+                "print.list.inscription.by.classe"
             ],
         ];
     }

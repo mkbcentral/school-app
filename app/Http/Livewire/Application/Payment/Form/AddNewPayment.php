@@ -26,6 +26,7 @@ class AddNewPayment extends Component
     public $months=[],$month;
     public $defaultScolaryYerId;
     public  $amountLabel='';
+    public $currency='';
 
     public function updatedTypeOtherCostId($val): void
     {
@@ -34,6 +35,7 @@ class AddNewPayment extends Component
 
     public function updatedCostGeneralId($val): void{
         $this->amountLabel=CostGeneralHelper::getCostById($val)->amount;
+        $this->currency=CostGeneralHelper::getCostById($val)->currency->currency;
     }
     public function getStudent(Student $student): void
     {
@@ -46,12 +48,13 @@ class AddNewPayment extends Component
     }
     public function store(): void
     {
+        $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
         $this->validateForm();
         $paymentChecker=CreatePaymentCheckerHelper::checkIfPaymentExistBeforCreate(
             $this->student->id,
             $this->month,
             $this->cost_general_id,
-            $this->defaultScolaryYerId
+            $scolaryYear->id
         );
         if ($paymentChecker){
             $this->dispatchBrowserEvent('error',['message'=>'Désolé,cet élève a déjà un paiement pour ce mois']);
@@ -63,7 +66,7 @@ class AddNewPayment extends Component
                 $this->student->inscription->classe->classeOption->id,
                 $this->student->inscription->id,
                 $this->student->id,
-                $this->defaultScolaryYerId,
+                $scolaryYear->id,
                 $this->student->inscription->classe->id
             );
             $cost=CostGeneral::find($this->cost_general_id);

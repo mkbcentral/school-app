@@ -98,7 +98,8 @@
                                                 <div class="form-group clearfix">
                                                     <div  class="icheck-primary d-inline">
                                                         <input type="checkbox" id="{{$cost->id}}"
-                                                               wire:model="typeCostSelected" value="{{$cost->id}}">
+                                                               wire:model="typeCostSelected" 
+                                                               value="{{$cost->id}}">
                                                         <label for="{{$cost->id}}"
                                                                class="">
                                                             {{$cost->name}}

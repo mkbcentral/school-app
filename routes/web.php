@@ -12,13 +12,17 @@ use App\Http\Livewire\Application\Rapport\PaymentRapport;
 use App\Http\Controllers\Application\Printings\RapportInscriptionPaymentPrintingController;
 use App\Http\Livewire\Application\Rapport\Inscription\RapportInscriptionByClasse;
 use App\Http\Controllers\Application\Pages\CreateSchoolController;
+use App\Http\Controllers\Application\Printings\ListInscriptionController;
 use App\Http\Controllers\Application\Printings\PrintingDepenseAndEmpruntController;
 use App\Http\Livewire\Application\Payment\MainControlPayment;
 use App\Http\Livewire\Application\Rapport\Payment\RapportAllReceiptBySection;
 use App\Http\Controllers\Application\Printings\PrintingReceiptController;
 use App\Http\Livewire\Application\Depense\MyDepense;
+use App\Http\Livewire\Application\Inscription\List\ListAllInscription;
+use App\Http\Livewire\Application\Inscription\List\ListInscriptionByClasse;
 use App\Http\Livewire\Application\Inscription\List\ListStudentResponsable;
 use App\Http\Livewire\Application\Parents\ListParents;
+use App\Http\Livewire\Application\Payment\MainLatePaymeent;
 use App\Http\Livewire\Application\Payment\MyLatePayment;
 use App\Http\Livewire\Application\Tarification\CostTarification;
 use App\Http\Livewire\Application\User\MyAccount;
@@ -44,12 +48,14 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
         Route::get('new-inscription',NewInscription::class)->name('inscription.new');
         Route::get('new-reinscription',NewReinscription::class)->name('reinscription.new');
         Route::get('valide-payment',ValideInscriptionPayment::class)->name('inscription.payment.valide');
+        Route::get('list-all-inscription',ListAllInscription::class)->name('inscription.list.all');
+        Route::get('lis-inscription-by-classe/{classe}',ListInscriptionByClasse::class)->name('inscription.list.by.classe');
     });
     //Payment routes
     Route::prefix('payment')->group(function () {
         Route::get('other-cost-payment',OtherCostPayment::class)->name('payment.other.cost');
         Route::get('control-payment',MainControlPayment::class)->name('payment.control');
-        Route::get('late',MyLatePayment::class)->name('payment.late');
+        Route::get('late',MainLatePaymeent::class)->name('payment.late');
     });
     //Settings links route
     Route::prefix('settings')->group(function () {
@@ -84,6 +90,14 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
     });
 
 
+    //Prin inscription
+    Route::prefix('printing')->group(function(){
+        Route::prefix('inscription')->group(function(){
+            Route::controller(ListInscriptionController::class)->group(function(){
+                Route::get('list-by-classe/{classe}','printListInscriptionByClasse')->name('print.list.inscription.by.classe');
+            });
+        });
+    });
 
     //Pint rapport payment cost
     Route::prefix('printing')->group(function () {
@@ -93,13 +107,14 @@ Route::middleware(['auth','route-access-checker'])->group(function () {
             });
         });
     });
+    //pRINT RECEIPT
     Route::prefix('print-receipt')->group(function (){
         Route::controller(PrintingReceiptController::class)->group(function (){
             Route::get('inscription/{inscription}/{currency}','printReceiptInscription')->name('receipt.inscription');
             Route::get('payment/{payment}/{currency}','printReceiptPayment')->name('receipt.payment');
         });
     });
-
+    //Print depense and emprunt
     Route::prefix('print-depense-emprunt')->group(function (){
         Route::controller(PrintingDepenseAndEmpruntController::class)->group(function (){
             Route::get('depense/{month}','printDepenseMonth')->name('depense.month');

@@ -72,8 +72,8 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <h3 class="mt-2 text-info text-bold">Montant à payer: {{ $amountLabel }}
-                                            </h3 class="mt-2">
+                                            <h4 class="mt-2 text-info text-bold">Montant à payer: {{ $amountLabel }} {{$currency}}
+                                            </h4 class="mt-2">
                                         </div>
                                     </div>
                                 </div>

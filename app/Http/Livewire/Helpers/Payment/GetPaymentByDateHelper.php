@@ -19,7 +19,7 @@ class GetPaymentByDateHelper
      * @param $currency
      * @return mixed
      */
-    public static function getDatePayments($date, $idSColaryYear, $idCost, $type, $classeId, $keySearch, $currency)
+    public static function getDatePayments($date, $idSColaryYear, $idCost, $type, $classeId, $keySearch)
     {
         if ($type == 0) {
             if ($classeId == 0) {
@@ -35,7 +35,7 @@ class GetPaymentByDateHelper
 
                         ->with('cost')
                         ->with('classe')
-                        ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                        ->select('payments.*')
                         ->get();
                 } else {
                     $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -49,7 +49,7 @@ class GetPaymentByDateHelper
                         ->where('payments.school_id', auth()->user()->school->id)
                         ->with('cost')
                         ->with('classe')
-                        ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                        ->select('payments.*')
                         ->get();
                 }
             } else {
@@ -65,7 +65,7 @@ class GetPaymentByDateHelper
                         ->where('payments.school_id', auth()->user()->school->id)
                         ->with('cost')
                         ->with('classe')
-                        ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                        ->select('payments.*')
                         ->get();
                 } else {
                     $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -80,7 +80,7 @@ class GetPaymentByDateHelper
                         ->where('payments.school_id', auth()->user()->school->id)
                         ->with('cost')
                         ->with('classe')
-                        ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                        ->select('payments.*')
                         ->get();
                 }
             }
@@ -97,7 +97,7 @@ class GetPaymentByDateHelper
                         ->where('payments.school_id', auth()->user()->school->id)
                         ->with('cost')
                         ->with('classe')
-                        ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                        ->select('payments.*')
                         ->get();
                 } else {
                     $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -112,7 +112,7 @@ class GetPaymentByDateHelper
                         ->where('payments.school_id', auth()->user()->school->id)
                         ->with('cost')
                         ->with('classe')
-                        ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                        ->select('payments.*')
                         ->get();
                 }
             } else {
@@ -129,7 +129,7 @@ class GetPaymentByDateHelper
                         ->where('payments.school_id', auth()->user()->school->id)
                         ->with('cost')
                         ->with('classe')
-                        ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                        ->select('payments.*')
                         ->get();
                 } else {
                     $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -145,7 +145,7 @@ class GetPaymentByDateHelper
                         ->where('payments.school_id', auth()->user()->school->id)
                         ->with('cost')
                         ->with('classe')
-                        ->select('payments.*', $currency == 'USD' ? 'cost_generals.amount as amount' : DB::raw('cost_generals.amount*rates.rate as amount'))
+                        ->select('payments.*')
                         ->get();
                 }
             }
