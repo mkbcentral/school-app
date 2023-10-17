@@ -20,8 +20,8 @@ class ListStudentForPayment extends Component
         $this->defaultScolaryYerId = $id;
     }
 
-    public function show(Student $student){
-        $this->emit('studentPayment', $student);
+    public function show(Inscription $inscription){
+        $this->emit('studentPayment', $inscription);
     }
     public function mount()
     {

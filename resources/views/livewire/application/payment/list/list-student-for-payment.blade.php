@@ -42,7 +42,7 @@
                             <td class="text-center">{{ $inscription->student->gender }}
                             </td>
                             <td class="text-center">
-                                <x-button wire:click.prevent='show({{ $inscription->student }})'
+                                <x-button wire:click.prevent='show({{ $inscription }})'
                                           class="btn-sm btn-info" type="button" data-toggle="modal"
                                           data-target="#newPayment">
                                     Payer

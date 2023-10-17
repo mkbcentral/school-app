@@ -10,6 +10,7 @@ use App\Http\Livewire\Helpers\Payment\CreateNewPaymentHelper;
 use App\Http\Livewire\Helpers\Printing\PosPrintingHelper;
 use App\Http\Livewire\Helpers\SchoolHelper;
 use App\Models\CostGeneral;
+use App\Models\Inscription;
 use App\Models\Student;
 use Livewire\Component;
 
@@ -21,6 +22,7 @@ class AddNewPayment extends Component
             'scolaryYearFresh' => 'getScolaryYear',
         ];
     public  $student = null;
+    public $inscription=null;
     public $listTypeCost=[],$listOtherCost;
     public $type_other_cost_id,$cost_general_id;
     public $months=[],$month;
@@ -37,10 +39,11 @@ class AddNewPayment extends Component
         $this->amountLabel=CostGeneralHelper::getCostById($val)->amount;
         $this->currency=CostGeneralHelper::getCostById($val)->currency->currency;
     }
-    public function getStudent(Student $student): void
+    public function getStudent(Inscription $inscription): void
     {
         $this->student = null;
-        $this->student = $student;
+        $this->student = $inscription->student;
+        $this->inscription=$inscription;
     }
     public function getScolaryYear($id): void
     {
@@ -63,11 +66,11 @@ class AddNewPayment extends Component
             $payment= CreateNewPaymentHelper::create(
                 $this->month,
                 $this->cost_general_id,
-                $this->student->inscription->classe->classeOption->id,
-                $this->student->inscription->id,
+                $this->inscription->classe->classeOption->id,
+                $this->inscription->id,
                 $this->student->id,
                 $scolaryYear->id,
-                $this->student->inscription->classe->id
+                $this->inscription->classe->id
             );
             $cost=CostGeneral::find($this->cost_general_id);
             //(new PosPrintingHelper())->printPayment($payment,'USD');

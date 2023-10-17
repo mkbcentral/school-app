@@ -39,7 +39,7 @@ class ListRapportPayment extends Component
     public function updatedMonth($val): void
     {
         $this->month=$val;
-        $this->date_to_search=null;;
+        $this->date_to_search=null;
     }
 
     public function updatedDateToSearch($val)

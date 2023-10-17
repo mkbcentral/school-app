@@ -32,10 +32,8 @@ class GetPaymentByDateHelper
                         ->where('students.name', 'Like', '%' . $keySearch . '%')
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
-
-                        ->with('cost')
-                        ->with('classe')
-                        ->select('payments.*')
+                        ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                        ->select('payments.*', 'cost_generals.amount as amount')
                         ->get();
                 } else {
                     $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -47,9 +45,8 @@ class GetPaymentByDateHelper
                         ->where('payments.cost_general_id', $idCost)
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
-                        ->with('cost')
-                        ->with('classe')
-                        ->select('payments.*')
+                        ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                        ->select('payments.*', 'cost_generals.amount as amount')
                         ->get();
                 }
             } else {
@@ -63,9 +60,8 @@ class GetPaymentByDateHelper
                         ->where('payments.classe_id', $classeId)
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
-                        ->with('cost')
-                        ->with('classe')
-                        ->select('payments.*')
+                        ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                        ->select('payments.*', 'cost_generals.amount as amount')
                         ->get();
                 } else {
                     $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -78,9 +74,8 @@ class GetPaymentByDateHelper
                         ->where('payments.classe_id', $classeId)
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
-                        ->with('cost')
-                        ->with('classe')
-                        ->select('payments.*')
+                        ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                        ->select('payments.*', 'cost_generals.amount as amount')
                         ->get();
                 }
             }
@@ -95,9 +90,8 @@ class GetPaymentByDateHelper
                         ->where('students.name', 'Like', '%' . $keySearch . '%')
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
-                        ->with('cost')
-                        ->with('classe')
-                        ->select('payments.*')
+                        ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                        ->select('payments.*', 'cost_generals.amount as amount')
                         ->get();
                 } else {
                     $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -110,9 +104,8 @@ class GetPaymentByDateHelper
                         ->where('payments.cost_general_id', $idCost)
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
-                        ->with('cost')
-                        ->with('classe')
-                        ->select('payments.*')
+                        ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                        ->select('payments.*', 'cost_generals.amount as amount')
                         ->get();
                 }
             } else {
@@ -127,9 +120,8 @@ class GetPaymentByDateHelper
                         ->where('payments.classe_id', $classeId)
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
-                        ->with('cost')
-                        ->with('classe')
-                        ->select('payments.*')
+                        ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                        ->select('payments.*', 'cost_generals.amount as amount')
                         ->get();
                 } else {
                     $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -143,9 +135,8 @@ class GetPaymentByDateHelper
                         ->where('payments.classe_id', $classeId)
                         ->orderBy('payments.created_at', 'DESC')
                         ->where('payments.school_id', auth()->user()->school->id)
-                        ->with('cost')
-                        ->with('classe')
-                        ->select('payments.*')
+                        ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
+                        ->select('payments.*', 'cost_generals.amount as amount')
                         ->get();
                 }
             }

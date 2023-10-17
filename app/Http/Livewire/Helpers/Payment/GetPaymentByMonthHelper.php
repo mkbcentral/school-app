@@ -33,7 +33,7 @@ class GetPaymentByMonthHelper
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
                     ->with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
-                    ->select('payments.*')
+                    ->select('payments.*','cost_generals.amount as amount')
                     ->get();
             } else {
                 $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -48,7 +48,7 @@ class GetPaymentByMonthHelper
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
                     > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
-                    ->select('payments.*')
+                    ->select('payments.*','cost_generals.amount as amount')
                     ->get();
             }
         } else {
@@ -65,7 +65,7 @@ class GetPaymentByMonthHelper
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
                     > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
-                    ->select('payments.*')
+                    ->select('payments.*','cost_generals.amount as amount')
                     ->get();
             } else {
                 $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -81,7 +81,7 @@ class GetPaymentByMonthHelper
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
                     > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
-                    ->select('payments.*')
+                    ->select('payments.*','cost_generals.amount as amount')
                     ->get();
             }
         }
@@ -101,7 +101,7 @@ class GetPaymentByMonthHelper
                     ->where('students.school_id', auth()->user()->school->id)
                     ->orderBy('payments.created_at', 'DESC')
                     > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
-                    ->select('payments.*')
+                    ->select('payments.*','cost_generals.amount as amount')
                     ->get();
             } else {
                 $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -116,7 +116,7 @@ class GetPaymentByMonthHelper
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
                     > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
-                    ->select('payments.*')
+                    ->select('payments.*','cost_generals.amount as amount')
                     ->get();
             }
         } else {
@@ -133,7 +133,7 @@ class GetPaymentByMonthHelper
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
                     > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
-                    ->select('payments.*')
+                    ->select('payments.*','cost_generals.amount as amount')
                     ->get();
             } else {
                 $payments = Payment::join('students', 'students.id', '=', 'payments.student_id')
@@ -149,7 +149,7 @@ class GetPaymentByMonthHelper
                     ->orderBy('payments.created_at', 'DESC')
                     ->where('payments.is_paid', true)
                     > with(['cost.currency', 'student.studentResponsable', 'inscription.classe.classeOption', 'inscription.scolaryYear'])
-                    ->select('payments.*')
+                    ->select('payments.*','cost_generals.amount as amount')
                     ->get();
             }
         }
