@@ -22,6 +22,7 @@ class ListStudentForPayment extends Component
 
     public function show(Inscription $inscription){
         $this->emit('studentPayment', $inscription);
+        $this->emit('paymentsByInscription', $inscription);
     }
     public function mount()
     {

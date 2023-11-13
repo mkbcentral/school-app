@@ -128,25 +128,26 @@ class Inscription extends Model
         return ' ' . $inscription?->classe->name . '/' . $inscription?->classe?->classeOption->name;
     }
 
-    public  function getByCurrentYearPaymentCheckerStatus($idType, $studentId, $month): string
-    {
-        $payment = GetPaymentByTypeCostToCheck::getCurrentYearPaymentChecker($idType, $studentId, $month);
-        $status = '';
-        if ($payment) {
-            return   $status = 'OK';
-        } else {
-            return  $status = '-';
-        }
-    }
-
-    public  function getByCurrentYearBycostPaymentCheckerStatus($idType, $studentId, $month, $costId): string
-    {
-        $payment = GetPaymentByTypeCostToCheck::getCurrentYearCostPaymentChecker($idType, $studentId, $month, $costId);
-        $status = '';
-        if ($payment) {
-            return   $status = 'OK';
-        } else {
-            return  $status = '-';
-        }
-    }
+   //Get status with control payment (OK or -)
+   public  function getByCurrentYearPaymentCheckerStatus($idType, $studentId, $month,$scolaryId): string
+   {
+       $payment = GetPaymentByTypeCostToCheck::getCurrentYearPaymentChecker($idType, $studentId, $month,$scolaryId);
+       $status = '';
+       if ($payment) {
+           return   $status = 'OK';
+       } else {
+           return  $status = '-';
+       }
+   }
+   //Get status with control payment (OK or -) with type cost
+   public  function getByCurrentYearBycostPaymentCheckerStatus($idType, $studentId, $month, $costId,$scolaryId): string
+   {
+       $payment = GetPaymentByTypeCostToCheck::getCurrentYearCostPaymentChecker($idType, $studentId, $month, $costId,$scolaryId);
+       $status = '';
+       if ($payment) {
+           return   $status = 'OK';
+       } else {
+           return  $status = '-';
+       }
+   }
 }

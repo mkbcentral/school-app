@@ -32,16 +32,15 @@ class GetPaymentByTypeCostToCheck
      * @param $month
      * @return Payment|null
      */
-    public static function getCurrentYearPaymentChecker($idType,$student_id,$month):?Payment{
-        $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();//Récuperer l'année en cours
+    public static function getCurrentYearPaymentChecker($idType,$student_id,$month,$scolaryYearId):?Payment{
         return Payment::join('cost_generals','cost_generals.id','=','payments.cost_general_id')
-            ->join('type_other_costs','type_other_costs.id','=','cost_generals.type_other_cost_id')
-            ->where('payments.student_id',$student_id)
-            ->where('payments.school_id',auth()->user()->school->id)
-            ->where('payments.scolary_year_id',$scolaryYear->id)
-            ->where('type_other_costs.id',$idType)
-            ->where('payments.month_name',$month)
-            ->first();
+        ->join('type_other_costs','type_other_costs.id','=','cost_generals.type_other_cost_id')
+        ->where('payments.student_id',$student_id)
+        ->where('payments.school_id',auth()->user()->school->id)
+        ->where('payments.scolary_year_id',$scolaryYearId)
+        ->where('type_other_costs.id',$idType)
+        ->where('payments.month_name',$month)
+        ->first();
     }
 
     /**
@@ -52,17 +51,16 @@ class GetPaymentByTypeCostToCheck
      * @param $costId
      * @return Payment|null
      */
-    public static function getCurrentYearCostPaymentChecker($idType,$student_id,$month,$costId):?Payment{
-        $scolaryYear=(new SchoolHelper())->getCurrectScolaryYear();
+    public static function getCurrentYearCostPaymentChecker($idType,$student_id,$month,$costId,$scolaryId):?Payment{
         return Payment::join('cost_generals','cost_generals.id','=','payments.cost_general_id')
-            ->join('type_other_costs','type_other_costs.id','=','cost_generals.type_other_cost_id')
-            ->where('payments.student_id',$student_id)
-            ->where('students.school_id',auth()->user()->school->id)
-            ->where('payments.scolary_year_id',$scolaryYear->id)
-            ->where('cost_generals.type_other_cost_id',$idType)
-            ->where('payments.month_name',$month)
-            ->where('payments.cost_general_id',$costId)
-            ->select('payments.month_name')
-            ->first();
+        ->join('type_other_costs','type_other_costs.id','=','cost_generals.type_other_cost_id')
+        ->where('payments.student_id',$student_id)
+        ->where('payments.school_id',auth()->user()->school->id)
+        ->where('payments.scolary_year_id',$scolaryId)
+        ->where('cost_generals.type_other_cost_id',$idType)
+        ->where('payments.month_name',$month)
+        ->where('payments.cost_general_id',$costId)
+        ->select('payments.month_name')
+        ->first();
     }
 }

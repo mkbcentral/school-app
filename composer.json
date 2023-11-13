@@ -8,13 +8,13 @@
         "php": "^8.1",
         "barryvdh/laravel-debugbar": "^3.7",
         "barryvdh/laravel-dompdf": "^2.0",
-        "filament/filament": "^2.17",
+
         "guzzlehttp/guzzle": "^7.2",
         "laravel/fortify": "^1.13",
         "laravel/framework": "^10.14.1",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "livewire/livewire": "^2.11",
+        "livewire/livewire": "^3.0",
         "mediumart/orange-sms": "^2.0",
         "mike42/escpos-php": "^2.2",
         "phpoffice/phpspreadsheet": "^1.29",
@@ -23,6 +23,7 @@
     "require-dev": {
         "doctrine/dbal": "^3.6",
         "fakerphp/faker": "^1.9.1",
+        "filament/upgrade": "3.0-stable",
         "kitloong/laravel-migrations-generator": "^6.4",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
