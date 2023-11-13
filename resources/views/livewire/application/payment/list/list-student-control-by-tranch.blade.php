@@ -54,7 +54,7 @@
                         <td>{{$inscription->student->name}}</td>
                         @foreach($months as $month)
                             <td class="text-center">
-                                {{$inscription->getByCurrentYearBycostPaymentCheckerStatus($index,$inscription->student->id,$month,$cost_id)}}
+                                {{$inscription->getByCurrentYearBycostPaymentCheckerStatus($index,$inscription->student->id,$month,$cost_id,$defaultScolaryYerId)}}
                             </td>
                         @endforeach
                     </tr>
