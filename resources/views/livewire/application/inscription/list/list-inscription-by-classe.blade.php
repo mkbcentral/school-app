@@ -1,4 +1,6 @@
 <div>
+    @livewire('application.inscription.forms.edit-inscription-form')
+    @livewire('application.inscription.forms.edit-classe-and-inscription')
     <div>
         <div class="content-header">
             <div class="container-fluid">
@@ -39,6 +41,7 @@
                         <th>Noms élève</th>
                         <th class="text-center">Genre</th>
                         <th class="text-center">Age</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +55,26 @@
                             </td>
                             <td class="text-center">
                                 {{ $inscription->student->getAge($inscription->student->date_of_birth) }}
+                            </td>
+                            <td>
+                                @can('edit-student-infos')
+                                    <x-button wire:click.prevent='edit({{ $inscription->student }})' class="btn-sm"
+                                        type="button" data-toggle="modal" data-target="#formEditInscriptionModal">
+                                        <i class="fas fa-edit text-primary"></i>
+                                    </x-button>
+                                    <x-button wire:click.prevent='editInscription({{ $inscription }})'
+                                        class="btn-sm text-secondary" type="button" data-toggle="modal"
+                                        data-target="#editClasseAnInscription">
+                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                    </x-button>
+                                    <x-button class=" btn-sm" type="button"
+                                        wire:click.prevent="delete({{ $inscription->id }})">
+                                        <span wire:loading wire:target="delete({{ $inscription->id }})"
+                                            class="spinner-border spinner-border-sm" role="status"
+                                            aria-hidden="true"></span>
+                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    </x-button>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
