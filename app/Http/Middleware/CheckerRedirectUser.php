@@ -49,7 +49,8 @@ class CheckerRedirectUser
                 'payment.other.cost',
                 ' filament.pages.dashboard',
                 'payment.control',
-                'user.account'
+                'user.account',
+                "print.list.inscription.by.classe"
             ],
             'Finance'=>[
                 'main',
@@ -70,7 +71,8 @@ class CheckerRedirectUser
                 'depense.month',
                 'emprunt.month',
                 'parent.list',
-                'user.account'
+                'user.account',
+                "print.list.inscription.by.classe"
             ],
             'Secretary'=>[
                 'main',
