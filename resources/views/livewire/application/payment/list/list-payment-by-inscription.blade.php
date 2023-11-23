@@ -1,7 +1,10 @@
 <div>
     <div class="card p-2">
         <div class="card-header">
-            SITUATION DE REGULARISATION
+            <div class="d-flex justify-content-between">
+                <h5> SITUATION DE REGULARISATION</h5>
+                <a href="http://">Imprimer</a>
+            </div>
         </div>
         <div class="card-body">
             @if ($inscription->payments->isEmpty())

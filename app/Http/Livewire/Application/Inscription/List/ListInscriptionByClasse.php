@@ -39,9 +39,9 @@ class ListInscriptionByClasse extends Component
             if($student->scolaryYear->id==$scolayYear->id){
                 $student->delete();
             }
-            $this->dispatchBrowserEvent('added', ['message' => "Famille bien rétirée !"]);
+            $this->dispatchBrowserEvent('added', ['message' => "Inscription bien rétirée !"]);
         }else{
-            $this->dispatchBrowserEvent('error', ['message' => "Impossible, Famille déjà remplie"]);
+            $this->dispatchBrowserEvent('error', ['message' => "Impossible, de retirer l'inscription"]);
         }
 
     }

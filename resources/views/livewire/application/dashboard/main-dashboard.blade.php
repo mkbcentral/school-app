@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="card-body">
-            @can('edit-student-infos')  
+            @can('edit-student-infos')
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group d-flex justify-content-between align-items-center">
@@ -79,6 +79,9 @@
                         @can('view-depense-emprunt')
                             @livewire('application.depense.widget.amount-emprunt-by-currency-widget')
                         @endcan
+                        <div class="">
+                            @livewire('application.inscription.list.widget.list-classe-by-option-with-student-counter-widget')
+                        </div>
                     </div>
                     <div class="col-md-6">
                         @can('view-total-amount')
