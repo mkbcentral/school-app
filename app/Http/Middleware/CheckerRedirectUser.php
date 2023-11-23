@@ -50,6 +50,7 @@ class CheckerRedirectUser
                 ' filament.pages.dashboard',
                 'payment.control',
                 'user.account',
+                "inscription.list.by.classe",
                 "print.list.inscription.by.classe"
             ],
             'Finance'=>[
@@ -72,6 +73,7 @@ class CheckerRedirectUser
                 'emprunt.month',
                 'parent.list',
                 'user.account',
+                "inscription.list.by.classe",
                 "print.list.inscription.by.classe"
             ],
             'Secretary'=>[
